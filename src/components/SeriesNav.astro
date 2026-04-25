@@ -1,0 +1,38 @@
+---
+interface SeriesItem {
+  href: string;
+  title: string;
+  order: number;
+  current: boolean;
+}
+
+interface Props {
+  series: string;
+  items: SeriesItem[];
+}
+
+const { series, items } = Astro.props;
+const sorted = [...items].sort((a, b) => a.order - b.order);
+---
+
+<nav class="rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-5 my-8">
+  <div class="text-xs uppercase tracking-widest text-[var(--color-accent)] mb-4">
+    Series · {series}
+  </div>
+  <ol class="space-y-2 text-sm">
+    {sorted.map(item => (
+      <li class="flex gap-3">
+        <span class="text-[var(--color-text-secondary)] tabular-nums">
+          {String(item.order).padStart(2, '0')}.
+        </span>
+        {item.current ? (
+          <span class="text-[var(--color-text-primary)] font-medium">{item.title}</span>
+        ) : (
+          <a href={item.href} class="text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]">
+            {item.title}
+          </a>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>

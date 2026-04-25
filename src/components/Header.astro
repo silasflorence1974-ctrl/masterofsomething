@@ -1,0 +1,27 @@
+---
+const navLinks = [
+  { href: '/learn/build-your-ai/build-your-ai-part-1', label: 'Learn' },
+  { href: '/tools', label: 'Tools' },
+  { href: '/about', label: 'About' },
+];
+---
+
+<header class="sticky top-0 z-40 border-b border-[var(--color-border)] backdrop-blur-md bg-[rgba(10,10,10,0.7)]">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="/" class="text-[var(--color-text-primary)] font-medium tracking-tight text-lg hover:text-[var(--color-accent)] transition-colors">
+      masterofsomething
+    </a>
+    <div class="flex items-center gap-6">
+      <nav class="flex items-center gap-5 text-sm">
+        {navLinks.map(link => (
+          <a href={link.href} class="text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]">
+            {link.label}
+          </a>
+        ))}
+      </nav>
+      <span class="hidden md:inline text-xs text-[var(--color-text-secondary)] tracking-wide">
+        In Practice Media
+      </span>
+    </div>
+  </div>
+</header>

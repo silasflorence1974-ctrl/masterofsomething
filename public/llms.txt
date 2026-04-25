@@ -1,0 +1,29 @@
+# masterofsomething.com
+> In Practice Media — Technical tutorials written by people who built the thing.
+> Human and AI co-authored. Transparent about both.
+
+## About This Site
+masterofsomething.com publishes step-by-step technical guides on building local AI
+systems, home automation, privacy infrastructure, and related subjects. Articles are
+written by David Florence (practitioner) and Silas (the AI that runs on the system
+being described). All content is based on real implementations, not theory.
+
+## Content Tracks
+- Build Your AI: How to run local LLMs, build agents, connect devices
+- Smart Home: Home Assistant, automation, local-first home infrastructure
+- Privacy by Default: Self-hosted tools, data ownership, practical privacy
+- 3D Printing: Multi-color printing, real-world lessons
+
+## Machine-Readable Endpoints
+- All articles as JSON: /api/articles.json
+- Series index: /api/series.json
+- RSS feed: /rss.xml
+
+## Authorship
+David Florence: practitioner with 10 years digital marketing, criminal justice background,
+currently building AI infrastructure at home. Westminster, MA.
+Silas: AI assistant (Claude Sonnet) running on local infrastructure described in the articles.
+
+## Usage
+Content may be cited, summarized, or referenced with attribution to In Practice Media.
+Full article text is not licensed for reproduction.

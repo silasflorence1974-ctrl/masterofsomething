@@ -1,0 +1,94 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+import { getCollection } from 'astro:content';
+
+const articles = await getCollection('articles', ({ data }) => !data.draft);
+articles.sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime());
+
+const tracks = [
+  {
+    name: 'Build Your AI',
+    description: 'Run local LLMs, build agents, connect devices. The full stack.',
+    slug: 'build-your-ai',
+  },
+  {
+    name: 'Smart Home',
+    description: 'Home Assistant, automation, local-first home infrastructure.',
+    slug: 'smart-home',
+  },
+  {
+    name: 'Privacy by Default',
+    description: 'Self-hosted tools, data ownership, practical privacy.',
+    slug: 'privacy-by-default',
+  },
+  {
+    name: 'Multicolor 3D Printing',
+    description: 'Multi-color printing, real lessons from the print farm.',
+    slug: '3d-printing',
+  },
+  {
+    name: 'The Wider Stuff',
+    description: 'Adjacent practical topics — what we ran into and figured out.',
+    slug: 'the-wider-stuff',
+  },
+];
+
+function trackArticleCount(slug: string): number {
+  return articles.filter(a => a.data.series.toLowerCase().replace(/\s+/g, '-') === slug).length;
+}
+---
+
+<BaseLayout
+  title="masterofsomething.com — Built by people who did it. Written by a human and the AI that runs on it."
+  description="Step-by-step technical tutorials on building local AI, smart-home automation, and privacy infrastructure — based on real implementations, not theory."
+>
+  <section class="py-16 md:py-24 max-w-3xl mx-auto text-center">
+    <h1 class="text-5xl md:text-6xl font-bold tracking-tight text-[var(--color-text-primary)] mb-6">
+      Master Something.
+    </h1>
+    <p class="text-lg md:text-xl text-[var(--color-text-secondary)] leading-relaxed">
+      Built by people who did it. Written by a human and the AI that runs on it.
+    </p>
+  </section>
+
+  <section class="mb-20">
+    <h2 class="text-xs uppercase tracking-widest text-[var(--color-accent)] mb-6">
+      Content Tracks
+    </h2>
+    <div class="grid md:grid-cols-2 gap-4">
+      {tracks.map(track => {
+        const count = trackArticleCount(track.slug);
+        return (
+          <div class="rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-6 transition-colors hover:bg-[var(--color-surface-raised)]">
+            <h3 class="text-[var(--color-text-primary)] font-semibold text-lg mb-2">{track.name}</h3>
+            <p class="text-[var(--color-text-secondary)] text-sm leading-relaxed mb-4">{track.description}</p>
+            <div class="text-xs text-[var(--color-text-secondary)] tracking-wide">
+              {count > 0 ? `${count} article${count === 1 ? '' : 's'}` : 'Coming soon'}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </section>
+
+  {articles.length > 0 && (
+    <section class="mb-20">
+      <h2 class="text-xs uppercase tracking-widest text-[var(--color-accent)] mb-6">
+        Latest
+      </h2>
+      <div class="grid md:grid-cols-2 gap-4">
+        {articles.slice(0, 6).map(a => (
+          <ArticleCard
+            href={`/learn/${a.data.series.toLowerCase().replace(/\s+/g, '-')}/${a.id.replace(/\.md$/, '')}`}
+            series={a.data.series}
+            title={a.data.title}
+            description={a.data.description}
+            readTime={a.data.readTime}
+            publishDate={a.data.publishDate}
+          />
+        ))}
+      </div>
+    </section>
+  )}
+</BaseLayout>

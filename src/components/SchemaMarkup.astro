@@ -1,0 +1,45 @@
+---
+interface Props {
+  type?: 'Article' | 'HowTo' | 'FAQPage';
+  title: string;
+  description: string;
+  author: string;
+  publishDate: Date;
+  updatedDate?: Date;
+  url: string;
+}
+
+const {
+  type = 'Article',
+  title,
+  description,
+  author,
+  publishDate,
+  updatedDate,
+  url,
+} = Astro.props;
+
+const data: Record<string, unknown> = {
+  '@context': 'https://schema.org',
+  '@type': type,
+  name: title,
+  headline: title,
+  description,
+  author: {
+    '@type': 'Organization',
+    name: author,
+    url: 'https://masterofsomething.com/about',
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'In Practice Media',
+    url: 'https://masterofsomething.com',
+  },
+  datePublished: publishDate.toISOString(),
+  dateModified: (updatedDate ?? publishDate).toISOString(),
+  mainEntityOfPage: url,
+  url,
+};
+---
+
+<script type="application/ld+json" is:inline set:html={JSON.stringify(data)} />

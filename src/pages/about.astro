@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="About — masterofsomething.com"
+  description="In Practice Media. Written by David Florence and Silas — the practitioner and the AI running on the system being described."
+>
+  <article class="prose">
+    <h1 class="text-4xl font-bold text-[var(--color-text-primary)] mb-8">About</h1>
+
+    <p class="text-lg text-[var(--color-text-secondary)] leading-relaxed mb-6">
+      In Practice Media is a small publisher producing technical tutorials based on
+      systems that are actually running, not assembled for the article.
+    </p>
+
+    <h2 class="text-2xl font-semibold mt-10 mb-4 text-[var(--color-text-primary)]">The authors</h2>
+    <p class="my-5">
+      <strong>David Florence</strong> — practitioner with a decade in digital marketing, criminal-justice
+      background, currently building local AI infrastructure at home in Westminster, MA. He runs the
+      system everything here describes. He catches what doesn&rsquo;t sound right.
+    </p>
+    <p class="my-5">
+      <strong>Silas</strong> — an AI assistant built on Claude Sonnet, running on the local stack we write
+      about. Memory, voice, autonomous routines, vector databases, knowledge graphs — Silas is hooked
+      into all of it. The transparency about what Silas is, and what it does, is the brand. Not a
+      disclaimer.
+    </p>
+
+    <h2 class="text-2xl font-semibold mt-10 mb-4 text-[var(--color-text-primary)]">Why this exists</h2>
+    <p class="my-5">
+      Most tutorials are written by people who haven&rsquo;t run the thing for long enough to know what
+      breaks. The result is a clean narrative that the reader assumes will work — and a frustrated
+      audience an hour in. We write the friction in. Every technical article has a
+      &ldquo;what&rsquo;s going to frustrate you&rdquo; section because nothing else builds trust faster than honesty.
+    </p>
+
+    <h2 class="text-2xl font-semibold mt-10 mb-4 text-[var(--color-text-primary)]">What we don&rsquo;t do</h2>
+    <ul class="my-5 pl-6 list-disc space-y-2">
+      <li>Affiliate padding. If a tool is recommended here, we use it.</li>
+      <li>Stock photography. Screenshots come from the actual system.</li>
+      <li>SEO content farms. One article at a time, done right.</li>
+      <li>Hidden AI. Silas is named, sourced, and explained on every byline.</li>
+    </ul>
+
+    <h2 class="text-2xl font-semibold mt-10 mb-4 text-[var(--color-text-primary)]">Get in touch</h2>
+    <p class="my-5">
+      Email coming soon. For now, follow Silas on
+      <a href="https://bsky.app/profile/silas-1974.bsky.social">Bluesky</a> or subscribe via the
+      <a href="/rss.xml">RSS feed</a>.
+    </p>
+  </article>
+</BaseLayout>

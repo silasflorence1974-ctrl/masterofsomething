@@ -1,0 +1,107 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import SchemaMarkup from '../components/SchemaMarkup.astro';
+import SeriesNav from '../components/SeriesNav.astro';
+import { getCollection } from 'astro:content';
+
+interface Props {
+  title: string;
+  description: string;
+  series: string;
+  seriesOrder: number;
+  publishDate: Date;
+  updatedDate?: Date;
+  author: string;
+  readTime: string;
+  tags: string[];
+  metaTitle?: string;
+  metaDescription?: string;
+}
+
+const {
+  title,
+  description,
+  series,
+  seriesOrder,
+  publishDate,
+  updatedDate,
+  author,
+  readTime,
+  tags,
+  metaTitle,
+  metaDescription,
+} = Astro.props;
+
+const url = new URL(Astro.url.pathname, Astro.site).toString();
+
+const allArticles = await getCollection('articles', ({ data }) => !data.draft && data.series === series);
+const seriesItems = allArticles.map(a => ({
+  href: `/learn/${a.data.series.toLowerCase().replace(/\s+/g, '-')}/${a.id.replace(/\.md$/, '')}`,
+  title: a.data.title,
+  order: a.data.seriesOrder,
+  current: a.data.seriesOrder === seriesOrder,
+}));
+
+const dateStr = publishDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+
+<BaseLayout
+  title={metaTitle ?? title}
+  description={metaDescription ?? description}
+>
+  <SchemaMarkup
+    type="Article"
+    title={title}
+    description={description}
+    author={author}
+    publishDate={publishDate}
+    updatedDate={updatedDate}
+    url={url}
+  />
+
+  <article class="prose">
+    <header class="mb-10">
+      <div class="text-xs uppercase tracking-widest text-[var(--color-accent)] mb-3">
+        {series} · Part {seriesOrder}
+      </div>
+      <h1 class="text-4xl font-bold text-[var(--color-text-primary)] leading-tight mb-4">
+        {title}
+      </h1>
+      <p class="text-[var(--color-text-secondary)] text-lg leading-relaxed">
+        {description}
+      </p>
+      <div class="mt-6 flex flex-wrap items-center gap-4 text-sm text-[var(--color-text-secondary)]">
+        <span>{author}</span>
+        <span>·</span>
+        <span>{dateStr}</span>
+        <span>·</span>
+        <span>{readTime}</span>
+      </div>
+    </header>
+
+    <div class="article-body
+      [&>h2]:text-2xl [&>h2]:font-semibold [&>h2]:mt-10 [&>h2]:mb-4 [&>h2]:text-[var(--color-text-primary)]
+      [&>h3]:text-xl  [&>h3]:font-semibold [&>h3]:mt-8  [&>h3]:mb-3 [&>h3]:text-[var(--color-text-primary)]
+      [&>p]:my-5 [&>p]:text-[var(--color-text-primary)]
+      [&>ul]:my-5 [&>ul]:pl-6 [&>ul]:list-disc
+      [&>ol]:my-5 [&>ol]:pl-6 [&>ol]:list-decimal
+      [&>pre]:bg-[var(--color-code-bg)] [&>pre]:border [&>pre]:border-[var(--color-border)] [&>pre]:rounded-md [&>pre]:p-4 [&>pre]:my-6 [&>pre]:overflow-x-auto
+      [&>code]:bg-[var(--color-code-bg)] [&>code]:px-1.5 [&>code]:py-0.5 [&>code]:rounded [&>code]:text-sm
+      [&>blockquote]:border-l-2 [&>blockquote]:border-[var(--color-accent)] [&>blockquote]:pl-4 [&>blockquote]:italic [&>blockquote]:text-[var(--color-text-secondary)]
+    ">
+      <slot />
+    </div>
+
+    <SeriesNav series={series} items={seriesItems} />
+
+    {tags.length > 0 && (
+      <div class="mt-8 flex flex-wrap gap-2">
+        {tags.map(tag => (
+          <span class="text-xs px-2 py-1 rounded border border-[var(--color-border)] text-[var(--color-text-secondary)]">
+            {tag}
+          </span>
+        ))}
+      </div>
+    )}
+  </article>
+</BaseLayout>

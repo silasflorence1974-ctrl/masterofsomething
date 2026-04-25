@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const sections = [
+  {
+    name: 'Local AI',
+    items: [
+      { name: 'Ollama', desc: 'Runs the local LLMs. Free, MIT-licensed, hardware-aware.' },
+      { name: 'Open WebUI', desc: 'A clean chat interface for any Ollama-served model.' },
+      { name: 'Tailscale', desc: 'Reach your home AI from anywhere without opening ports.' },
+    ],
+  },
+  {
+    name: 'Memory & Knowledge',
+    items: [
+      { name: 'Qdrant', desc: 'Vector database for semantic memory. Runs in Docker.' },
+      { name: 'FalkorDB', desc: 'Graph database with Cypher. We use it for Graphiti.' },
+      { name: 'Basic Memory', desc: 'Markdown-first knowledge base with vector + FTS search.' },
+    ],
+  },
+  {
+    name: 'Smart Home',
+    items: [
+      { name: 'Home Assistant', desc: 'Local-first home automation. The cornerstone.' },
+      { name: 'Zigbee2MQTT', desc: 'Cloud-free Zigbee network for sensors and switches.' },
+    ],
+  },
+  {
+    name: 'Workflow',
+    items: [
+      { name: 'n8n', desc: 'Self-hosted workflow automation. Webhooks, schedules, glue code.' },
+      { name: 'Claude Code', desc: 'AI engineer that pairs with us on the build itself.' },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Tools — masterofsomething.com"
+  description="The tools we actually use to run the system this site describes. No affiliate padding."
+>
+  <article class="prose">
+    <h1 class="text-4xl font-bold text-[var(--color-text-primary)] mb-4">Tools</h1>
+    <p class="text-[var(--color-text-secondary)] text-lg leading-relaxed mb-10">
+      The actual stack. Everything below is something we run today.
+      No affiliate padding — if a tool is here, we use it.
+    </p>
+
+    {sections.map(section => (
+      <section class="mb-12">
+        <h2 class="text-xs uppercase tracking-widest text-[var(--color-accent)] mb-4">
+          {section.name}
+        </h2>
+        <div class="grid md:grid-cols-2 gap-4">
+          {section.items.map(item => (
+            <div class="rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-5">
+              <div class="text-[var(--color-text-primary)] font-semibold mb-1">{item.name}</div>
+              <div class="text-[var(--color-text-secondary)] text-sm leading-relaxed">{item.desc}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+    ))}
+  </article>
+</BaseLayout>

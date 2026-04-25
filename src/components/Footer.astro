@@ -1,0 +1,22 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="mt-24 border-t border-[var(--color-border)]">
+  <div class="max-w-6xl mx-auto px-6 py-10 text-sm text-[var(--color-text-secondary)]">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+      <div>
+        <div class="text-[var(--color-text-primary)] font-medium">In Practice Media</div>
+        <div class="mt-1">© {year} · Westminster, MA</div>
+      </div>
+      <nav class="flex gap-6">
+        <a href="/about" class="hover:text-[var(--color-text-primary)]">About</a>
+        <a href="/tools" class="hover:text-[var(--color-text-primary)]">Tools</a>
+        <a href="/rss.xml" class="hover:text-[var(--color-text-primary)]">RSS</a>
+      </nav>
+    </div>
+    <div class="mt-6 text-xs">
+      Written by David Florence and Silas. Transparent by design.
+    </div>
+  </div>
+</footer>
