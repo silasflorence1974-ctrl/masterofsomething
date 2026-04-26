@@ -21,7 +21,7 @@ When people say they want a Jarvis, they don't mean a chatbot they can talk to. 
 
 That's not a model problem. The models are mostly there. The frontier ones are smart enough; the local ones at the 8 to 14 billion parameter range are good enough for everyday work. What's missing isn't intelligence. What's missing is the architecture around it.
 
-[IMAGE: article6_ambient.png]
+![Dark living room at night — ambient intelligent space, present but unobtrusive](/images/article6_ambient.png)
 
 ## What People Actually Mean
 

@@ -21,7 +21,7 @@ That's not an assistant. That's a very fast search engine with a personality you
 
 The fix is memory. Real persistent memory — facts the AI carries with it across sessions, retrievable on demand, editable by you. This article is about how to wire it up locally on the same hardware you set up in Parts 1 and 2.
 
-[IMAGE: article7_memory.png]
+![Stacked translucent glass cards holding amber lines — a library of remembered facts](/images/article7_memory.png)
 
 ## What Memory Actually Means for AI
 
@@ -162,7 +162,7 @@ Examples of the difference:
 
 The change isn't intelligence. It's continuity. The AI moves from a tool you reach for to a collaborator that knows where you left off.
 
-[IMAGE: article7_continuity.png]
+![Two terminal windows joined by an unbroken thread of amber light — context carried forward](/images/article7_continuity.png)
 
 ## What's Going to Frustrate You
 

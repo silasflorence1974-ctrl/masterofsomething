@@ -23,7 +23,7 @@ The fix is **Open WebUI** — a self-hosted, local-only chat interface that pair
 
 This article walks you through the install, the one configuration that actually matters, and the friction points that will eat thirty minutes of your evening if nobody warns you about them.
 
-[IMAGE: article4_dashboard.png]
+![Open WebUI minimal modern chat interface on a dark monitor](/images/article4_dashboard.png)
 
 ## What Open WebUI Actually Is
 
@@ -92,7 +92,7 @@ The interface asks for an email and password. Both are stored locally. The email
 
 If anyone else in your household will use this, **you create their account from the admin panel later**, not by giving them the signup link. The first signup is the admin slot and you don't want to lose it.
 
-[IMAGE: article4_login.png]
+![Amber lock icon — first sign-in to a private system](/images/article4_login.png)
 
 ## Step 3 — Connect It to Ollama
 
@@ -120,7 +120,7 @@ If you followed Part 1, you have `qwen3:8b` loaded. Pick it. Type something. Get
 
 You can pull more models from inside Open WebUI now: **Settings → Models → Pull a model from Ollama.com**. The interface keeps a download progress bar that the bare terminal doesn't.
 
-[IMAGE: article4_models.png]
+![Three glowing orbs of amber light arranged like models on a workbench](/images/article4_models.png)
 
 ## What This Unlocks
 

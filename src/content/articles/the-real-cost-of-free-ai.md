@@ -19,7 +19,7 @@ You're not paying for ChatGPT with money. You're paying with something else.
 
 This isn't a complaint and it isn't a moral argument. It's a description of how the business actually works. You can be perfectly fine with the trade. You just need to know it's the trade.
 
-[IMAGE: article5_data.png]
+![Two streams of light flowing in opposite directions — paid privacy vs. free training](/images/article5_data.png)
 
 ## The Business Model
 
