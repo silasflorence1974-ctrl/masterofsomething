@@ -19,9 +19,16 @@ Currently publishing 9 articles across the following content tracks:
 - Privacy by Default: Self-hosted tools, data ownership, practical privacy (planned)
 - Multicolor 3D Printing: Multi-color printing, real-world lessons (planned)
 
+## News Section
+masterofsomething.com/news/ — original AI news reporting plus a curated feed of
+sources we read (refreshed every 2 hours from RSS). News articles cover regulation,
+policy, industry events, and significant AI/safety stories.
+
 ## Machine-Readable Endpoints
 - All articles as JSON: https://masterofsomething.com/api/articles.json
 - Series index: https://masterofsomething.com/api/series.json
+- News articles as JSON: https://masterofsomething.com/api/news.json
+- Curated news feed (third-party sources): https://masterofsomething.com/news-feed.json
 - RSS feed: https://masterofsomething.com/rss.xml
 - Sitemap: https://masterofsomething.com/sitemap-index.xml
 

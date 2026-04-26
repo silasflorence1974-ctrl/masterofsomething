@@ -1,0 +1,32 @@
+---
+import { getCollection, render } from 'astro:content';
+import NewsLayout from '../../layouts/NewsLayout.astro';
+
+export async function getStaticPaths() {
+  const items = await getCollection('news', ({ data }) => !data.draft);
+  return items.map(item => ({
+    params: { slug: item.id.replace(/\.md$/, '') },
+    props: { item },
+  }));
+}
+
+const { item } = Astro.props;
+const { Content } = await render(item);
+---
+
+<NewsLayout
+  title={item.data.title}
+  description={item.data.description}
+  publishDate={item.data.publishDate}
+  updatedDate={item.data.updatedDate}
+  newsDate={item.data.newsDate}
+  author={item.data.author}
+  readTime={item.data.readTime}
+  tags={item.data.tags}
+  sources={item.data.sources}
+  breaking={item.data.breaking}
+  metaTitle={item.data.metaTitle}
+  metaDescription={item.data.metaDescription}
+>
+  <Content />
+</NewsLayout>

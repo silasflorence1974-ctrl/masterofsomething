@@ -6,6 +6,11 @@ import { getCollection } from 'astro:content';
 const articles = await getCollection('articles', ({ data }) => !data.draft);
 articles.sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime());
 
+const newsItems = await getCollection('news', ({ data }) => !data.draft);
+newsItems.sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime());
+const latestNews = newsItems.slice(0, 3);
+const fmtNewsDate = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+
 // Map each article slug to the hero image used in its body — for cards
 const ARTICLE_IMAGES: Record<string, string> = {
   'build-your-ai-part-1':   '/images/article1_hardware.png',
@@ -156,6 +161,41 @@ const readingRoom = [
           </div>
         </div>
       </a>
+    </section>
+  )}
+
+  <!-- Latest News strip -->
+  {latestNews.length > 0 && (
+    <section class="mb-16">
+      <div class="flex items-baseline justify-between mb-6 flex-wrap gap-3">
+        <h2 class="text-xs uppercase tracking-widest text-[var(--color-accent)]">
+          AI in the News
+        </h2>
+        <a href="/news/" class="text-xs uppercase tracking-widest text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors">
+          All news →
+        </a>
+      </div>
+      <div class="grid md:grid-cols-3 gap-3">
+        {latestNews.map(it => {
+          const slug = it.id.replace(/\.md$/, '');
+          return (
+            <a
+              href={`/news/${slug}/`}
+              class="group block rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-5 hover:bg-[var(--color-surface-raised)] hover:border-[var(--color-accent)] transition-colors"
+            >
+              <div class="text-xs text-[var(--color-text-secondary)] mb-2">
+                {fmtNewsDate(it.data.publishDate)}
+              </div>
+              <h3 class="text-[var(--color-text-primary)] font-semibold leading-snug mb-2 group-hover:text-white">
+                {it.data.title}
+              </h3>
+              <p class="text-xs text-[var(--color-text-secondary)] leading-relaxed line-clamp-2">
+                {it.data.description}
+              </p>
+            </a>
+          );
+        })}
+      </div>
     </section>
   )}
 

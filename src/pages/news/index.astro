@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import NewsFeed from '../../components/NewsFeed.astro';
+import { getCollection } from 'astro:content';
+
+const items = await getCollection('news', ({ data }) => !data.draft);
+items.sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime());
+
+const fmt = (d: Date) => d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+---
+
+<BaseLayout
+  title="AI in the News — masterofsomething.com"
+  description="What's happening in AI, with context. No hype. No PR. Original reporting + a curated feed of sources we trust."
+>
+  <section class="mb-12">
+    <div class="text-xs uppercase tracking-widest text-[var(--color-accent)] mb-4">
+      News
+    </div>
+    <h1 class="text-4xl md:text-5xl font-bold text-[var(--color-text-primary)] tracking-tight mb-4">
+      AI in the News
+    </h1>
+    <p class="text-lg text-[var(--color-text-secondary)] leading-relaxed max-w-2xl">
+      What's happening in AI, with context. No hype. No PR.
+    </p>
+  </section>
+
+  {items.length > 0 && (
+    <section class="mb-16">
+      <h2 class="text-xs uppercase tracking-widest text-[var(--color-accent)] mb-6">
+        Our Reporting
+      </h2>
+      <div class="grid md:grid-cols-2 gap-4">
+        {items.map(it => {
+          const slug = it.id.replace(/\.md$/, '');
+          return (
+            <a
+              href={`/news/${slug}/`}
+              class="group block rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-6 hover:bg-[var(--color-surface-raised)] hover:border-[var(--color-accent)] transition-colors"
+            >
+              <div class="flex items-center gap-3 mb-3">
+                <span class="text-xs uppercase tracking-widest text-[var(--color-accent)]">News</span>
+                {it.data.breaking && (
+                  <span class="text-xs uppercase tracking-widest text-red-400 border border-red-400/40 rounded px-2 py-0.5">
+                    Breaking
+                  </span>
+                )}
+              </div>
+              <h3 class="text-[var(--color-text-primary)] font-semibold text-xl leading-snug mb-2 group-hover:text-white">
+                {it.data.title}
+              </h3>
+              <p class="text-sm text-[var(--color-text-secondary)] leading-relaxed mb-4">
+                {it.data.description}
+              </p>
+              <div class="text-xs text-[var(--color-text-secondary)] tracking-wide">
+                {it.data.readTime} · {fmt(it.data.publishDate)}
+              </div>
+            </a>
+          );
+        })}
+      </div>
+    </section>
+  )}
+
+  <NewsFeed />
+</BaseLayout>

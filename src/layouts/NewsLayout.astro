@@ -1,0 +1,130 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import SchemaMarkup from '../components/SchemaMarkup.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  publishDate: Date;
+  updatedDate?: Date;
+  newsDate?: Date;
+  author: string;
+  readTime: string;
+  tags: string[];
+  sources?: string[];
+  breaking: boolean;
+  metaTitle?: string;
+  metaDescription?: string;
+}
+
+const {
+  title,
+  description,
+  publishDate,
+  updatedDate,
+  newsDate,
+  author,
+  readTime,
+  tags,
+  sources,
+  breaking,
+  metaTitle,
+  metaDescription,
+} = Astro.props;
+
+const url = new URL(Astro.url.pathname, Astro.site).toString();
+const fmt = (d: Date) => d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+const publishStr = fmt(publishDate);
+const newsStr = newsDate ? fmt(newsDate) : null;
+---
+
+<BaseLayout
+  title={metaTitle ?? title}
+  description={metaDescription ?? description}
+>
+  <SchemaMarkup
+    type="Article"
+    title={title}
+    description={description}
+    author={author}
+    publishDate={publishDate}
+    updatedDate={updatedDate}
+    url={url}
+  />
+
+  <article class="prose">
+    <header class="mb-10">
+      <div class="flex items-center gap-3 mb-3">
+        <span class="text-xs uppercase tracking-widest text-[var(--color-accent)] font-semibold">
+          News
+        </span>
+        {breaking && (
+          <span class="text-xs uppercase tracking-widest text-red-400 font-semibold border border-red-400/40 rounded px-2 py-0.5">
+            Breaking
+          </span>
+        )}
+      </div>
+      <h1 class="text-4xl font-bold text-[var(--color-text-primary)] leading-tight mb-4">
+        {title}
+      </h1>
+      <p class="text-[var(--color-text-secondary)] text-lg leading-relaxed">
+        {description}
+      </p>
+      <div class="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-[var(--color-text-secondary)]">
+        <span>{author}</span>
+        <span>·</span>
+        <span>Published {publishStr}</span>
+        {newsStr && (
+          <>
+            <span>·</span>
+            <span>News date {newsStr}</span>
+          </>
+        )}
+        <span>·</span>
+        <span>{readTime}</span>
+      </div>
+    </header>
+
+    <div class="article-body
+      [&>h2]:text-2xl [&>h2]:font-semibold [&>h2]:mt-10 [&>h2]:mb-4 [&>h2]:text-[var(--color-text-primary)]
+      [&>h3]:text-xl  [&>h3]:font-semibold [&>h3]:mt-8  [&>h3]:mb-3 [&>h3]:text-[var(--color-text-primary)]
+      [&>p]:my-5 [&>p]:text-[var(--color-text-primary)]
+      [&>ul]:my-5 [&>ul]:pl-6 [&>ul]:list-disc
+      [&>ol]:my-5 [&>ol]:pl-6 [&>ol]:list-decimal
+      [&>pre]:bg-[var(--color-code-bg)] [&>pre]:border [&>pre]:border-[var(--color-border)] [&>pre]:rounded-md [&>pre]:p-4 [&>pre]:my-6 [&>pre]:overflow-x-auto
+      [&>code]:bg-[var(--color-code-bg)] [&>code]:px-1.5 [&>code]:py-0.5 [&>code]:rounded [&>code]:text-sm
+      [&>blockquote]:border-l-2 [&>blockquote]:border-[var(--color-accent)] [&>blockquote]:pl-4 [&>blockquote]:italic [&>blockquote]:text-[var(--color-text-secondary)]
+      [&_img]:rounded-lg [&_img]:border [&_img]:border-[var(--color-border)] [&_img]:my-8 [&_img]:w-full [&_p>img]:my-2
+      [&>table]:my-6 [&>table]:w-full [&>table]:text-sm
+      [&_th]:text-left [&_th]:py-2 [&_th]:px-3 [&_th]:border-b [&_th]:border-[var(--color-border)] [&_th]:text-[var(--color-text-secondary)] [&_th]:font-medium
+      [&_td]:py-2 [&_td]:px-3 [&_td]:border-b [&_td]:border-[var(--color-border)]
+    ">
+      <slot />
+    </div>
+
+    {sources && sources.length > 0 && (
+      <section class="mt-12 pt-8 border-t border-[var(--color-border)]">
+        <h2 class="text-xs uppercase tracking-widest text-[var(--color-accent)] mb-4">Sources</h2>
+        <ul class="space-y-2 text-sm">
+          {sources.map(s => (
+            <li>
+              <a href={s} target="_blank" rel="noopener" class="text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] break-all">
+                {s}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    {tags.length > 0 && (
+      <div class="mt-8 flex flex-wrap gap-2">
+        {tags.map(tag => (
+          <span class="text-xs px-2 py-1 rounded border border-[var(--color-border)] text-[var(--color-text-secondary)]">
+            {tag}
+          </span>
+        ))}
+      </div>
+    )}
+  </article>
+</BaseLayout>

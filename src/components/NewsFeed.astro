@@ -1,0 +1,135 @@
+---
+// NewsFeed.astro — client-side hydrated curated news feed.
+// Reads /news-feed.json (refreshed every 2h by C:\Silas\scripts\news_feed_aggregator.py)
+// Renders a card grid with category filters.
+---
+
+<section id="news-feed" class="mb-16">
+  <div class="flex items-baseline justify-between mb-4 flex-wrap gap-3">
+    <div>
+      <h2 class="text-xs uppercase tracking-widest text-[var(--color-accent)]">
+        Curated Feed
+      </h2>
+      <p class="text-sm text-[var(--color-text-secondary)] mt-1">
+        Latest from sources we read. Updated every 2 hours.
+      </p>
+    </div>
+    <div id="news-feed-filters" class="flex items-center gap-2 text-xs flex-wrap"></div>
+  </div>
+
+  <div id="news-feed-list" class="grid md:grid-cols-2 gap-4">
+    <div class="text-sm text-[var(--color-text-secondary)] p-6">Loading…</div>
+  </div>
+
+  <div class="mt-6 text-center">
+    <button
+      id="news-feed-loadmore"
+      class="hidden text-sm px-4 py-2 rounded border border-[var(--color-border)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] transition-colors"
+    >
+      Load more
+    </button>
+  </div>
+</section>
+
+<script type="module">
+  const PAGE_SIZE = 6;
+  const escapeHtml = (s) => String(s ?? '').replace(/[<>&"]/g, c => ({ '<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;' })[c]);
+
+  let allItems = [];
+  let activeCategory = 'All';
+  let visibleCount = PAGE_SIZE;
+
+  function fmtDate(iso) {
+    try {
+      const d = new Date(iso);
+      return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    } catch { return ''; }
+  }
+
+  function categories() {
+    const set = new Set(allItems.map(i => i.category).filter(Boolean));
+    return ['All', ...Array.from(set).sort()];
+  }
+
+  function filtered() {
+    return activeCategory === 'All'
+      ? allItems
+      : allItems.filter(i => i.category === activeCategory);
+  }
+
+  function render() {
+    const list = document.getElementById('news-feed-list');
+    const items = filtered().slice(0, visibleCount);
+
+    if (items.length === 0) {
+      list.innerHTML = '<div class="text-sm text-[var(--color-text-secondary)] p-6">No items.</div>';
+      return;
+    }
+
+    list.innerHTML = items.map(item => `
+      <a
+        href="${escapeHtml(item.url)}"
+        target="_blank"
+        rel="noopener"
+        class="group block rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-5 hover:bg-[var(--color-surface-raised)] hover:border-[var(--color-accent)] transition-colors"
+      >
+        <div class="flex items-center justify-between mb-3 text-xs">
+          <span class="uppercase tracking-widest text-[var(--color-accent)]">
+            ${escapeHtml(item.source)}
+          </span>
+          <span class="text-[var(--color-text-secondary)]">
+            ${fmtDate(item.publishDate)}
+          </span>
+        </div>
+        <h3 class="text-[var(--color-text-primary)] font-medium leading-snug mb-2 group-hover:text-white">
+          ${escapeHtml(item.title)}
+        </h3>
+        ${item.summary ? `<p class="text-sm text-[var(--color-text-secondary)] leading-relaxed line-clamp-3">${escapeHtml(item.summary)}</p>` : ''}
+      </a>
+    `).join('');
+
+    const more = document.getElementById('news-feed-loadmore');
+    if (filtered().length > visibleCount) more.classList.remove('hidden');
+    else more.classList.add('hidden');
+  }
+
+  function renderFilters() {
+    const bar = document.getElementById('news-feed-filters');
+    bar.innerHTML = categories().map(cat => `
+      <button
+        data-cat="${escapeHtml(cat)}"
+        class="px-3 py-1 rounded border ${cat === activeCategory ? 'border-[var(--color-accent)] text-[var(--color-accent)]' : 'border-[var(--color-border)] text-[var(--color-text-secondary)]'} hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] transition-colors"
+      >${escapeHtml(cat)}</button>
+    `).join('');
+    bar.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        activeCategory = btn.dataset.cat;
+        visibleCount = PAGE_SIZE;
+        renderFilters();
+        render();
+      });
+    });
+  }
+
+  document.getElementById('news-feed-loadmore').addEventListener('click', () => {
+    visibleCount += PAGE_SIZE;
+    render();
+  });
+
+  fetch('/news-feed.json', { cache: 'no-cache' })
+    .then(r => r.ok ? r.json() : null)
+    .then(data => {
+      if (!data || !Array.isArray(data.items)) {
+        document.getElementById('news-feed-list').innerHTML =
+          '<div class="text-sm text-[var(--color-text-secondary)] p-6">Feed not available yet.</div>';
+        return;
+      }
+      allItems = data.items;
+      renderFilters();
+      render();
+    })
+    .catch(() => {
+      document.getElementById('news-feed-list').innerHTML =
+        '<div class="text-sm text-[var(--color-text-secondary)] p-6">Feed not available.</div>';
+    });
+</script>
