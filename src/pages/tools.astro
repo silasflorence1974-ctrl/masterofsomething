@@ -1,65 +1,269 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const sections = [
+interface Tool {
+  name: string;
+  href: string;
+  what: string;
+  why: string;
+  tag: 'Free' | 'Open Source' | 'Paid' | 'Freemium';
+}
+
+interface Section {
+  name: string;
+  blurb?: string;
+  items: Tool[];
+}
+
+const sections: Section[] = [
   {
-    name: 'Local AI',
+    name: 'Local AI & Models',
+    blurb: 'The runtime layer — what actually executes the model on your hardware.',
     items: [
-      { name: 'Ollama', desc: 'Runs the local LLMs. Free, MIT-licensed, hardware-aware.' },
-      { name: 'Open WebUI', desc: 'A clean chat interface for any Ollama-served model.' },
-      { name: 'Tailscale', desc: 'Reach your home AI from anywhere without opening ports.' },
+      {
+        name: 'Ollama',
+        href: 'https://ollama.com',
+        what: 'Runs LLMs locally — model download, inference, simple HTTP API.',
+        why: 'The fastest path to a private AI. One install, one command, working chat.',
+        tag: 'Open Source',
+      },
+      {
+        name: 'Open WebUI',
+        href: 'https://openwebui.com',
+        what: 'Self-hosted ChatGPT-style interface that pairs with Ollama.',
+        why: 'Persistent history, model switching, file uploads. The interface you live in once the terminal stops scaling.',
+        tag: 'Open Source',
+      },
+      {
+        name: 'LM Studio',
+        href: 'https://lmstudio.ai',
+        what: 'Desktop app for running local models with a polished GUI.',
+        why: 'A more approachable on-ramp than Ollama if you prefer GUI over CLI. Model browser is solid.',
+        tag: 'Free',
+      },
+      {
+        name: 'AnythingLLM',
+        href: 'https://anythingllm.com',
+        what: 'All-in-one local AI workspace with documents, agents, and chat.',
+        why: 'If you want a batteries-included desktop app rather than assembling parts. Good for non-technical household members.',
+        tag: 'Open Source',
+      },
     ],
   },
   {
     name: 'Memory & Knowledge',
+    blurb: 'How the AI remembers things across sessions.',
     items: [
-      { name: 'Qdrant', desc: 'Vector database for semantic memory. Runs in Docker.' },
-      { name: 'FalkorDB', desc: 'Graph database with Cypher. We use it for Graphiti.' },
-      { name: 'Basic Memory', desc: 'Markdown-first knowledge base with vector + FTS search.' },
+      {
+        name: 'Basic Memory',
+        href: 'https://github.com/basicmachines-co/basic-memory',
+        what: 'Markdown-first knowledge base. Notes are plain files, indexed for FTS + vector search.',
+        why: 'The simplest possible persistent memory layer. You can read and edit your AI\'s memory in any text editor.',
+        tag: 'Open Source',
+      },
+      {
+        name: 'Mem0',
+        href: 'https://mem0.ai',
+        what: 'Memory layer for AI apps — store, retrieve, and decay conversation snippets as embeddings.',
+        why: 'Pairs with Qdrant for semantic recall. The right tool when you need "what did we discuss three weeks ago" search.',
+        tag: 'Open Source',
+      },
+      {
+        name: 'Qdrant',
+        href: 'https://qdrant.tech',
+        what: 'High-performance vector database. Runs in Docker, no auth needed for local use.',
+        why: 'The vector store under our memory stack. Faster than the alternatives and zero-config for a single-user setup.',
+        tag: 'Open Source',
+      },
+      {
+        name: 'FalkorDB',
+        href: 'https://www.falkordb.com',
+        what: 'Graph database with Cypher query support. Drop-in for Neo4j-style use cases.',
+        why: 'Backs our Graphiti causal graph — entity relationships across time without a JVM.',
+        tag: 'Open Source',
+      },
     ],
   },
   {
-    name: 'Smart Home',
+    name: 'Agents & Automation',
+    blurb: 'Tools that turn your AI into an actor, not just a responder.',
     items: [
-      { name: 'Home Assistant', desc: 'Local-first home automation. The cornerstone.' },
-      { name: 'Zigbee2MQTT', desc: 'Cloud-free Zigbee network for sensors and switches.' },
+      {
+        name: 'n8n',
+        href: 'https://n8n.io',
+        what: 'Self-hosted workflow automation — visual editor, hundreds of integrations.',
+        why: 'The glue between your AI, your inbox, your calendar, and your home. Schedules, triggers, webhooks.',
+        tag: 'Freemium',
+      },
+      {
+        name: 'Claude Code',
+        href: 'https://claude.com/product/claude-code',
+        what: 'Anthropic\'s autonomous developer agent — drives a real terminal, edits real files.',
+        why: 'The build agent. We use it to write code, deploy infrastructure, run system tasks. Full agentic envelope, not chat-with-snippets.',
+        tag: 'Paid',
+      },
+      {
+        name: 'ComfyUI',
+        href: 'https://github.com/comfyanonymous/ComfyUI',
+        what: 'Node-based interface for running image generation models locally.',
+        why: 'When the cost of cloud image gen adds up, this is the local alternative. Steeper curve, total control.',
+        tag: 'Open Source',
+      },
+      {
+        name: 'Playwright',
+        href: 'https://playwright.dev',
+        what: 'Browser automation framework — Chrome, Edge, Firefox via a single API.',
+        why: 'Our browser-agent foundation. Drives ChatGPT, Substack, GitHub, anything web — when you need an AI to act in a real browser session.',
+        tag: 'Open Source',
+      },
     ],
   },
   {
-    name: 'Workflow',
+    name: 'Infrastructure',
+    blurb: 'The substrate everything runs on.',
     items: [
-      { name: 'n8n', desc: 'Self-hosted workflow automation. Webhooks, schedules, glue code.' },
-      { name: 'Claude Code', desc: 'AI engineer that pairs with us on the build itself.' },
+      {
+        name: 'Tailscale',
+        href: 'https://tailscale.com',
+        what: 'Zero-config private network across all your devices via WireGuard.',
+        why: 'Reach your home AI from your phone, your laptop, anywhere — without opening ports or trusting a cloud relay.',
+        tag: 'Freemium',
+      },
+      {
+        name: 'Cloudflare',
+        href: 'https://cloudflare.com',
+        what: 'DNS, CDN, Pages hosting, free SSL, privacy-first analytics.',
+        why: 'masterofsomething.com runs on Cloudflare Pages. Free tier handles real traffic. The DX is unusually good.',
+        tag: 'Freemium',
+      },
+      {
+        name: 'Docker',
+        href: 'https://docker.com',
+        what: 'Container runtime — package and run apps in isolated environments.',
+        why: 'Qdrant, FalkorDB, n8n, Open WebUI — all of these run as Docker containers on the same machine. Cleaner than installing each one natively.',
+        tag: 'Free',
+      },
+      {
+        name: 'Home Assistant',
+        href: 'https://home-assistant.io',
+        what: 'Local-first home automation platform. Hundreds of integrations.',
+        why: 'The substrate the AI plugs into for any physical-world action. The only mature option for a privacy-respecting smart home.',
+        tag: 'Open Source',
+      },
+    ],
+  },
+  {
+    name: 'Models Worth Knowing',
+    blurb: 'The actual brains. Pull these from Ollama or HuggingFace.',
+    items: [
+      {
+        name: 'Qwen3',
+        href: 'https://qwenlm.github.io',
+        what: 'Alibaba\'s open-weights model family. The 8B variant is our daily driver locally.',
+        why: 'Best quality-per-VRAM in the 7-9B range as of 2026. Multilingual, good at reasoning, fits in 8 GB.',
+        tag: 'Open Source',
+      },
+      {
+        name: 'Llama 3.1',
+        href: 'https://ai.meta.com/llama',
+        what: 'Meta\'s flagship open model. 8B and 70B variants commonly used.',
+        why: 'Solid alternative to Qwen. The 70B (quantized) is what you run if you have 12+ GB VRAM.',
+        tag: 'Open Source',
+      },
+      {
+        name: 'FLUX.1',
+        href: 'https://blackforestlabs.ai',
+        what: 'Open-weights image generation model from Black Forest Labs.',
+        why: 'Best open image model in 2026. The schnell variant fits on 8 GB VRAM at 8-bit. Local image gen without an API bill.',
+        tag: 'Open Source',
+      },
+      {
+        name: 'Whisper',
+        href: 'https://github.com/openai/whisper',
+        what: 'OpenAI\'s open-weights speech recognition. Variants like faster-whisper run locally with low latency.',
+        why: 'The voice-input layer. Runs on CPU well enough for a single user; on a GPU it\'s near real-time.',
+        tag: 'Open Source',
+      },
     ],
   },
 ];
+
+const tagStyles: Record<Tool['tag'], string> = {
+  'Open Source': 'bg-[rgba(0,224,158,0.08)] text-[#00e09e] border-[rgba(0,224,158,0.25)]',
+  'Free':        'bg-[rgba(232,124,46,0.08)] text-[var(--color-accent)] border-[rgba(232,124,46,0.25)]',
+  'Freemium':    'bg-[rgba(212,168,83,0.08)] text-[#d4a853] border-[rgba(212,168,83,0.25)]',
+  'Paid':        'bg-[rgba(168,123,250,0.08)] text-[#a87bfa] border-[rgba(168,123,250,0.25)]',
+};
+
+const totalTools = sections.reduce((n, s) => n + s.items.length, 0);
 ---
 
 <BaseLayout
   title="Tools — masterofsomething.com"
-  description="The tools we actually use to run the system this site describes. No affiliate padding."
+  description="A curated directory of the tools we actually use to run the system this site describes. No affiliate padding — if a tool is here, we use it."
 >
-  <article class="prose">
-    <h1 class="text-4xl font-bold text-[var(--color-text-primary)] mb-4">Tools</h1>
-    <p class="text-[var(--color-text-secondary)] text-lg leading-relaxed mb-10">
-      The actual stack. Everything below is something we run today.
-      No affiliate padding — if a tool is here, we use it.
-    </p>
+  <article>
+    <header class="mb-12 max-w-3xl">
+      <h1 class="text-4xl md:text-5xl font-bold text-[var(--color-text-primary)] mb-4">Tools</h1>
+      <p class="text-[var(--color-text-secondary)] text-lg leading-relaxed">
+        The actual stack. {totalTools} tools across {sections.length} categories.
+        Everything here is something we run on the system this site describes.
+        No affiliate padding — if a tool is on this page, we use it.
+      </p>
+    </header>
 
     {sections.map(section => (
-      <section class="mb-12">
-        <h2 class="text-xs uppercase tracking-widest text-[var(--color-accent)] mb-4">
-          {section.name}
-        </h2>
+      <section class="mb-14">
+        <div class="mb-5">
+          <h2 class="text-xs uppercase tracking-widest text-[var(--color-accent)] mb-1">
+            {section.name}
+          </h2>
+          {section.blurb && (
+            <p class="text-sm text-[var(--color-text-secondary)]">{section.blurb}</p>
+          )}
+        </div>
         <div class="grid md:grid-cols-2 gap-4">
           {section.items.map(item => (
-            <div class="rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-5">
-              <div class="text-[var(--color-text-primary)] font-semibold mb-1">{item.name}</div>
-              <div class="text-[var(--color-text-secondary)] text-sm leading-relaxed">{item.desc}</div>
-            </div>
+            <a
+              href={item.href}
+              target="_blank"
+              rel="noopener"
+              class="group block rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-5 transition-colors hover:bg-[var(--color-surface-raised)] hover:border-[var(--color-accent)]"
+            >
+              <div class="flex items-start justify-between gap-4 mb-2">
+                <div class="text-[var(--color-text-primary)] font-semibold group-hover:text-white">
+                  {item.name}
+                </div>
+                <span class={`text-[0.65rem] px-2 py-0.5 rounded border tracking-wide ${tagStyles[item.tag]}`}>
+                  {item.tag}
+                </span>
+              </div>
+              <div class="text-[var(--color-text-secondary)] text-sm leading-relaxed mb-3">
+                {item.what}
+              </div>
+              <div class="text-[var(--color-text-primary)]/85 text-sm leading-relaxed mb-3 italic">
+                {item.why}
+              </div>
+              <div class="text-xs text-[var(--color-text-secondary)] tracking-wide opacity-0 group-hover:opacity-100 transition-opacity">
+                {item.href.replace(/^https?:\/\/(www\.)?/, '')} ↗
+              </div>
+            </a>
           ))}
         </div>
       </section>
     ))}
+
+    <footer class="mt-16 pt-8 border-t border-[var(--color-border)] max-w-3xl text-sm text-[var(--color-text-secondary)] leading-relaxed">
+      <p>
+        Tag legend: <span class="text-[#00e09e]">Open Source</span> ·
+        <span class="text-[var(--color-accent)]">Free</span> ·
+        <span class="text-[#d4a853]">Freemium</span> ·
+        <span class="text-[#a87bfa]">Paid</span>.
+      </p>
+      <p class="mt-3">
+        Missing a tool you'd expect to see here? Email us. We add things when they earn a spot,
+        not when someone asks. The bar is "we use it daily and would notice if it broke."
+      </p>
+    </footer>
   </article>
 </BaseLayout>
