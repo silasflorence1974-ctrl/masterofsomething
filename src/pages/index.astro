@@ -43,13 +43,24 @@ function trackArticleCount(slug: string): number {
   title="masterofsomething.com — Built by people who did it. Written by a human and the AI that runs on it."
   description="Step-by-step technical tutorials on building local AI, smart-home automation, and privacy infrastructure — based on real implementations, not theory."
 >
-  <section class="py-16 md:py-24 max-w-3xl mx-auto text-center">
-    <h1 class="text-5xl md:text-6xl font-bold tracking-tight text-[var(--color-text-primary)] mb-6">
-      Master Something.
-    </h1>
-    <p class="text-lg md:text-xl text-[var(--color-text-secondary)] leading-relaxed">
-      Built by people who did it. Written by a human and the AI that runs on it.
-    </p>
+  <section class="relative overflow-hidden rounded-lg border border-[var(--color-border)] mb-16">
+    <img
+      src="/images/hero_workstation.png"
+      alt="Dark home office at night — dual monitors with amber-text terminal and chat interface, mechanical keyboard in foreground, PC tower in warm side light"
+      class="w-full h-[480px] md:h-[560px] object-cover opacity-70"
+      loading="eager"
+      width="1672"
+      height="941"
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-[var(--color-bg)] via-[rgba(10,10,10,0.55)] to-transparent"></div>
+    <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
+      <h1 class="text-5xl md:text-7xl font-bold tracking-tight text-[var(--color-text-primary)] mb-5 drop-shadow-[0_4px_24px_rgba(0,0,0,0.7)]">
+        Master Something.
+      </h1>
+      <p class="max-w-2xl text-lg md:text-xl text-[var(--color-text-primary)]/90 leading-relaxed drop-shadow-[0_2px_12px_rgba(0,0,0,0.7)]">
+        Built by people who did it. Written by a human and the AI that runs on it.
+      </p>
+    </div>
   </section>
 
   <section class="mb-20">

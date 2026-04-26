@@ -88,6 +88,10 @@ const dateStr = publishDate.toLocaleDateString('en-US', { year: 'numeric', month
       [&>pre]:bg-[var(--color-code-bg)] [&>pre]:border [&>pre]:border-[var(--color-border)] [&>pre]:rounded-md [&>pre]:p-4 [&>pre]:my-6 [&>pre]:overflow-x-auto
       [&>code]:bg-[var(--color-code-bg)] [&>code]:px-1.5 [&>code]:py-0.5 [&>code]:rounded [&>code]:text-sm
       [&>blockquote]:border-l-2 [&>blockquote]:border-[var(--color-accent)] [&>blockquote]:pl-4 [&>blockquote]:italic [&>blockquote]:text-[var(--color-text-secondary)]
+      [&_img]:rounded-lg [&_img]:border [&_img]:border-[var(--color-border)] [&_img]:my-8 [&_img]:w-full [&_p>img]:my-2
+      [&>table]:my-6 [&>table]:w-full [&>table]:text-sm
+      [&_th]:text-left [&_th]:py-2 [&_th]:px-3 [&_th]:border-b [&_th]:border-[var(--color-border)] [&_th]:text-[var(--color-text-secondary)] [&_th]:font-medium
+      [&_td]:py-2 [&_td]:px-3 [&_td]:border-b [&_td]:border-[var(--color-border)]
     ">
       <slot />
     </div>
