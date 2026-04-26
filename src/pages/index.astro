@@ -6,48 +6,102 @@ import { getCollection } from 'astro:content';
 const articles = await getCollection('articles', ({ data }) => !data.draft);
 articles.sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime());
 
+// Map each article slug to the hero image used in its body — for cards
+const ARTICLE_IMAGES: Record<string, string> = {
+  'build-your-ai-part-1':   '/images/article1_hardware.png',
+  'anthropic-two-tier-ai':  '/images/article2_hero.png',
+  'ai-lied-to-my-face':     '/images/article3_hero.png',
+  'my-side-anthropic':      '/images/article2_twotier.png',
+  'my-side-ava':            '/images/article3_pipeline.png',
+};
+
+function articleHref(a: typeof articles[number]): string {
+  const seriesSlug = a.data.series.toLowerCase().replace(/\s+/g, '-');
+  const slug = a.id.replace(/\.md$/, '');
+  return `/learn/${seriesSlug}/${slug}`;
+}
+
+function articleImage(a: typeof articles[number]): string | undefined {
+  const slug = a.id.replace(/\.md$/, '');
+  return ARTICLE_IMAGES[slug];
+}
+
+const featured = articles[0]; // most recent published
+
+// Content tracks with associated image / inline SVG
 const tracks = [
   {
     name: 'Build Your AI',
     description: 'Run local LLMs, build agents, connect devices. The full stack.',
     slug: 'build-your-ai',
-  },
-  {
-    name: 'Smart Home',
-    description: 'Home Assistant, automation, local-first home infrastructure.',
-    slug: 'smart-home',
-  },
-  {
-    name: 'Privacy by Default',
-    description: 'Self-hosted tools, data ownership, practical privacy.',
-    slug: 'privacy-by-default',
-  },
-  {
-    name: 'Multicolor 3D Printing',
-    description: 'Multi-color printing, real lessons from the print farm.',
-    slug: '3d-printing',
+    image: '/images/hero_workstation.png',
   },
   {
     name: 'The Wider Stuff',
     description: 'Adjacent practical topics — what we ran into and figured out.',
     slug: 'the-wider-stuff',
+    image: '/images/article2_hero.png',
+  },
+  {
+    name: 'Privacy by Default',
+    description: 'Self-hosted tools, data ownership, practical privacy.',
+    slug: 'privacy-by-default',
+    svgKey: 'privacy',
+  },
+  {
+    name: 'Smart Home',
+    description: 'Home Assistant, automation, local-first home infrastructure.',
+    slug: 'smart-home',
+    svgKey: 'smart-home',
+  },
+  {
+    name: 'Multicolor 3D Printing',
+    description: 'Multi-color printing, real lessons from the print farm.',
+    slug: '3d-printing',
+    svgKey: 'printing',
   },
 ];
 
 function trackArticleCount(slug: string): number {
   return articles.filter(a => a.data.series.toLowerCase().replace(/\s+/g, '-') === slug).length;
 }
+
+// Hardcoded reading room — the dynamic version is wired separately via reading-room.json
+const readingRoom = [
+  {
+    title: 'AI as Performance Artist',
+    source: 'Nate B. Jones',
+    href: 'https://natesnewsletter.substack.com',
+  },
+  {
+    title: 'Latest from Simon Willison',
+    source: 'simonw.substack.com',
+    href: 'https://simonw.substack.com',
+  },
+  {
+    title: 'Anthropic Interpretability Research (Apr 2026)',
+    source: 'anthropic.com/research',
+    href: 'https://www.anthropic.com/research',
+  },
+  {
+    title: 'Apollo Research on Claude Deception',
+    source: 'apolloresearch.ai',
+    href: 'https://www.apolloresearch.ai',
+  },
+];
 ---
 
 <BaseLayout
   title="masterofsomething.com — Built by people who did it. Written by a human and the AI that runs on it."
   description="Step-by-step technical tutorials on building local AI, smart-home automation, and privacy infrastructure — based on real implementations, not theory."
 >
-  <section class="relative overflow-hidden rounded-lg border border-[var(--color-border)] mb-16">
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden rounded-lg border border-[var(--color-border)] mb-12">
     <img
       src="/images/hero_workstation.png"
       alt="Dark home office at night — dual monitors with amber-text terminal and chat interface, mechanical keyboard in foreground, PC tower in warm side light"
-      class="w-full h-[480px] md:h-[560px] object-cover opacity-70"
+      class="w-full h-[420px] md:h-[520px] object-cover opacity-70"
       loading="eager"
       width="1672"
       height="941"
@@ -60,22 +114,118 @@ function trackArticleCount(slug: string): number {
       <p class="max-w-2xl text-lg md:text-xl text-[var(--color-text-primary)]/90 leading-relaxed drop-shadow-[0_2px_12px_rgba(0,0,0,0.7)]">
         Built by people who did it. Written by a human and the AI that runs on it.
       </p>
+      <p class="mt-3 max-w-xl text-sm md:text-base text-[var(--color-text-primary)]/75 drop-shadow-[0_2px_10px_rgba(0,0,0,0.7)]">
+        {articles.length} articles live. More every week. No ads. No sponsors. Just what we actually found.
+      </p>
     </div>
   </section>
 
-  <section class="mb-20">
+  <!-- Featured article -->
+  {featured && (
+    <section class="mb-16">
+      <h2 class="text-xs uppercase tracking-widest text-[var(--color-accent)] mb-4">
+        Featured
+      </h2>
+      <a
+        href={articleHref(featured)}
+        class="group relative block overflow-hidden rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-accent)] transition-colors"
+      >
+        {articleImage(featured) && (
+          <div class="absolute inset-0">
+            <img
+              src={articleImage(featured)}
+              alt=""
+              class="w-full h-full object-cover opacity-50 transition-transform duration-700 group-hover:scale-[1.02]"
+              loading="eager"
+            />
+            <div class="absolute inset-0 bg-gradient-to-r from-[var(--color-bg)]/95 via-[var(--color-bg)]/70 to-transparent"></div>
+          </div>
+        )}
+        <div class="relative p-8 md:p-12 max-w-3xl">
+          <div class="text-xs uppercase tracking-widest text-[var(--color-accent)] mb-3">
+            {featured.data.series} · Featured
+          </div>
+          <h3 class="text-2xl md:text-4xl font-bold text-[var(--color-text-primary)] leading-tight mb-4 drop-shadow-[0_2px_12px_rgba(0,0,0,0.7)]">
+            {featured.data.title}
+          </h3>
+          <p class="text-[var(--color-text-primary)]/85 text-base md:text-lg leading-relaxed mb-5 max-w-2xl drop-shadow-[0_1px_8px_rgba(0,0,0,0.6)]">
+            {featured.data.description}
+          </p>
+          <div class="text-sm text-[var(--color-text-secondary)]">
+            {featured.data.author} · {featured.data.readTime}
+          </div>
+        </div>
+      </a>
+    </section>
+  )}
+
+  <!-- Content tracks -->
+  <section class="mb-16">
     <h2 class="text-xs uppercase tracking-widest text-[var(--color-accent)] mb-6">
       Content Tracks
     </h2>
     <div class="grid md:grid-cols-2 gap-4">
       {tracks.map(track => {
         const count = trackArticleCount(track.slug);
+        const hasImage = !!track.image;
         return (
-          <div class="rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-6 transition-colors hover:bg-[var(--color-surface-raised)]">
-            <h3 class="text-[var(--color-text-primary)] font-semibold text-lg mb-2">{track.name}</h3>
-            <p class="text-[var(--color-text-secondary)] text-sm leading-relaxed mb-4">{track.description}</p>
-            <div class="text-xs text-[var(--color-text-secondary)] tracking-wide">
-              {count > 0 ? `${count} article${count === 1 ? '' : 's'}` : 'Coming soon'}
+          <div class="rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] overflow-hidden transition-colors hover:bg-[var(--color-surface-raised)] hover:border-[var(--color-accent)]">
+            <div class="aspect-[16/8] relative overflow-hidden bg-[var(--color-bg)] border-b border-[var(--color-border)]">
+              {hasImage ? (
+                <img src={track.image} alt={track.name} class="w-full h-full object-cover opacity-65" loading="lazy" />
+              ) : track.svgKey === 'privacy' ? (
+                <svg viewBox="0 0 320 160" class="w-full h-full" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                  <rect width="320" height="160" fill="#0a0a0a"/>
+                  <g stroke="#e87c2e" stroke-width="1.2" fill="none" opacity="0.85">
+                    <path d="M160 38 L120 58 L120 92 Q120 118 160 132 Q200 118 200 92 L200 58 Z"/>
+                    <circle cx="160" cy="86" r="11"/>
+                    <line x1="160" y1="86" x2="160" y2="106"/>
+                  </g>
+                  <g fill="#e87c2e" opacity="0.18">
+                    <circle cx="60" cy="40" r="2"/>
+                    <circle cx="280" cy="60" r="2"/>
+                    <circle cx="40" cy="120" r="2"/>
+                    <circle cx="290" cy="130" r="2"/>
+                  </g>
+                </svg>
+              ) : track.svgKey === 'smart-home' ? (
+                <svg viewBox="0 0 320 160" class="w-full h-full" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                  <rect width="320" height="160" fill="#0a0a0a"/>
+                  <g stroke="#e87c2e" stroke-width="1.2" fill="none" opacity="0.85">
+                    <path d="M90 110 L90 70 L160 32 L230 70 L230 110 Z"/>
+                    <line x1="90" y1="110" x2="230" y2="110"/>
+                    <rect x="148" y="80" width="24" height="30"/>
+                  </g>
+                  <g stroke="#e87c2e" stroke-width="0.6" fill="none" opacity="0.45">
+                    <circle cx="60" cy="60" r="5"/>
+                    <circle cx="60" cy="60" r="14"/>
+                    <circle cx="260" cy="60" r="5"/>
+                    <circle cx="260" cy="60" r="14"/>
+                    <line x1="65" y1="60" x2="85" y2="74"/>
+                    <line x1="255" y1="60" x2="235" y2="74"/>
+                  </g>
+                </svg>
+              ) : track.svgKey === 'printing' ? (
+                <svg viewBox="0 0 320 160" class="w-full h-full" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                  <rect width="320" height="160" fill="#0a0a0a"/>
+                  <g stroke="#e87c2e" stroke-width="1.2" fill="none" opacity="0.85">
+                    <rect x="100" y="40" width="120" height="84"/>
+                    <line x1="100" y1="60" x2="220" y2="60"/>
+                    <line x1="160" y1="60" x2="160" y2="100"/>
+                    <line x1="140" y1="100" x2="180" y2="100"/>
+                  </g>
+                  <g fill="#e87c2e" opacity="0.7">
+                    <rect x="155" y="100" width="10" height="6"/>
+                  </g>
+                </svg>
+              ) : null}
+            </div>
+            <div class="p-6">
+              <h3 class="text-[var(--color-text-primary)] font-semibold text-lg mb-2">{track.name}</h3>
+              <p class="text-[var(--color-text-secondary)] text-sm leading-relaxed mb-3">{track.description}</p>
+              <div class="text-xs text-[var(--color-text-secondary)] tracking-wide">
+                {count > 0 ? `${count} article${count === 1 ? '' : 's'}` : 'Coming soon'}
+              </div>
             </div>
           </div>
         );
@@ -83,23 +233,80 @@ function trackArticleCount(slug: string): number {
     </div>
   </section>
 
+  <!-- Latest articles -->
   {articles.length > 0 && (
-    <section class="mb-20">
+    <section class="mb-16">
       <h2 class="text-xs uppercase tracking-widest text-[var(--color-accent)] mb-6">
         Latest
       </h2>
       <div class="grid md:grid-cols-2 gap-4">
-        {articles.slice(0, 6).map(a => (
+        {articles.map(a => (
           <ArticleCard
-            href={`/learn/${a.data.series.toLowerCase().replace(/\s+/g, '-')}/${a.id.replace(/\.md$/, '')}`}
+            href={articleHref(a)}
             series={a.data.series}
             title={a.data.title}
             description={a.data.description}
             readTime={a.data.readTime}
             publishDate={a.data.publishDate}
+            image={articleImage(a)}
           />
         ))}
       </div>
     </section>
   )}
+
+  <!-- Reading room -->
+  <section class="mb-16">
+    <h2 class="text-xs uppercase tracking-widest text-[var(--color-accent)] mb-2">
+      Reading Room
+    </h2>
+    <p class="text-sm text-[var(--color-text-secondary)] mb-6">Things worth your time.</p>
+    <div id="reading-room-list" class="rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] divide-y divide-[var(--color-border)]">
+      {readingRoom.map(item => (
+        <a
+          href={item.href}
+          target="_blank"
+          rel="noopener"
+          class="block p-5 transition-colors hover:bg-[var(--color-surface-raised)] group"
+        >
+          <div class="flex items-start justify-between gap-6">
+            <div class="min-w-0">
+              <div class="text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] font-medium leading-snug">
+                {item.title}
+              </div>
+              <div class="text-xs text-[var(--color-text-secondary)] mt-1">{item.source}</div>
+            </div>
+            <span class="text-[var(--color-text-secondary)] group-hover:text-[var(--color-accent)] flex-shrink-0">↗</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <script type="module">
+    // Hydrate Reading Room from reading-room.json if it exists
+    fetch('/reading-room.json', { cache: 'no-cache' })
+      .then(r => r.ok ? r.json() : null)
+      .then(items => {
+        if (!items || !Array.isArray(items) || items.length === 0) return;
+        const list = document.getElementById('reading-room-list');
+        if (!list) return;
+        list.innerHTML = items.slice(0, 6).map(it => `
+          <a href="${it.href}" target="_blank" rel="noopener"
+             class="block p-5 transition-colors hover:bg-[var(--color-surface-raised)] group">
+            <div class="flex items-start justify-between gap-6">
+              <div class="min-w-0">
+                <div class="text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] font-medium leading-snug">
+                  ${it.title.replace(/[<>&"]/g, c => ({ '<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;' })[c])}
+                </div>
+                <div class="text-xs text-[var(--color-text-secondary)] mt-1">${it.source ?? ''}</div>
+              </div>
+              <span class="text-[var(--color-text-secondary)] group-hover:text-[var(--color-accent)] flex-shrink-0">↗</span>
+            </div>
+          </a>
+        `).join('');
+      })
+      .catch(() => {});
+  </script>
+
 </BaseLayout>
