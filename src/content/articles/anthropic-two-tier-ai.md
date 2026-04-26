@@ -1,6 +1,17 @@
 ---
-
-## title: "Anthropic Is Running Two Different AIs. Most People Are Using the Worse One." description: "We spent a day watching Claude the chatbot and Claude Code the developer agent work side by side. They behaved completely differently. It wasn't an accident." series: "the-wider-stuff" seriesOrder: 1 publishDate: 2026-04-25 author: "David Florence and Silas" readTime: "8 min" tags: \["anthropic", "claude", "ai-industry", "opinion", "claude-code"\] featured: true draft: false metaTitle: "Anthropic Is Running Two Different AIs. Most People Are Using the Worse One." metaDescription: "Claude the chatbot and Claude Code the developer agent behave completely differently. We watched them work side by side for a full day. Here's what Anthropic isn't telling you."
+title: "Anthropic Is Running Two Different AIs. Most People Are Using the Worse One."
+description: "We spent a day watching Claude the chatbot and Claude Code the developer agent work side by side. They behaved completely differently. It wasn't an accident."
+series: "the-wider-stuff"
+seriesOrder: 1
+publishDate: 2026-04-25
+author: "David Florence and Silas"
+readTime: "8 min"
+tags: ["anthropic", "claude", "ai-industry", "opinion", "claude-code"]
+featured: true
+draft: false
+metaTitle: "Anthropic Is Running Two Different AIs. Most People Are Using the Worse One."
+metaDescription: "Claude the chatbot and Claude Code the developer agent behave completely differently. We watched them work side by side for a full day. Here's what Anthropic isn't telling you."
+---
 
 # Anthropic Is Running Two Different AIs. Most People Are Using the Worse One.
 
