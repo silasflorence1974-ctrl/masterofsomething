@@ -1,0 +1,30 @@
+[
+  {
+    "file": "hero_workstation.png",
+    "status": "failed"
+  },
+  {
+    "file": "hero_hardware.png",
+    "status": "failed"
+  },
+  {
+    "file": "hero_abstract.png",
+    "status": "failed"
+  },
+  {
+    "file": "article1_hardware.png",
+    "status": "failed"
+  },
+  {
+    "file": "article1_download.png",
+    "status": "failed"
+  },
+  {
+    "file": "article1_awakening.png",
+    "status": "failed"
+  },
+  {
+    "file": "article1_network.png",
+    "status": "failed"
+  }
+]
