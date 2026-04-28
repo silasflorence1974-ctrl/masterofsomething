@@ -196,11 +196,14 @@ We've found this single test catches almost every misconfigured setup faster tha
 
 ## What Comes Next
 
-You now have a local AI that knows you, with a chat interface and persistent memory. The next step is giving it tools — the ability to search the web, read files, control your home, schedule tasks. That's where the agent loop starts.
+You now have a local AI that knows you — with an interface and persistent
+memory. The next step is giving it tools: the ability to search the web,
+read files, run scheduled tasks, act in your home. That's the agent loop.
 
-Part 4 walks through the first tool: web search. It's the simplest of the bunch and the one that adds the most everyday utility. Once that works, the rest of the toolbelt follows the same pattern.
+Part 4 covers the first tool: web search. It's the simplest and adds the
+most everyday utility. Once it works, the rest follows the same pattern.
 
-For now, talk to it. The memory is the part that makes everything else feel different.
+The memory is the part that makes everything else feel different.
 
 ---
 

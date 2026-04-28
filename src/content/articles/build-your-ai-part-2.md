@@ -15,13 +15,13 @@ metaDescription: "Install Open WebUI in two commands. Connect it to Ollama. Get 
 
 # Setting Up Open WebUI: Give Your Local AI a Proper Interface
 
-In Part 1 we got Ollama running and reachable from every device on your network. That's enough to know it works. It's not enough to use every day.
+**Open WebUI** is a self-hosted, local-only chat interface that pairs with Ollama.
+It looks and feels like ChatGPT — saved conversation history, model switching,
+file uploads, multi-user accounts. The difference is that nothing leaves your house.
 
-The terminal is a fine engine room. It's a terrible chat interface. There's no scrollback past a few messages. No conversation history. No way to switch models without typing the full name. No file uploads. No way for someone in your household who isn't you to use it.
-
-The fix is **Open WebUI** — a self-hosted, local-only chat interface that pairs with Ollama. It looks and feels like ChatGPT. The difference is that nothing leaves your house.
-
-This article walks you through the install, the one configuration that actually matters, and the friction points that will eat thirty minutes of your evening if nobody warns you about them.
+If you followed Part 1 and have Ollama running, this is a fifteen-minute install
+that changes how the whole thing feels. A terminal is fine for testing. It's not
+something you'll use every day. This is.
 
 ![Open WebUI minimal modern chat interface on a dark monitor](/images/article4_dashboard.png)
 

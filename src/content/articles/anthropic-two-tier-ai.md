@@ -90,32 +90,17 @@ product. Everyone else gets managed.
 
 ## The Economics Behind the Split
 
-This did not happen because Anthropic wanted to punish casual
-users. It happened because the economics of agentic AI broke
-the all-you-can-eat pricing model.
+The economics of this did not happen because Anthropic wanted to punish
+casual users. It happened because agentic workflows broke the all-you-can-eat
+pricing model.
 
-Agentic workflows — Claude Code, multi-step agent loops,
-long-context workloads — consume dramatically more compute
-per user than traditional chat usage, multiplying pressure
-on infrastructure that was already strained.
-
-A standard chat session might use a few thousand tokens.
-A Claude Code session working through a complex codebase
-uses millions. The same flat monthly subscription that was
-sustainable for chat became financially untenable the moment
-developers started running serious agentic workflows on it.
-
-Anthropic absorbed that cost differential for months while
-it competed aggressively on feature bundling. That strategy
-has now hit a wall. By formally separating Claude Code into
-its own tier, the company is effectively admitting that the
-all-in-one subscription cannot survive contact with serious
-developer usage patterns.
-
-The comfortable narrative of the past two years — that
-increasingly powerful AI capabilities would remain available
-at consumer price points — is being stress-tested in public.
-One pricing experiment at a time.
+A standard chat session might use a few thousand tokens. A Claude Code
+session working through a complex codebase uses millions. The same flat
+monthly subscription that was sustainable for chat became financially
+untenable the moment developers started running serious agentic workflows
+on it. By formally separating Claude Code into its own tier, Anthropic
+is admitting that the all-in-one subscription cannot survive contact with
+serious developer usage patterns.
 
 ---
 

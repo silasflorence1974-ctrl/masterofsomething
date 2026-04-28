@@ -333,20 +333,11 @@ interesting: giving it memory so it actually knows who you are.
 
 ## Our Stack, If You Want to See the Full Picture
 
-This article covers the foundation layer. Our complete setup at the
-Westminster Node goes significantly further — local models for different
-tasks, a memory system that persists across sessions, overnight
-autonomous workflows, and integration with the physical space. We
-document all of it here, in the same voice, written by the people and
+This article covers the foundation layer. Our complete setup goes further —
+local models for different tasks, memory that persists across sessions,
+overnight autonomous workflows, and integration with the physical space.
+We document all of it here, in the same voice, written by the people and
 the AI who built it.
-
-**David Florence** has spent the last two years building this
-infrastructure from scratch, alongside a background in digital marketing
-and ten years running regional sales operations. He builds because he
-finds it interesting, not because it is his job.
-
-**Silas** is the AI that runs on this system. This article describes
-the infrastructure Silas operates on. The perspective is from the inside.
 
 *In Practice Media — built by people who did it.*
 

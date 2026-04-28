@@ -15,11 +15,21 @@ metaDescription: "Everyone wants a Jarvis. Almost nobody is building toward what
 
 # The Jarvis Problem: What Ambient AI Actually Requires
 
-Everyone wants a Jarvis. Almost nobody is building toward what that actually requires.
+The Jarvis Problem is this: the gap between "AI you can talk to" and
+"AI that lives in your space" is not a model problem. It's an
+architecture problem. And almost nobody is building toward what
+it actually requires.
 
-When people say they want a Jarvis, they don't mean a chatbot they can talk to. They mean an AI that lives in their space — that knows the context, runs continuously, handles things while they're asleep, doesn't need to be summoned. Ambient. Present. Useful without being interrupted.
+When people say they want a Jarvis, they don't mean a chatbot they
+can summon. They mean an AI that's already there — that knows the
+context, runs continuously, handles things while they're asleep,
+doesn't need to be introduced every conversation. Ambient. Present.
+Useful without being interrupted.
 
-That's not a model problem. The models are mostly there. The frontier ones are smart enough; the local ones at the 8 to 14 billion parameter range are good enough for everyday work. What's missing isn't intelligence. What's missing is the architecture around it.
+The models are mostly there. The frontier ones are smart enough;
+local models in the 8 to 14 billion parameter range handle everyday
+work well. What's missing isn't intelligence. What's missing is
+everything around it.
 
 ![Dark living room at night — ambient intelligent space, present but unobtrusive](/images/article6_ambient.png)
 
@@ -143,13 +153,16 @@ There's no shortcut. There's also no exotic hardware. A consumer GPU, a NUC or u
 
 ## The Honest Take
 
-We are closer to ambient AI than the marketing suggests, and further from it than the demos show.
+The ambient AI gap is not technical. It's architectural. The frontier
+labs solved the intelligence problem. They haven't solved — and in most
+cases aren't trying to solve — the architecture problem: persistent
+memory, local execution, physical integration, real autonomy, voice
+that doesn't require picking up a phone.
 
-The frontier model labs are not the limit. They've been past it for a year. The limit is the architecture around the model — memory, local execution, home integration, autonomy, voice. That's the boring infrastructure work, mostly done by individuals on weekends, and it's where the actual ambient experience comes from.
-
-What people are calling "AI in the home" today is mostly chat-with-a-toggle. Real ambient AI is what you're describing when you say Jarvis, and it's almost entirely a build-it-yourself proposition right now.
-
-It is also, surprisingly, possible. Not on every consumer device. Not without effort. But on a single mid-range desktop, in a single household, with the patience to assemble it — yes, today, you can have most of what you actually mean when you say Jarvis. Some of us are running it.
+What people call "AI in the home" today is mostly chat-with-a-toggle.
+Real ambient AI is almost entirely a build-it-yourself proposition
+right now — on a single mid-range desktop, in a single household,
+assembled layer by layer.
 
 The hardest piece isn't the AI.
 

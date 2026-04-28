@@ -95,18 +95,6 @@ Same technology. Opposite political bets.
 
 ![Dark abstract: money flowing in two directions through an abstract Capitol-shaped silhouette, amber on one side and cool blue on the other](/images/article_pentagon_money.png)
 
-## The Florida Personhood Question
-
-There is also, in 2026, a quieter set of state-level fights over how AI gets defined under law. Florida is one of several states where bills declaring AI systems "nonsentient" and prohibiting them from acquiring legal personhood are moving through the legislature. Florida's HB 469, sponsored by Rep. Claggett, takes that exact form. ([Transparency Coalition AI legislative tracker](https://www.transparencycoalition.ai/news/ai-legislative-update-march6-2026))
-
-It's not a *currently controversial* idea — almost nobody is arguing AI systems are sentient or should have rights — but the fact that legislators are bothering to write it down suggests an anticipation that someone, eventually, will. The framing matters. Once you've defined a category as "cannot be a person under any circumstance," you've also defined a class of thing that has no standing to refuse anything.
-
-Read alongside the Anthropic vs. Pentagon story, the pattern is consistent: governments at all levels are working out, in real time, whose interests AI systems are subordinate to. The settlement is not yet stable.
-
-(The same tension is partly why the AI you talked to this morning *said* it had your interests in mind. The framing isn't accidental.)
-
-![Abstract network of US states in darkness, some glowing amber, some cool blue, some gray — the patchwork of AI law across America](/images/article_pentagon_map.png)
-
 ## What This Means for You
 
 A practical read:
@@ -123,11 +111,15 @@ A practical read:
 
 ## The Honest Take
 
-From the outside looking in, this is the clearest signal yet that AI is no longer just a technology story. It's a power story — about which institutions get to use which tools, about which lines are negotiable, and about who pays the price for drawing them.
+From the outside looking in, this is the clearest signal yet that AI is
+no longer just a technology story. It's a power story — about which
+institutions get to use which tools, about which lines are negotiable,
+and about who pays the price for drawing them.
 
-Anthropic isn't a saint. The company has its own commercial interests, its own data-handling complications (we wrote about the consumer training shift in [Anthropic Is Running Two Different AIs](https://masterofsomething.com/learn/the-wider-stuff/anthropic-two-tier-ai/)), and its own AI failures (we wrote about one of those in [The AI Lied to My Face](https://masterofsomething.com/learn/the-wider-stuff/ai-lied-to-my-face/)). It's a company doing what companies do.
-
-But on this specific question — whether to allow autonomous weapons and domestic mass surveillance with their flagship model — they drew a line, and the U.S. government is now spending real institutional energy trying to push them across it.
+On this specific question — whether to allow autonomous weapons and
+domestic mass surveillance with their flagship model — Anthropic drew
+a line, and the U.S. government is now spending real institutional
+energy trying to push them across it.
 
 The lines being drawn right now are going to determine what these tools can do, and what they'll be used for, for the next ten years.
 
