@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Link Intelligence</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500&family=Barlow+Condensed:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:         #060a0f;
+      --bg-card:    #0b1219;
+      --bg-card2:   #0f1a24;
+      --border:     #1a2d40;
+      --border-hi:  #1e4060;
+      --cyan:       #00d8f0;
+      --cyan-dim:   #008aaa;
+      --cyan-glow:  rgba(0,216,240,0.12);
+      --amber:      #ffb000;
+      --text:       #c8dde8;
+      --text-dim:   #4a6a80;
+      --text-hi:    #eaf4ff;
+      --grid-line:  rgba(26,45,64,0.6);
+    }
+    html, body { height: 100%; background: var(--bg); color: var(--text); font-family: 'Barlow Condensed', sans-serif; letter-spacing: 0.01em; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; z-index: 0; }
+    #app { position: relative; z-index: 1; max-width: 1280px; margin: 0 auto; padding: 28px 24px 60px; }
+    header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 36px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+    .logo { font-size: 11px; font-weight: 700; letter-spacing: 0.25em; color: var(--cyan); font-family: 'IBM Plex Mono', monospace; display: flex; align-items: center; gap: 10px; }
+    .logo::before { content: ''; display: inline-block; width: 8px; height: 8px; background: var(--cyan); border-radius: 50%; box-shadow: 0 0 8px var(--cyan); animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; box-shadow: 0 0 8px var(--cyan); } 50% { opacity: 0.4; box-shadow: 0 0 3px var(--cyan); } }
+    .logo-sub { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 300; color: var(--text-dim); letter-spacing: 0.15em; text-transform: uppercase; margin-left: 12px; }
+    .header-right { display: flex; align-items: center; gap: 16px; }
+    #last-sync { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--text-dim); letter-spacing: 0.1em; }
+    .sync-btn { background: transparent; border: 1px solid var(--border-hi); color: var(--cyan); font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.15em; padding: 7px 14px; cursor: pointer; transition: all 0.2s; }
+    .sync-btn:hover { background: var(--cyan-glow); border-color: var(--cyan); box-shadow: 0 0 12px var(--cyan-glow); }
+    .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px; }
+    @media (max-width: 800px) { .stat-grid { grid-template-columns: repeat(2, 1fr); } }
+    .stat-card { background: var(--bg-card); border: 1px solid var(--border); padding: 20px 22px; position: relative; overflow: hidden; transition: border-color 0.2s; }
+    .stat-card::after { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: var(--cyan); opacity: 0.5; }
+    .stat-card:hover { border-color: var(--border-hi); }
+    .stat-label { font-size: 9px; font-weight: 700; letter-spacing: 0.2em; color: var(--text-dim); text-transform: uppercase; margin-bottom: 12px; }
+    .stat-value { font-family: 'IBM Plex Mono', monospace; font-size: 38px; font-weight: 300; color: var(--text-hi); line-height: 1; }
+    .stat-value.accent { color: var(--cyan); }
+    .stat-value.small { font-size: 18px; margin-top: 4px; }
+    .chart-section { background: var(--bg-card); border: 1px solid var(--border); padding: 24px; margin-bottom: 28px; }
+    .section-label { font-size: 9px; font-weight: 700; letter-spacing: 0.25em; color: var(--cyan-dim); text-transform: uppercase; margin-bottom: 20px; }
+    .chart-wrap { position: relative; height: 220px; }
+    .lower-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 28px; }
+    @media (max-width: 700px) { .lower-grid { grid-template-columns: 1fr; } }
+    .data-panel { background: var(--bg-card); border: 1px solid var(--border); padding: 22px 24px; }
+    .metric-row { display: flex; align-items: center; justify-content: space-between; padding: 9px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+    .metric-row:last-child { border-bottom: none; }
+    .metric-key { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--text-dim); }
+    .metric-val { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--text-hi); display: flex; align-items: center; gap: 10px; }
+    .bar-bg { width: 80px; height: 3px; background: var(--border); border-radius: 2px; overflow: hidden; }
+    .bar-fill { height: 100%; background: var(--cyan); border-radius: 2px; }
+    .links-section { background: var(--bg-card); border: 1px solid var(--border); padding: 24px; }
+    .link-card { border: 1px solid var(--border); margin-bottom: 12px; padding: 18px 20px; background: var(--bg-card2); transition: border-color 0.2s; }
+    .link-card:last-child { margin-bottom: 0; }
+    .link-card:hover { border-color: var(--border-hi); }
+    .link-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 14px; }
+    .link-id { font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 500; color: var(--cyan); }
+    .link-id a { color: inherit; text-decoration: none; }
+    .link-id a:hover { text-decoration: underline; }
+    .link-dest { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--text-dim); margin-top: 4px; max-width: 500px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .link-total { text-align: right; flex-shrink: 0; }
+    .link-total .num { font-family: 'IBM Plex Mono', monospace; font-size: 32px; font-weight: 300; color: var(--text-hi); line-height: 1; }
+    .link-total .lbl { font-size: 9px; letter-spacing: 0.2em; color: var(--text-dim); text-transform: uppercase; }
+    .link-meta { display: flex; gap: 24px; flex-wrap: wrap; }
+    .link-meta-item { display: flex; flex-direction: column; gap: 3px; }
+    .link-meta-label { font-size: 8px; letter-spacing: 0.2em; color: var(--text-dim); text-transform: uppercase; }
+    .link-meta-val { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--text); }
+    .loading-msg { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--text-dim); letter-spacing: 0.1em; padding: 40px; text-align: center; }
+    .error-msg { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #ff5555; padding: 16px; border: 1px solid rgba(255,85,85,0.3); background: rgba(255,85,85,0.05); }
+  </style>
+</head>
+<body>
+<div id="app">
+  <header>
+    <div style="display:flex;align-items:center">
+      <div class="logo">LINK INTEL</div>
+      <div class="logo-sub">masterofsomething.com</div>
+    </div>
+    <div class="header-right">
+      <span id="last-sync">NOT SYNCED</span>
+      <button class="sync-btn" id="sync-btn" onclick="fetchAll()">&#8635; SYNC</button>
+    </div>
+  </header>
+  <div class="stat-grid">
+    <div class="stat-card"><div class="stat-label">Active Links</div><div class="stat-value accent" id="s-links">—</div></div>
+    <div class="stat-card"><div class="stat-label">Total Clicks (30d)</div><div class="stat-value" id="s-total">—</div></div>
+    <div class="stat-card"><div class="stat-label">Clicks Today</div><div class="stat-value" id="s-today">—</div></div>
+    <div class="stat-card"><div class="stat-label">Top Link</div><div class="stat-value small" id="s-top">—</div></div>
+  </div>
+  <div class="chart-section">
+    <div class="section-label">Click Trend — Last 30 Days</div>
+    <div class="chart-wrap"><canvas id="trendChart"></canvas></div>
+  </div>
+  <div class="lower-grid">
+    <div class="data-panel"><div class="section-label">Top Countries</div><div id="countries-list"><div class="loading-msg">—</div></div></div>
+    <div class="data-panel"><div class="section-label">Top Referrers</div><div id="referrers-list"><div class="loading-msg">—</div></div></div>
+  </div>
+  <div class="links-section">
+    <div class="section-label">Links</div>
+    <div id="links-container"><div class="loading-msg">Loading…</div></div>
+  </div>
+</div>
+<script>
+const TOKEN='02dddde375fef867cca66309ce133b4305cf7306';
+const GROUP='Bq5sfz9dXvo';
+const BASE='https://api-ssl.bitly.com/v4';
+const CACHE_KEY='bitly_cache_v2';
+const CACHE_TTL=15*60*1000;
+let trendChart=null;
+async function api(path){
+  const r=await fetch(BASE+path,{headers:{'Authorization':'Bearer '+TOKEN,'Content-Type':'application/json'}});
+  if(!r.ok)throw new Error('API '+r.status+' — '+path);
+  return r.json();
+}
+async function fetchAll(){
+  const btn=document.getElementById('sync-btn');
+  btn.textContent='↺ SYNCING';btn.disabled=true;
+  try{
+    const{links}=await api('/groups/'+GROUP+'/bitlinks?size=100');
+    const enriched=await Promise.all(links.map(async link=>{
+      const enc=encodeURIComponent(link.id);
+      const[summary,byDay,countries,referrers]=await Promise.all([
+        api('/bitlinks/'+enc+'/clicks/summary?unit=day&units=30'),
+        api('/bitlinks/'+enc+'/clicks?unit=day&units=30'),
+        api('/bitlinks/'+enc+'/countries?unit=day&units=30'),
+        api('/bitlinks/'+enc+'/referrers?unit=day&units=30'),
+      ]);
+      return{...link,summary,byDay,countries,referrers};
+    }));
+    saveCache(enriched);render(enriched);
+    document.getElementById('last-sync').textContent='SYNCED '+new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+  }catch(e){
+    document.getElementById('links-container').innerHTML='<div class="error-msg">ERROR: '+e.message+'</div>';
+  }finally{btn.textContent='↻ SYNC';btn.disabled=false;}
+}
+function saveCache(enriched){
+  let db={};try{db=JSON.parse(localStorage.getItem(CACHE_KEY)||'{}')}catch(e){}
+  db.last_sync=Date.now();db.links=enriched;
+  if(!db.history)db.history={};
+  enriched.forEach(link=>{
+    if(!db.history[link.id])db.history[link.id]={};
+    (link.byDay.link_clicks||[]).forEach(({date,clicks})=>{db.history[link.id][date.slice(0,10)]=clicks;});
+  });
+  localStorage.setItem(CACHE_KEY,JSON.stringify(db));
+}
+function loadCache(){try{const db=JSON.parse(localStorage.getItem(CACHE_KEY));if(db&&db.links)return db;}catch(e){}return null;}
+function render(links){
+  const totalClicks=links.reduce((s,l)=>s+(l.summary.total_clicks||0),0);
+  const todayStr=new Date().toISOString().slice(0,10);
+  const todayClicks=links.reduce((s,l)=>{const t=(l.byDay.link_clicks||[]).find(d=>d.date.startsWith(todayStr));return s+(t?t.clicks:0);},0);
+  const topLink=links.slice().sort((a,b)=>(b.summary.total_clicks||0)-(a.summary.total_clicks||0))[0];
+  document.getElementById('s-links').textContent=links.length;
+  document.getElementById('s-total').textContent=totalClicks.toLocaleString();
+  document.getElementById('s-today').textContent=todayClicks.toLocaleString();
+  document.getElementById('s-top').textContent=topLink?topLink.id.replace('bit.ly/',''):'—';
+  renderTrend(links);renderCountries(links);renderReferrers(links);renderLinks(links);
+}
+function renderTrend(links){
+  const dayMap={};
+  links.forEach(link=>{(link.byDay.link_clicks||[]).forEach(({date,clicks})=>{const d=date.slice(0,10);dayMap[d]=(dayMap[d]||0)+clicks;});});
+  const sorted=Object.keys(dayMap).sort();
+  const labels=sorted.map(d=>{const dt=new Date(d+'T12:00:00');return dt.toLocaleDateString('en-US',{month:'short',day:'numeric'});});
+  const data=sorted.map(d=>dayMap[d]);
+  if(trendChart)trendChart.destroy();
+  const ctx=document.getElementById('trendChart').getContext('2d');
+  trendChart=new Chart(ctx,{type:'bar',data:{labels,datasets:[{data,backgroundColor:data.map(v=>v>0?'rgba(0,216,240,0.5)':'rgba(26,45,64,0.8)'),borderColor:data.map(v=>v>0?'rgba(0,216,240,0.9)':'rgba(26,45,64,1)'),borderWidth:1,borderRadius:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#4a6a80',font:{family:'IBM Plex Mono',size:9},maxRotation:0,maxTicksLimit:10},grid:{color:'rgba(26,45,64,0.6)'}},y:{beginAtZero:true,ticks:{color:'#4a6a80',font:{family:'IBM Plex Mono',size:9},stepSize:1},grid:{color:'rgba(26,45,64,0.6)'}}}}});
+}
+function renderMetrics(containerId,metrics,total){
+  const el=document.getElementById(containerId);
+  if(!metrics||!metrics.length){el.innerHTML='<div class="loading-msg">No data yet</div>';return;}
+  el.innerHTML=metrics.slice(0,8).map(m=>{const pct=total>0?Math.round((m.clicks/total)*100):0;return'<div class="metric-row"><span class="metric-key">'+m.value+'</span><span class="metric-val"><div class="bar-bg"><div class="bar-fill" style="width:'+pct+'%"></div></div>'+m.clicks+'</span></div>';}).join('');
+}
+function renderCountries(links){
+  const map={};links.forEach(l=>{(l.countries.metrics||[]).forEach(m=>{map[m.value]=(map[m.value]||0)+m.clicks;});});
+  const total=Object.values(map).reduce((a,b)=>a+b,0);
+  renderMetrics('countries-list',Object.entries(map).sort((a,b)=>b[1]-a[1]).map(([value,clicks])=>({value,clicks})),total);
+}
+function renderReferrers(links){
+  const map={};links.forEach(l=>{(l.referrers.metrics||[]).forEach(m=>{map[m.value]=(map[m.value]||0)+m.clicks;});});
+  const total=Object.values(map).reduce((a,b)=>a+b,0);
+  renderMetrics('referrers-list',Object.entries(map).sort((a,b)=>b[1]-a[1]).map(([value,clicks])=>({value,clicks})),total);
+}
+function renderLinks(links){
+  const sorted=links.slice().sort((a,b)=>(b.summary.total_clicks||0)-(a.summary.total_clicks||0));
+  const container=document.getElementById('links-container');
+  if(!sorted.length){container.innerHTML='<div class="loading-msg">No links found</div>';return;}
+  container.innerHTML=sorted.map(link=>{
+    const total=link.summary.total_clicks||0;
+    const created=new Date(link.created_at).toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'});
+    const topCountry=(link.countries.metrics||[])[0];
+    const topRef=(link.referrers.metrics||[])[0];
+    return'<div class="link-card"><div class="link-header"><div><div class="link-id"><a href="'+link.link+'" target="_blank">'+link.id+'</a></div><div class="link-dest" title="'+link.long_url+'">'+link.long_url+'</div></div><div class="link-total"><div class="num">'+total.toLocaleString()+'</div><div class="lbl">Clicks (30d)</div></div></div><div class="link-meta"><div class="link-meta-item"><span class="link-meta-label">Created</span><span class="link-meta-val">'+created+'</span></div><div class="link-meta-item"><span class="link-meta-label">Top Country</span><span class="link-meta-val">'+(topCountry?topCountry.value+' ('+topCountry.clicks+')':'—')+'</span></div><div class="link-meta-item"><span class="link-meta-label">Top Referrer</span><span class="link-meta-val">'+(topRef?topRef.value+' ('+topRef.clicks+')':'—')+'</span></div></div></div>';
+  }).join('');
+}
+(function init(){
+  const cached=loadCache();
+  if(cached){
+    const age=Date.now()-cached.last_sync;
+    render(cached.links);
+    const ts=new Date(cached.last_sync).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+    document.getElementById('last-sync').textContent=age<CACHE_TTL?'SYNCED '+ts:'CACHED '+ts+' — STALE';
+    if(age>=CACHE_TTL)fetchAll();
+  }else{fetchAll();}
+})();
+</script>
+</body>
+</html>
