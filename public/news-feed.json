@@ -1,277 +1,277 @@
 {
-  "generated": "2026-04-26T17:29:51+00:00",
+  "generated": "2026-07-02T19:30:08+00:00",
   "count": 30,
   "sources_total": 12,
   "items": [
     {
-      "title": "To buy this Bay Area home, you’ll need Anthropic equity",
-      "url": "https://techcrunch.com/2026/04/26/to-buy-this-bay-area-home-youll-need-anthropic-equity/",
-      "summary": "Someone’s offering an unusual deal for a 13-acre property in Mill Valley, just north of South Francisco.",
+      "title": "Meta quietly launches vibe-coded gaming app Pocket",
+      "url": "https://techcrunch.com/2026/07/02/meta-quietly-launches-vibe-coded-gaming-app-pocket/",
+      "summary": "Meta has quietly launched Pocket, an experimental AI app that lets users generate and share interactive mini games using text prompts.",
       "source": "TechCrunch AI",
       "category": "News",
       "priority": "medium",
-      "publishDate": "2026-04-26T15:30:00+00:00"
+      "publishDate": "2026-07-02T18:44:02+00:00"
     },
     {
-      "title": "Anthropic created a test marketplace for agent-on-agent commerce",
-      "url": "https://techcrunch.com/2026/04/25/anthropic-created-a-test-marketplace-for-agent-on-agent-commerce/",
-      "summary": "In a recent experiment, Anthropic created a classified marketplace where AI agents represented both buyers and sellers, striking real deals for real goods and real money.",
+      "title": "Anthropic is discussing a new custom chip with Samsung",
+      "url": "https://techcrunch.com/2026/07/02/anthropic-is-discussing-a-new-custom-chip-with-samsung/",
+      "summary": "The news comes about a week after OpenAI announced its own custom AI chip in a partnership with Broadcom.",
       "source": "TechCrunch AI",
       "category": "News",
       "priority": "medium",
-      "publishDate": "2026-04-25T21:43:37+00:00"
+      "publishDate": "2026-07-02T18:31:09+00:00"
     },
     {
-      "title": "Maine’s governor vetoes data center moratorium",
-      "url": "https://techcrunch.com/2026/04/25/maines-governor-vetoes-data-center-moratorium/",
-      "summary": "L.D. 307 would have imposed the country’s first statewide moratorium on new data centers — lasting, in this case, until November 1, 2027.",
+      "title": "OpenAI proposed donating 5% of its equity to a US sovereign wealth fund",
+      "url": "https://techcrunch.com/2026/07/02/openai-proposed-donating-5-of-its-equity-to-a-us-sovereign-wealth-fund/",
+      "summary": "OpenAI CEO Sam Altman has reportedly proposed giving 5% of the company’s equity to a U.S. sovereign wealth fund, reviving discussions about letting the public share in the financial gains from the AI boom.",
       "source": "TechCrunch AI",
       "category": "News",
       "priority": "medium",
-      "publishDate": "2026-04-25T20:57:08+00:00"
+      "publishDate": "2026-07-02T15:20:51+00:00"
     },
     {
-      "title": "OpenAI CEO apologizes to Tumbler Ridge community",
-      "url": "https://techcrunch.com/2026/04/25/openai-ceo-apologizes-to-tumbler-ridge-community/",
-      "summary": "In a letter to the residents of Tumbler Ridge, Canada, OpenAI CEO Sam Altman said he is “deeply sorry” that his company failed to alert law enforcement about the suspect in a recent mass shooting.",
+      "title": "Microsoft launches its own AI deployment company with $2.5 billion commitment",
+      "url": "https://techcrunch.com/2026/07/02/microsoft-launches-its-own-ai-deployment-company-with-2-5-billion-commitment/",
+      "summary": "Microsoft follows Amazon, OpenAI, and Anthropic with its new AI deployment group.",
       "source": "TechCrunch AI",
       "category": "News",
       "priority": "medium",
-      "publishDate": "2026-04-25T17:17:56+00:00"
+      "publishDate": "2026-07-02T13:53:00+00:00"
     },
     {
-      "title": "Why Cohere is merging with Aleph Alpha",
-      "url": "https://techcrunch.com/2026/04/25/why-cohere-is-merging-with-aleph-alpha/",
-      "summary": "Canadian AI startup Cohere is taking over Germany-based Aleph Alpha with support from Lidl’s owner, Schwarz Group. With the blessing of their governments, the companies intend to offer a sovereign alternative to enterprises in an AI landscape dominated by American players.",
+      "title": "Yep, we’re using OpenClaw to date now",
+      "url": "https://techcrunch.com/2026/07/02/yep-were-using-openclaw-to-date-now/",
+      "summary": "Ben Guez has \"a bunch of potential international wives in [his] DMs,\" thanks to an automated script he set up using OpenClaw, Claude code, and Instagram trials.",
       "source": "TechCrunch AI",
       "category": "News",
       "priority": "medium",
-      "publishDate": "2026-04-25T16:00:00+00:00"
+      "publishDate": "2026-07-02T12:00:00+00:00"
     },
     {
-      "title": "Why Tokyo is the most important tech destination of 2026",
-      "url": "https://techcrunch.com/2026/04/25/why-tokyo-is-the-most-important-tech-destination-of-2026/",
-      "summary": "SusHi Tech Tokyo 2026 has four tightly defined technology domains, each backed by live demonstrations, dedicated exhibit floors, and sessions featuring the people actually building and funding these technologies globally.",
+      "title": "Indian tech tycoon bets $30M of his own money to build AI alternative to Microsoft Office",
+      "url": "https://techcrunch.com/2026/07/01/indian-tech-tycoon-bets-30m-to-build-an-ai-alternative-to-microsoft-office/",
+      "summary": "Neo is Bhavin Turakhia’s fifth venture and his latest involving enterprise software. This time he's taking on Microsoft Office and Google Apps with AI.",
       "source": "TechCrunch AI",
       "category": "News",
       "priority": "medium",
-      "publishDate": "2026-04-25T15:03:00+00:00"
+      "publishDate": "2026-07-02T05:30:00+00:00"
     },
     {
-      "title": "Meta’s loss is Thinking Machines’ gain",
-      "url": "https://techcrunch.com/2026/04/24/metas-loss-is-thinking-machines-gain/",
-      "summary": "Meta has been poaching talent from Thinking Machines Lab. But it's a two-way street.",
+      "title": "SpaceX has an AI device prototype, and it sure sounds phone-ish",
+      "url": "https://techcrunch.com/2026/07/01/spacex-has-an-ai-device-prototype-and-it-sure-sounds-phone-ish/",
+      "summary": "SpaceX reportedly showed investors a \"handset-like\" AI device before going public. It could be another signal SpaceX wants to expand into wireless.",
       "source": "TechCrunch AI",
       "category": "News",
       "priority": "medium",
-      "publishDate": "2026-04-24T20:52:07+00:00"
+      "publishDate": "2026-07-01T18:54:18+00:00"
     },
     {
-      "title": "ComfyUI hits $500M valuation as creators seek more control over AI-generated media",
-      "url": "https://techcrunch.com/2026/04/24/comfyui-hits-500m-valuation-as-creators-seek-more-control-over-ai-generated-media/",
-      "summary": "ComfyUI, whose tools give creators more control over AI image, video, and audio generation, just raised $30 million.",
+      "title": "Ashton Kutcher leaving Sound Ventures to launch new VC firm with Morgan Beller",
+      "url": "https://techcrunch.com/2026/07/01/ashton-kutcher-leaving-sound-ventures-to-launch-new-vc-firm-with-morgan-beller/",
+      "summary": "Sound built its reputation on concentrated, high-conviction bets in category-leading AI labs, while Kutcher's new fund appears to be chasing the layer underneath those companies — the infrastructure and energy that power them.",
       "source": "TechCrunch AI",
       "category": "News",
       "priority": "medium",
-      "publishDate": "2026-04-24T19:49:35+00:00"
+      "publishDate": "2026-07-01T18:47:22+00:00"
     },
     {
-      "title": "Why are top university websites serving porn? It comes down to shoddy housekeeping.",
-      "url": "https://arstechnica.com/security/2026/04/why-are-top-university-websites-serving-porn-it-comes-down-to-shoddy-housekeeping/",
-      "summary": "Hundreds of subdomains from dozens of universities have been hijacked by scammers.",
+      "title": "Cloudflare’s new policy pushes AI companies to pay for publishers’ content",
+      "url": "https://techcrunch.com/2026/07/01/cloudflares-new-policy-pushes-ai-companies-to-pay-for-publishers-content/",
+      "summary": "Cloudflare is giving AI companies until September 15 to separate web crawlers used for search from those used for AI training and agents, or risk being blocked by default on many publisher sites.",
+      "source": "TechCrunch AI",
+      "category": "News",
+      "priority": "medium",
+      "publishDate": "2026-07-01T17:48:37+00:00"
+    },
+    {
+      "title": "Venice AI becomes a unicorn with $65M Series A as its privacy-first AI platform takes off",
+      "url": "https://techcrunch.com/2026/07/01/venice-ai-becomes-a-unicorn-with-65m-series-a-as-its-privacy-first-ai-platform-takes-off/",
+      "summary": "Venice AI is already profitable, with annualized run-rate revenues of over $70 million, CEO Erik Voorhees said.",
+      "source": "TechCrunch AI",
+      "category": "News",
+      "priority": "medium",
+      "publishDate": "2026-07-01T14:25:23+00:00"
+    },
+    {
+      "title": "Gemini Spark, Google’s agentic assistant, is now available on Mac",
+      "url": "https://techcrunch.com/2026/07/01/gemini-spark-googles-agentic-assistant-is-now-available-on-mac/",
+      "summary": "Google's 24/7 agentic assistant, Gemini Spark, comes to Mac alongside other improvements, like real-time tracking and support for more apps.",
+      "source": "TechCrunch AI",
+      "category": "News",
+      "priority": "medium",
+      "publishDate": "2026-07-01T14:20:19+00:00"
+    },
+    {
+      "title": "Meta, like SpaceX, looks to turn excess AI compute into cash",
+      "url": "https://techcrunch.com/2026/07/01/meta-like-spacex-looks-to-turn-excess-ai-compute-into-cash/",
+      "summary": "Meta is developing plans for a cloud infrastructure business, selling access to AI compute power and models. The move would pit it against the big cloud providers like Amazon Web Services, Google Cloud, and Microsoft Azure.",
+      "source": "TechCrunch AI",
+      "category": "News",
+      "priority": "medium",
+      "publishDate": "2026-07-01T13:43:07+00:00"
+    },
+    {
+      "title": "Trump drops restrictions on Anthropic’s Mythos and Fable models",
+      "url": "https://techcrunch.com/2026/06/30/trump-drops-restrictions-on-anthropics-mythos-and-fable-models/",
+      "summary": "The Trump administration's erratic approach to AI policymaking has left companies across the industry with little clarity about what will govern future model releases.",
+      "source": "TechCrunch AI",
+      "category": "News",
+      "priority": "medium",
+      "publishDate": "2026-07-01T02:16:06+00:00"
+    },
+    {
+      "title": "Wayve launches $85M employee tender offer at $8.5B valuation",
+      "url": "https://techcrunch.com/2026/06/30/wayve-launches-85m-employee-tender-offer-at-8-5b-valuation/",
+      "summary": "Wayve’s offering is part of a growing trend of AI startups using employee tenders as a strategic tool to attract and retain talent.",
+      "source": "TechCrunch AI",
+      "category": "News",
+      "priority": "medium",
+      "publishDate": "2026-07-01T02:04:40+00:00"
+    },
+    {
+      "title": "OpenClaw is finally available on Android and iOS",
+      "url": "https://techcrunch.com/2026/06/30/openclaw-is-finally-available-on-android-and-ios/",
+      "summary": "The free open source agentic program is finally invading your phone.",
+      "source": "TechCrunch AI",
+      "category": "News",
+      "priority": "medium",
+      "publishDate": "2026-06-30T21:53:28+00:00"
+    },
+    {
+      "title": "The DeepMind trio who built a poker AI are now making money for quant hedge funds",
+      "url": "https://techcrunch.com/2026/06/30/the-deepmind-trio-who-built-a-poker-ai-are-now-making-money-for-quant-hedge-funds/",
+      "summary": "EquiLibre Technologies, a Prague-based AI lab founded by three ex-DeepMind researchers, is now valued at more than $500 million.",
+      "source": "TechCrunch AI",
+      "category": "News",
+      "priority": "medium",
+      "publishDate": "2026-06-30T20:33:48+00:00"
+    },
+    {
+      "title": "New attack provides one more reason why AI browsers are a bad idea",
+      "url": "https://arstechnica.com/security/2026/06/ai-browsers-can-be-lulled-into-a-dream-world-where-guardrails-no-longer-apply/",
+      "summary": "Telling an LLM that 2 + 2 = 5 is enough to make it follow forbidden instructions.",
       "source": "Ars Technica",
       "category": "Technical",
       "priority": "medium",
-      "publishDate": "2026-04-24T19:00:39+00:00"
+      "publishDate": "2026-06-30T20:03:14+00:00"
     },
     {
-      "title": "Google to invest up to $40B in Anthropic in cash and compute",
-      "url": "https://techcrunch.com/2026/04/24/google-to-invest-up-to-40b-in-anthropic-in-cash-and-compute/",
-      "summary": "Google plans up to $40B investment in Anthropic as AI rivals race to secure massive compute capacity, following the limited release of its powerful, cybersecurity-focused Mythos model.",
+      "title": "Google introduces a faster, cheaper image generator with Nano Banana 2 Lite",
+      "url": "https://techcrunch.com/2026/06/30/google-introduces-a-faster-cheaper-image-generator-with-nano-banana-2-lite/",
+      "summary": "Google is updating its image generator to make it faster and cheaper, making it a more useful tool for creators looking to make AI content.",
       "source": "TechCrunch AI",
       "category": "News",
       "priority": "medium",
-      "publishDate": "2026-04-24T18:00:03+00:00"
+      "publishDate": "2026-06-30T19:02:38+00:00"
     },
     {
-      "title": "Apple’s new CEO, and why Elon Musk wants to buy Cursor for $60B",
-      "url": "https://techcrunch.com/podcast/apples-new-ceo-and-why-elon-musk-wants-to-buy-cursor-for-60b/",
-      "summary": "A new era is on the way for Apple as Tim Cook plans to step down from his CEO role in September,&#160;handing the reins to hardware chief John Ternus.&#160;&#160; Ternus may be inheriting one of the most durable businesses in tech, but&#160;he’s&#160;also stepping into&#160;a very different&#160;eco",
+      "title": "Nvidia competitor Etched hits $5B valuation, $1B in sales for AI chip",
+      "url": "https://techcrunch.com/2026/06/30/nvidia-competitor-etched-hits-5b-valuation-1b-in-sales-for-ai-chip/",
+      "summary": "Nvidia AI chip competitor Etched says it has already booked $1 billion under contract for the inference systems powered by its chip.",
       "source": "TechCrunch AI",
       "category": "News",
       "priority": "medium",
-      "publishDate": "2026-04-24T17:45:57+00:00"
+      "publishDate": "2026-06-30T18:13:02+00:00"
     },
     {
-      "title": "Marked-up Mac minis flood eBay amid shortages driven by AI",
-      "url": "https://techcrunch.com/2026/04/24/mac-mini-price-expensive-ebay-shortage-ai-memory/",
-      "summary": "Apple’s sold-out Mac mini is spawning marked-up eBay listings as demand surges for the compact desktop, now favored for running local AI models and tools.",
-      "source": "TechCrunch AI",
-      "category": "News",
-      "priority": "medium",
-      "publishDate": "2026-04-24T16:42:19+00:00"
-    },
-    {
-      "title": "Nothing introduces an AI-powered dictation tool",
-      "url": "https://techcrunch.com/2026/04/24/nothing-introduces-an-ai-powered-dictation-tool/",
-      "summary": "Nothing's new on-device dictation tool supports over 100 languages.",
-      "source": "TechCrunch AI",
-      "category": "News",
-      "priority": "medium",
-      "publishDate": "2026-04-24T13:41:42+00:00"
-    },
-    {
-      "title": "DeepSeek previews new AI model that ‘closes the gap’ with frontier models",
-      "url": "https://techcrunch.com/2026/04/24/deepseek-previews-new-ai-model-that-closes-the-gap-with-frontier-models/",
-      "summary": "DeepSeek says both models are more efficient and performant than DeepSeek V3.2 due to architectural improvements, and have almost \"closed the gap\" with current leading models, both open and closed, on reasoning benchmarks.",
-      "source": "TechCrunch AI",
-      "category": "News",
-      "priority": "medium",
-      "publishDate": "2026-04-24T13:30:59+00:00"
-    },
-    {
-      "title": "In another wild turn for AI chips, Meta signs deal for millions of Amazon AI CPUs",
-      "url": "https://techcrunch.com/2026/04/24/in-another-wild-turn-for-ai-chips-meta-signs-deal-for-millions-of-amazon-ai-cpus/",
-      "summary": "Meta has commandeered a big chunk of Amazon's homegrown CPUs (not GPUs) for AI agentic workloads, signaling that a new kind of chip race has begun.",
-      "source": "TechCrunch AI",
-      "category": "News",
-      "priority": "medium",
-      "publishDate": "2026-04-24T12:00:00+00:00"
-    },
-    {
-      "title": "Bret Taylor’s Sierra buys YC-backed AI startup Fragment",
-      "url": "https://techcrunch.com/2026/04/23/bret-taylors-sierra-buys-yc-backed-ai-startup-fragment/",
-      "summary": "Sierra, the AI customer service agent startup founded by technologist Bret Taylor, announced today that it has acquired the YC-backed French startup Fragment.",
-      "source": "TechCrunch AI",
-      "category": "News",
-      "priority": "medium",
-      "publishDate": "2026-04-23T21:00:00+00:00"
-    },
-    {
-      "title": "Meet Noscroll, an AI bot that does your doomscrolling for you",
-      "url": "https://techcrunch.com/2026/04/23/meet-noscroll-an-ai-bot-that-does-your-doomscrolling-for-you/",
-      "summary": "Noscroll wants to cure doomscrolling with an AI bot that reads the internet for you.",
-      "source": "TechCrunch AI",
-      "category": "News",
-      "priority": "medium",
-      "publishDate": "2026-04-23T19:38:25+00:00"
-    },
-    {
-      "title": "OpenAI releases GPT-5.5, bringing company one step closer to an AI ‘super app’",
-      "url": "https://techcrunch.com/2026/04/23/openai-chatgpt-gpt-5-5-ai-model-superapp/",
-      "summary": "OpenAI says its latest model offers increased capabilities across a broad variety of categories.",
-      "source": "TechCrunch AI",
-      "category": "News",
-      "priority": "medium",
-      "publishDate": "2026-04-23T18:29:29+00:00"
-    },
-    {
-      "title": "Microsoft issues emergency update for macOS and Linux ASP.NET threat",
-      "url": "https://arstechnica.com/security/2026/04/microsoft-issues-emergency-update-for-macos-and-linux-asp-net-threat/",
-      "summary": "When authentication fails, things can go very, very wrong.",
+      "title": "Notion killing Skiff-influenced email app since most users use AI agents instead",
+      "url": "https://arstechnica.com/gadgets/2026/06/notion-killing-skiff-influenced-email-app-since-most-users-use-ai-agents-instead/",
+      "summary": "Notion is \"going all in on using agents to run your inbox.\"",
       "source": "Ars Technica",
       "category": "Technical",
       "priority": "medium",
-      "publishDate": "2026-04-22T19:32:56+00:00"
+      "publishDate": "2026-06-25T19:04:57+00:00"
     },
     {
-      "title": "US-sanctioned currency exchange says $15 million heist done by \"unfriendly states\"",
-      "url": "https://arstechnica.com/security/2026/04/russia-friendly-exchange-says-western-special-service-behind-15-million-cyberattack/",
-      "summary": "Grinex says needed hacking resources \"available exclusively to... unfriendly states.\"",
+      "title": "Oracle’s 21,000 layoffs help drive its debt-fueled AI investments",
+      "url": "https://arstechnica.com/ai/2026/06/oracles-21000-layoffs-help-drive-its-debt-fueled-ai-investments/",
+      "summary": "Oracle is spending billions on data center infrastructure to support AI.",
       "source": "Ars Technica",
       "category": "Technical",
       "priority": "medium",
-      "publishDate": "2026-04-17T21:28:35+00:00"
+      "publishDate": "2026-06-23T20:17:38+00:00"
     },
     {
-      "title": "Executive Briefing: The AI cost curve your strategy is riding just broke + 3 prompts to find your exposure",
-      "url": "https://natesnewsletter.substack.com/p/executive-briefing-the-ai-race-youre",
-      "summary": "Watch now | The inference economics nobody is pricing in &#8212; plus the prompts to audit your own exposure.",
+      "title": "Stop paying frontier prices for work a cheaper AI would crush. Grab the model-picker prompt that routes the deck, the repo, and the call.",
+      "url": "https://natesnewsletter.substack.com/p/which-ai-model-to-use",
+      "summary": "Watch now | Fable 5 came back yesterday after over two weeks offline, this time with different terms: usage caps, a credit model, and a filter that reroutes some work to a weaker model.",
       "source": "Nate's Newsletter",
       "category": "Analysis",
       "priority": "high",
-      "publishDate": "2026-04-26T15:02:46+00:00"
+      "publishDate": "2026-07-02T13:03:57+00:00"
     },
     {
-      "title": "What GPT-Image-2 actually changed — and the creative ops function that makes you the one who compounds from it",
-      "url": "https://natesnewsletter.substack.com/p/what-gpt-image-2-actually-changed",
-      "summary": "Watch now | OpenAI shipped an image model this week that plans before it draws, searches the web while it composes, and checks its own work before returning the result.",
+      "title": "You can build 80% of your own AI memory by talking to the agent already on your computer",
+      "url": "https://natesnewsletter.substack.com/p/build-your-own-ai-memory",
+      "summary": "Watch now | You&#8217;ve wished your AI would just go fight your insurance company for you.",
       "source": "Nate's Newsletter",
       "category": "Analysis",
       "priority": "high",
-      "publishDate": "2026-04-25T14:03:16+00:00"
+      "publishDate": "2026-07-01T13:03:40+00:00"
     },
     {
-      "title": "Claude Design just cut 60% of your designer's week — here's what to do with the rest + 4 prompts",
-      "url": "https://natesnewsletter.substack.com/p/claude-design-replaced-a-week-of",
-      "summary": "Watch now | How Claude Design, Claude Code, and Cowork together quietly retire the entire mockup-to-production handoff.",
-      "source": "Nate's Newsletter",
-      "category": "Analysis",
-      "priority": "high",
-      "publishDate": "2026-04-24T13:03:45+00:00"
-    },
-    {
-      "title": "DeepSeek V4 - almost on the frontier, a fraction of the price",
-      "url": "https://simonwillison.net/2026/Apr/24/deepseek-v4/#atom-entries",
-      "summary": "Chinese AI lab DeepSeek's last model release was V3.2 (and V3.2 Speciale) last December. They just dropped the first of their hotly anticipated V4 series in the shape of two preview models, DeepSeek-V4-Pro and DeepSeek-V4-Flash. Both models are 1 million token context Mixture of Experts. Pro is 1.6T",
+      "title": "Have your agent record video demos of its work with shot-scraper video",
+      "url": "https://simonwillison.net/2026/Jun/30/shot-scraper-video/#atom-entries",
+      "summary": "shot-scraper video is a new command introduced in today's shot-scraper 1.10 release which accepts a storyboard.yml file defining a routine to run against a web application and uses Playwright to record a video of that routine. I've written before about the importance of having coding agents produce ",
       "source": "Simon Willison",
       "category": "Technical",
       "priority": "high",
-      "publishDate": "2026-04-24T06:01:04+00:00"
+      "publishDate": "2026-06-30T16:54:26+00:00"
     },
     {
-      "title": "Extract PDF text in your browser with LiteParse for the web",
-      "url": "https://simonwillison.net/2026/Apr/23/liteparse-for-the-web/#atom-entries",
-      "summary": "LlamaIndex have a most excellent open source project called LiteParse, which provides a Node.js CLI tool for extracting text from PDFs. I got a version of LiteParse working entirely in the browser, using most of the same libraries that LiteParse uses to run in Node.js. Spatial text parsing Refreshin",
-      "source": "Simon Willison",
-      "category": "Technical",
+      "title": "How ChatGPT adoption has expanded",
+      "url": "https://openai.com/index/how-chatgpt-adoption-has-expanded",
+      "summary": "New OpenAI Signals data shows how ChatGPT adoption is growing globally, with users increasing usage, exploring more capabilities, and driving growth across regions and languages.",
+      "source": "OpenAI",
+      "category": "AI Companies",
       "priority": "high",
-      "publishDate": "2026-04-23T21:54:24+00:00"
+      "publishDate": "2026-06-30T09:00:00+00:00"
     },
     {
-      "title": "A pelican for GPT-5.5 via the semi-official Codex backdoor API",
-      "url": "https://simonwillison.net/2026/Apr/23/gpt-5-5/#atom-entries",
-      "summary": "GPT-5.5 is out. It's available in OpenAI Codex and is rolling out to paid ChatGPT subscribers. I've had some preview access and found it to be a fast, effective and highly capable model. As is usually the case these days, it's hard to put into words what's good about it - I ask it to build things an",
-      "source": "Simon Willison",
-      "category": "Technical",
+      "title": "Introducing GeneBench-Pro",
+      "url": "https://openai.com/index/introducing-genebench-pro",
+      "summary": "Introducing GeneBench-Pro, a new benchmark testing AI performance in genomics, biology, and scientific research using complex, real-world datasets.",
+      "source": "OpenAI",
+      "category": "AI Companies",
       "priority": "high",
-      "publishDate": "2026-04-23T19:59:47+00:00"
+      "publishDate": "2026-06-30T00:00:00+00:00"
     },
     {
-      "title": "Your automation strategy has a blind spot the size of your entire legacy stack. Codex just filled it.",
-      "url": "https://natesnewsletter.substack.com/p/grab-the-workflow-audit-that-tells",
-      "summary": "Watch now | Codex is coming for all of work &#8212; without waiting for anyone to build for agents.",
+      "title": "Core dump epidemiology: fixing an 18-year-old bug",
+      "url": "https://openai.com/index/core-dump-epidemiology-data-infrastructure-bug",
+      "summary": "OpenAI engineers used large-scale core dump analysis to debug rare infrastructure crashes, uncovering both a hardware fault and a long-standing software bug.",
+      "source": "OpenAI",
+      "category": "AI Companies",
+      "priority": "high",
+      "publishDate": "2026-06-30T00:00:00+00:00"
+    },
+    {
+      "title": "Import AI 463: Self-improving robots; a 10k Chinese GPU cluster; and an elegiac essay for the human era",
+      "url": "https://jack-clark.net/2026/06/29/import-ai-463-self-improving-robots-a-10k-chinese-gpu-cluster-and-an-elegiac-essay-for-the-human-era/",
+      "summary": "Welcome to Import AI, a newsletter about AI research. Import AI runs on arXiv, cappuccinos, and feedback from readers. If you’d like to support this, please subscribe. Subscribe now NVIDIA sets up a crude self-improvement loop for real world robotics:…What if you could take the best ideas from AI ag",
+      "source": "Import AI",
+      "category": "Research",
+      "priority": "high",
+      "publishDate": "2026-06-29T13:03:27+00:00"
+    },
+    {
+      "title": "Run this 4-question test before you let any AI into your files, your Slack, or your phone.",
+      "url": "https://natesnewsletter.substack.com/p/ai-race-context",
+      "summary": "Watch now | We should probably stop talking about AI model releases like normal software launches.",
       "source": "Nate's Newsletter",
       "category": "Analysis",
       "priority": "high",
-      "publishDate": "2026-04-23T13:04:05+00:00"
+      "publishDate": "2026-06-29T13:00:57+00:00"
     },
     {
-      "title": "Introducing GPT-5.5",
-      "url": "https://openai.com/index/introducing-gpt-5-5",
-      "summary": "Introducing GPT-5.5, our smartest model yet—faster, more capable, and built for complex tasks like coding, research, and data analysis across tools.",
+      "title": "Mapping Europe’s AI Workforce Opportunity",
+      "url": "https://openai.com/index/mapping-ai-jobs-transition-eu",
+      "summary": "A new OpenAI report maps how AI could reshape jobs across the EU, highlighting which occupations may face automation, growth, or workflow changes.",
       "source": "OpenAI",
       "category": "AI Companies",
       "priority": "high",
-      "publishDate": "2026-04-23T11:00:00+00:00"
-    },
-    {
-      "title": "GPT-5.5 System Card",
-      "url": "https://openai.com/index/gpt-5-5-system-card",
-      "summary": "",
-      "source": "OpenAI",
-      "category": "AI Companies",
-      "priority": "high",
-      "publishDate": "2026-04-23T11:00:00+00:00"
-    },
-    {
-      "title": "Automations",
-      "url": "https://openai.com/academy/codex-automations",
-      "summary": "Learn how to automate tasks in Codex using schedules and triggers to create reports, summaries, and recurring workflows without manual effort.",
-      "source": "OpenAI",
-      "category": "AI Companies",
-      "priority": "high",
-      "publishDate": "2026-04-23T10:00:00+00:00"
+      "publishDate": "2026-06-29T07:00:00+00:00"
     }
   ]
 }
