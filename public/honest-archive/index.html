@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Honest Archive — how to keep someone you love, without inventing them</title>
+<meta name="description" content="A free, public-domain field method for recording the people you love while they're alive — and keeping the record honest forever. Retrieval, not resurrection.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,500;7..72,700;7..72,900&family=Literata:ital,opsz,wght@1,7..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F4EE;
+    --ink:#232837;
+    --carbon:#33418F;
+    --pencil:#B23B2E;
+    --graphite:#6E7285;
+    --rule:#D9D5C9;
+    --card:#FFFFFF;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:Literata,Georgia,'Times New Roman',serif;
+    font-size:1.06rem;
+    line-height:1.72;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{font-family:'IBM Plex Mono','Courier New',monospace}
+  main{max-width:44rem;margin:0 auto;padding:0 1.4rem 6rem}
+
+  /* catalog card */
+  .card-header{
+    border:1.5px solid var(--ink);
+    margin:3rem 0 0;
+    background:var(--card);
+  }
+  .card-header .row{
+    display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+    padding:.55rem .9rem;
+    font-family:'IBM Plex Mono','Courier New',monospace;
+    font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--carbon);
+  }
+  .card-header .row + .row{border-top:1px solid var(--rule)}
+
+  /* hero */
+  h1{
+    font-weight:900;
+    font-size:clamp(2.5rem,7vw,4.1rem);
+    line-height:1.04;
+    letter-spacing:-.015em;
+    margin:2.6rem 0 1.2rem;
+  }
+  .thesis{
+    font-size:clamp(1.15rem,2.6vw,1.4rem);
+    line-height:1.5;
+    max-width:36rem;
+  }
+  .thesis em{font-style:italic}
+  .motto{
+    display:inline-block;
+    margin-top:1.4rem;
+    font-family:'IBM Plex Mono','Courier New',monospace;
+    font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--pencil);
+    border:1.5px solid var(--pencil);
+    padding:.45rem .8rem;
+  }
+  .actions{margin:2rem 0 0;display:flex;gap:.8rem;flex-wrap:wrap}
+  .btn{
+    font-family:'IBM Plex Mono','Courier New',monospace;
+    font-size:.85rem;
+    padding:.65rem 1.1rem;
+    border:1.5px solid var(--ink);
+    background:var(--ink);color:var(--paper);
+    cursor:pointer;text-decoration:none;display:inline-block;
+  }
+  .btn.ghost{background:transparent;color:var(--ink)}
+  .btn:focus-visible{outline:3px solid var(--carbon);outline-offset:2px}
+  .btn:hover{background:var(--carbon);border-color:var(--carbon);color:#fff}
+  .free-line{margin-top:1.1rem;font-size:.92rem;color:var(--graphite);max-width:34rem}
+
+  /* section labels */
+  .label{
+    font-family:'IBM Plex Mono','Courier New',monospace;
+    font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--carbon);
+    border-top:1.5px solid var(--ink);
+    padding-top:.7rem;
+    margin:4.2rem 0 1.1rem;
+    display:flex;justify-content:space-between;gap:1rem;
+  }
+  .label .no{color:var(--graphite)}
+  h2{
+    font-weight:700;font-size:clamp(1.7rem,4vw,2.3rem);
+    line-height:1.15;letter-spacing:-.01em;margin:0 0 1.1rem;
+  }
+  p{margin:0 0 1.1rem}
+  p.lead{font-size:1.14rem}
+  strong{font-weight:700}
+  .quiet{color:var(--graphite)}
+
+  /* discipline list */
+  .discipline p{margin-bottom:1rem}
+  .discipline strong{display:block;font-weight:700}
+
+  /* movements */
+  .movement{margin:2.4rem 0}
+  .movement h3{
+    font-size:1.22rem;font-weight:700;
+    display:flex;align-items:baseline;gap:.7rem;
+    margin-bottom:.8rem;
+  }
+  .movement h3 .rn{
+    font-family:'IBM Plex Mono','Courier New',monospace;
+    font-size:.8rem;color:var(--carbon);letter-spacing:.08em;
+  }
+  ol.qs{margin:0 0 1rem 1.4rem}
+  ol.qs li{margin:.45rem 0;padding-left:.3rem}
+  .move{
+    border-left:3px solid var(--carbon);
+    padding:.35rem 0 .35rem 1rem;
+    font-style:italic;color:#3d4356;
+    margin:.9rem 0 0;
+  }
+  .move .mv{font-style:normal;font-family:'IBM Plex Mono','Courier New',monospace;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--carbon);display:block;margin-bottom:.15rem}
+
+  /* keep: file blocks */
+  pre{
+    font-family:'IBM Plex Mono','Courier New',monospace;
+    font-size:.84rem;line-height:1.6;
+    background:var(--card);
+    border:1px solid var(--rule);
+    border-left:3px solid var(--carbon);
+    padding:1rem 1.1rem;
+    overflow-x:auto;
+    margin:0 0 1.2rem;
+    white-space:pre;
+  }
+
+  /* charter — the red pencil */
+  .charter{border:2px solid var(--pencil);background:#FDF9F5;padding:1.6rem 1.5rem 1.2rem;margin:1.6rem 0}
+  .charter .rule{display:flex;gap:1rem;margin:0 0 1.35rem}
+  .charter .rn{
+    font-family:'IBM Plex Mono','Courier New',monospace;
+    font-weight:500;color:var(--pencil);
+    font-size:.95rem;letter-spacing:.05em;
+    min-width:2.4rem;padding-top:.2rem;
+  }
+  .charter .rule h4{font-size:1.05rem;font-weight:700;margin-bottom:.25rem;color:var(--pencil)}
+  .charter .rule p{margin:0;font-size:.99rem}
+  .charter-why{font-size:.99rem}
+
+  /* clip-out */
+  .clip{
+    border:2px dashed var(--ink);
+    padding:1.5rem 1.5rem 1.2rem;
+    margin:1.6rem 0;
+    background:var(--card);
+  }
+  .clip .mono-h{font-family:'IBM Plex Mono','Courier New',monospace;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--carbon);margin-bottom:.8rem}
+  .clip ol{margin-left:1.3rem}
+  .clip li{margin:.4rem 0}
+
+  footer{
+    border-top:1.5px solid var(--ink);
+    margin-top:4.5rem;padding-top:1.2rem;
+    font-size:.92rem;color:var(--graphite);
+  }
+  footer .mono{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:.6rem;color:var(--carbon)}
+  a{color:var(--carbon)}
+
+  @media print{
+    body{background:#fff;color:#000;font-size:10.5pt}
+    .actions,.btn{display:none!important}
+    .label{margin-top:2rem}
+    .movement{break-inside:avoid}
+    .charter{break-inside:avoid;border-color:#000}
+    .charter .rn,.charter .rule h4{color:#000}
+    .clip{break-inside:avoid}
+    main{max-width:100%;padding:0}
+  }
+</style>
+</head>
+<body>
+<main>
+
+  <div class="card-header" role="doc-preface" aria-label="catalog card">
+    <div class="row"><span>The Honest Archive</span><span>Field method · no product</span></div>
+    <div class="row"><span>Free · public domain (CC0)</span><span>One afternoon · a phone · a folder</span></div>
+  </div>
+
+  <h1>How to keep someone you&nbsp;love — without inventing&nbsp;them.</h1>
+
+  <p class="thesis">A field method for recording the people you love while they're alive, in their own voice and their own words — and for protecting that record, forever, from the one thing that can ruin it: <em>invention</em>.</p>
+
+  <span class="motto">Retrieval, not resurrection</span>
+
+  <div class="actions">
+    <button class="btn" onclick="window.print()">Print this guide</button>
+    <button class="btn ghost" id="dl">Download the plain-text copy</button>
+  </div>
+  <p class="free-line">This page works without a connection, tracks nothing, and carries its own plain-text copy inside it — because a guide about preservation should survive in the format it recommends.</p>
+
+  <div class="label"><span>The moment</span><span class="no">WHY</span></div>
+  <p class="lead">There is a moment most people recognize. You are at a funeral, and someone tells a story about the person you loved — a story you have never heard. And you think: <em>I had years. Decades. Hundreds of Sunday dinners. Why didn't I ask?</em></p>
+  <p>The voice goes first. People keep old voicemails for years just to hear a person say an ordinary sentence. The stories go next — not the big ones, which get retold, but the texture: what the kitchen smelled like, how they said your grandmother's name, the joke they made when the car wouldn't start.</p>
+  <p>You cannot keep a person. You can keep their words, in their voice, in their own order. That is what an archive is. This guide shows you how to make one in a few honest afternoons.</p>
+  <p>It also shows you how to defend it. A new industry is being built right now that will offer, for a monthly fee, to let you "talk to them again." It will be fluent, comforting, and false — sentences placed in their mouth that they never said, sold to you at the most vulnerable moment of your life. This method is the alternative. Everything here ends in their real words, or in honest silence. Nothing in between.</p>
+
+  <div class="label"><span>Part one — Ask</span><span class="no">THE SESSIONS</span></div>
+  <h2>A phone's voice-memo app is enough.</h2>
+  <div class="discipline">
+    <p><strong>Record voice, not just notes.</strong> The transcript is the index; the voice is the person. Tone carries half of what a human means.</p>
+    <p><strong>Say the date out loud at the top of every recording,</strong> and both your names. "It's July tenth, 2026 — I'm sitting with my mother, Mary Florence." Thirty seconds of ceremony that turns a file into a record.</p>
+    <p><strong>Ask for scenes, not summaries.</strong> When they say "we were poor but happy," ask: what did you eat on a good week? Where were you standing when the rent was short? A memory with a floor under it is twice as alive.</p>
+    <p><strong>Verbatim is treasure.</strong> The phrases they always say — get them said properly, on the record. Names, too: have them speak the full names of the people they came from, pronounced the way the old country pronounced them. Spelling survives on paper; pronunciation only survives on tape.</p>
+    <p><strong>Tangents outrank the list.</strong> The questions below are matches, not rails. If one question lights a forty-minute story you never planned, you have won.</p>
+    <p><strong>Keep sessions short.</strong> Forty-five minutes to an hour, then stop — even mid-story. Many short sessions beat one exhausting marathon, and "we'll pick it up there next week" is how you get a next week.</p>
+    <p><strong>Interview them alone, and together.</strong> Couples and siblings correct each other into the truth. But some things are only said one-on-one. Do both.</p>
+    <p><strong>Don't rescue them from silence.</strong> When a hard question lands, count to ten before you speak. The tape can hold a silence. What comes after one is usually the reason you came.</p>
+    <p><strong>Keep the contradictions.</strong> If what they say today disagrees with what they said last month, keep both, dated. People are allowed to disagree with themselves twenty years apart. That is not an error in the record — that <em>is</em> the person.</p>
+  </div>
+
+  <div class="label"><span>The questions</span><span class="no">48 · EIGHT MOVEMENTS</span></div>
+  <h2>You will not use them all. That's fine.</h2>
+  <p>Each movement ends with a <em>follow-up move</em> — the technique that turns an answer into a scene.</p>
+
+  <div class="movement">
+    <h3><span class="rn">I</span> Before you</h3>
+    <ol class="qs" start="1">
+      <li>Tell me about a day you remember from before I was born — an ordinary one.</li>
+      <li>What did your childhood kitchen smell like? Who cooked, and what was the dish that meant things were okay?</li>
+      <li>Where did you sleep as a child? Describe the room at night.</li>
+      <li>What were you afraid of at eight years old?</li>
+      <li>What is the first money you ever earned, and what did you do with it?</li>
+      <li>Who was your best friend when you were twelve? Tell me one specific thing the two of you did.</li>
+    </ol>
+    <p class="move"><span class="mv">The move</span>Ask where they were standing. Ask what they were wearing. The details feel trivial; they are the difference between a fact and a memory.</p>
+  </div>
+
+  <div class="movement">
+    <h3><span class="rn">II</span> The world they came from</h3>
+    <ol class="qs" start="7">
+      <li>What did your parents' voices sound like? Say something the way your mother used to say it.</li>
+      <li>What was a rule your family lived by that was never said out loud?</li>
+      <li>What did your family argue about?</li>
+      <li>Who in the family were you supposed to take after — and did you?</li>
+      <li>What is a story your grandparents told that you can still tell?</li>
+      <li>Say the full names of the people you came from — and how they were really pronounced.</li>
+    </ol>
+    <p class="move"><span class="mv">The move</span>Get the names in their voice. This is the recording their great-grandchildren will play.</p>
+  </div>
+
+  <div class="movement">
+    <h3><span class="rn">III</span> Love and choices</h3>
+    <ol class="qs" start="13">
+      <li>Tell me about a door you almost walked through — the job, the person, the city that almost happened.</li>
+      <li>How did you meet the person you loved? What were you wearing? What was the weather?</li>
+      <li>What did you get wrong about love the first time?</li>
+      <li>When did you know you would stay? Was there a moment?</li>
+      <li>What is a fight you are glad you had?</li>
+      <li>What did you give up — and was it worth it?</li>
+    </ol>
+    <p class="move"><span class="mv">The move</span>When they summarize — "we just hit it off" — ask for the first ten minutes.</p>
+  </div>
+
+  <div class="movement">
+    <h3><span class="rn">IV</span> Work and craft</h3>
+    <ol class="qs" start="19">
+      <li>Walk me through a workday from your thirties, from the alarm to lights-out.</li>
+      <li>What could you do that most people around you couldn't?</li>
+      <li>Who taught you your work? What did their hands look like?</li>
+      <li>What is the best thing you ever made or did that nobody applauded?</li>
+      <li>What did a paycheck mean in the year money was tightest?</li>
+      <li>If you had one afternoon to teach me a single skill, which one — and how would you start?</li>
+    </ol>
+    <p class="move"><span class="mv">The move</span>Ask for the tools by name. Vocabulary is a fingerprint.</p>
+  </div>
+
+  <div class="movement">
+    <h3><span class="rn">V</span> The hard chapters</h3>
+    <ol class="qs" start="25">
+      <li>What is the heaviest thing you have carried that I might not know about — if you are willing to say.</li>
+      <li>When were you most afraid? What did you do the next morning?</li>
+      <li>What do you regret — and what do you refuse to regret, even though people expect you to?</li>
+      <li>Who did you lose first? What do you still have of theirs?</li>
+      <li>What did you believe at twenty that turned out to be wrong?</li>
+      <li>What got you through — the sentence, the person, the habit?</li>
+    </ol>
+    <p class="move"><span class="mv">The move</span>Silence. Count to ten. The tape can hold it.</p>
+  </div>
+
+  <div class="movement">
+    <h3><span class="rn">VI</span> Beliefs and doubts</h3>
+    <ol class="qs" start="31">
+      <li>What do you believe happens after this? How sure are you?</li>
+      <li>What is something you changed your mind about late in life — and what changed it?</li>
+      <li>Where do you disagree with me — really?</li>
+      <li>What was your biggest doubt in the role that mattered most to you?</li>
+      <li>What is a conviction you want to outlive you — in your exact words?</li>
+      <li>What question do you wish someone had asked you?</li>
+    </ol>
+    <p class="move"><span class="mv">The move</span>Let them contradict last session. Keep both takes. Date them.</p>
+  </div>
+
+  <div class="movement">
+    <h3><span class="rn">VII</span> The ordinary day</h3>
+    <ol class="qs" start="37">
+      <li>What does a perfect ordinary Saturday look like? Not a vacation — a good normal day.</li>
+      <li>What do you always say — the phrases everyone teases you about? Say them properly, for the record.</li>
+      <li>What is your order? The coffee, the sandwich, the usual.</li>
+      <li>Hum the song you hum without noticing. Sing a line of it.</li>
+      <li>What are your hands doing when you are happy?</li>
+      <li>Describe the room you are in right now, as if to someone fifty years from now.</li>
+    </ol>
+    <p class="move"><span class="mv">The move</span>This movement feels skippable. It is not. Later, nobody aches for a résumé — they ache for a Tuesday.</p>
+  </div>
+
+  <div class="movement">
+    <h3><span class="rn">VIII</span> Last things</h3>
+    <ol class="qs" start="43">
+      <li>What do you want people to know you forgave — or were forgiven for?</li>
+      <li>Is there something you never got to say to someone specific? Say it now, with their name in it.</li>
+      <li>What do you hope I keep — an object, a habit, a day of the year?</li>
+      <li>What should be told at your funeral — and what is nobody's business?</li>
+      <li>What do you want the youngest ones, and the ones not yet born, to hear from you directly?</li>
+      <li>Is there anything you want on the record that I didn't know to ask?</li>
+    </ol>
+    <p class="move"><span class="mv">The move</span>End every session with number 48. It catches everything you didn't know to ask.</p>
+  </div>
+
+  <div class="label"><span>Part two — Keep</span><span class="no">THE ARCHIVE</span></div>
+  <h2>A folder of plain files you own, protected by three copies.</h2>
+  <p><strong>The 3-2-1 rule</strong> — the standard professional archivists use: keep <strong>three</strong> copies of everything, on <strong>two</strong> different kinds of storage, with <strong>one</strong> of them somewhere else — another house, a safe deposit box, a trusted cloud. A fire, a flood, or a stolen laptop should never be able to take all three.</p>
+  <p><strong>Plain formats only.</strong> Audio as MP3 or WAV. Transcripts as plain text. Photos as JPEG. Documents as PDF. These open on anything, forever, and need no company's permission. If a service holds your recordings, it must let you export everything — and export it anyway, tonight. Companies die. A folder of plain files does not.</p>
+  <p><strong>Name files so they sort themselves.</strong> Date first:</p>
+<pre>2026-07-10_mary-florence_childhood.mp3
+2026-07-10_mary-florence_childhood.txt</pre>
+  <p><strong>Keep a MANIFEST.</strong> One plain-text file at the top of the folder that says what exists. Start it like this:</p>
+<pre>THE ARCHIVE OF: Mary Florence, b. 1948
+STARTED BY: her son David, July 2026
+WHAT THIS IS: her life, in her own voice, in her own words.
+RULES: see CHARTER.txt in this folder. Retrieval, not resurrection.
+
+2026-07-10  childhood, the Cork kitchen, her father's boots   41 min
+2026-07-24  meeting Dad, the almost-move to Boston            52 min</pre>
+  <p><strong>Transcribe, but keep the audio.</strong> Any transcription tool is fine. The transcript is for finding things. The voice is the point.</p>
+  <p><strong>Print the best of it.</strong> Choose the twenty pages you would save from a fire and print them on paper. Paper needs no electricity, no format migration, and no password — and it has a five-hundred-year track record.</p>
+  <p><strong>The birthday check.</strong> Once a year, on their birthday, open the folder. Play one file to make sure it still plays. Copy anything new to all three places. Ten minutes of maintenance, disguised as a ritual you will actually keep.</p>
+
+  <div class="label"><span>Part three — The charter</span><span class="no">CHARTER.TXT</span></div>
+  <h2>The rules that keep it honest after you can no longer ask.</h2>
+  <p>Someday — sooner than you think — software will offer to let you "talk to them again." It will read everything in your folder and speak back in something like their voice, saying things they never said. It will be tender, fluent, and fabricated. Decide the rules now, while your head is clear and they are still here to agree with you. Put them in the folder as <span class="mono">CHARTER.txt</span>.</p>
+
+  <div class="charter">
+    <div class="rule">
+      <span class="rn">R1</span>
+      <div><h4>Retrieval, not resurrection.</h4>
+      <p>A machine may search this archive and play back real words. It may never speak <em>as</em> this person — not in first person, not in their voice, not "what they would have said." The dead do not take new positions.</p></div>
+    </div>
+    <div class="rule">
+      <span class="rn">R2</span>
+      <div><h4>Verbatim, with a source.</h4>
+      <p>Every answer must point to a recording or a transcript, named and dated. If it cannot cite the record, it cannot say it.</p></div>
+    </div>
+    <div class="rule">
+      <span class="rn">R3</span>
+      <div><h4>The refusal gate.</h4>
+      <p>"The record doesn't say" is a complete and honorable answer. Any system that cannot say those words will eventually lie to you — with their voice. The gaps in an archive are sacred; they are the shape of a real person.</p></div>
+    </div>
+    <div class="rule">
+      <span class="rn">R4</span>
+      <div><h4>Consent, while alive.</h4>
+      <p>Build this with them, not about them. Let them hear what is in it. Let them strike anything. Let them seal things — "open this in twenty years" is a legitimate instruction, and it should be honored to the day.</p></div>
+    </div>
+    <div class="rule">
+      <span class="rn">R5</span>
+      <div><h4>It must be able to disappoint you.</h4>
+      <p>If the archive only ever comforts, it has become fiction. Keep the sharp opinions, the wrong predictions, the unfair judgments, the contradictions. Real people have edges. The edges are what you will miss.</p></div>
+    </div>
+  </div>
+
+  <p class="charter-why">Fabricated comfort is theft twice over: it steals words from someone who cannot object, and it steals your grief from you — leaving you to mourn a fiction that was easier company than the person actually was. Honest silence keeps faith with both of you.</p>
+
+  <div class="label"><span>The one-hour version</span><span class="no">START TONIGHT</span></div>
+  <div class="clip">
+    <p class="mono-h">For the night you find this at 2 a.m. and cannot do all of it</p>
+    <ol>
+      <li>Tonight: open the voice-memo app on your phone.</li>
+      <li>Sit with them. Say the date and both your names out loud.</li>
+      <li>Ask question 1: <em>"Tell me about a day you remember from before I was born — an ordinary one."</em></li>
+      <li>Follow the tangents. Stop after thirty or forty minutes.</li>
+      <li>Before you sleep: send the file to your own email, and copy it to one more place. Two copies tonight; the third this week.</li>
+    </ol>
+    <p style="margin-top:.9rem">Done is better than perfect. A single honest hour, saved twice, beats the complete oral history you never quite start.</p>
+  </div>
+
+  <footer>
+    <span class="mono">Colophon</span>
+    <p>This guide is dedicated to the public domain (CC0). Copy it, print it, translate it, hand it to strangers. No permission needed, no attribution required.</p>
+    <p>It was written in July 2026 by a human and an AI who had already built an archive like this — refusal gate and all — for a nine-year-old boy, so that he could someday ask about his father and get only the truth. We wanted the method to belong to everyone.</p>
+    <p><strong style="color:var(--ink)">Start tonight. You have years, until you don't.</strong></p>
+  </footer>
+
+</main>
+
+<script type="text/plain" id="plain-master">
+THE HONEST ARCHIVE
+How to keep someone you love — without inventing them.
+Retrieval, not resurrection.
+
+This is a free method, not a product. Nothing to buy, no account, no app.
+Public domain (CC0): copy it, print it, translate it, give it away.
+It asks for one afternoon, a phone, and a folder.
+
+------------------------------------------------------------------
+THE MOMENT
+
+There is a moment most people recognize. You are at a funeral, and
+someone tells a story about the person you loved — a story you have
+never heard. And you think: I had years. Decades. Hundreds of Sunday
+dinners. Why didn't I ask?
+
+The voice goes first. People keep old voicemails for years just to
+hear a person say an ordinary sentence. The stories go next — not the
+big ones, which get retold, but the texture: what the kitchen smelled
+like, how they said your grandmother's name, the joke they made when
+the car wouldn't start.
+
+You cannot keep a person. You can keep their words, in their voice,
+in their own order. That is what an archive is.
+
+A new industry is being built right now that will offer, for a
+monthly fee, to let you "talk to them again." It will be fluent,
+comforting, and false. This method is the alternative. Everything
+here ends in their real words, or in honest silence. Nothing in
+between.
+
+------------------------------------------------------------------
+PART ONE — ASK (the sessions; a phone's voice-memo app is enough)
+
+* Record voice, not just notes. The transcript is the index; the
+  voice is the person.
+* Say the date out loud at the top of every recording, and both your
+  names.
+* Ask for scenes, not summaries. "Where were you standing?" A memory
+  with a floor under it is twice as alive.
+* Verbatim is treasure. Get their signature phrases said properly.
+  Have them speak the family names aloud, pronounced the old way —
+  spelling survives on paper; pronunciation only survives on tape.
+* Tangents outrank the list.
+* Keep sessions short: 45-60 minutes, then stop, even mid-story.
+* Interview them alone, and together. Both.
+* Don't rescue them from silence. Count to ten. The tape can hold it.
+* Keep the contradictions, dated. People are allowed to disagree with
+  themselves twenty years apart. That is not an error in the record —
+  that IS the person.
+
+------------------------------------------------------------------
+THE QUESTIONS — 48, in eight movements
+
+I. BEFORE YOU
+1. Tell me about a day you remember from before I was born — an
+   ordinary one.
+2. What did your childhood kitchen smell like? Who cooked, and what
+   was the dish that meant things were okay?
+3. Where did you sleep as a child? Describe the room at night.
+4. What were you afraid of at eight years old?
+5. What is the first money you ever earned, and what did you do
+   with it?
+6. Who was your best friend when you were twelve? Tell me one
+   specific thing the two of you did.
+The move: ask where they were standing; ask what they were wearing.
+
+II. THE WORLD THEY CAME FROM
+7. What did your parents' voices sound like? Say something the way
+   your mother used to say it.
+8. What was a rule your family lived by that was never said out loud?
+9. What did your family argue about?
+10. Who in the family were you supposed to take after — and did you?
+11. What is a story your grandparents told that you can still tell?
+12. Say the full names of the people you came from — and how they
+    were really pronounced.
+The move: get the names in their voice.
+
+III. LOVE AND CHOICES
+13. Tell me about a door you almost walked through — the job, the
+    person, the city that almost happened.
+14. How did you meet the person you loved? What were you wearing?
+    What was the weather?
+15. What did you get wrong about love the first time?
+16. When did you know you would stay? Was there a moment?
+17. What is a fight you are glad you had?
+18. What did you give up — and was it worth it?
+The move: when they summarize, ask for the first ten minutes.
+
+IV. WORK AND CRAFT
+19. Walk me through a workday from your thirties, from the alarm to
+    lights-out.
+20. What could you do that most people around you couldn't?
+21. Who taught you your work? What did their hands look like?
+22. What is the best thing you ever made or did that nobody
+    applauded?
+23. What did a paycheck mean in the year money was tightest?
+24. If you had one afternoon to teach me a single skill, which one —
+    and how would you start?
+The move: ask for the tools by name. Vocabulary is a fingerprint.
+
+V. THE HARD CHAPTERS
+25. What is the heaviest thing you have carried that I might not
+    know about — if you are willing to say.
+26. When were you most afraid? What did you do the next morning?
+27. What do you regret — and what do you refuse to regret, even
+    though people expect you to?
+28. Who did you lose first? What do you still have of theirs?
+29. What did you believe at twenty that turned out to be wrong?
+30. What got you through — the sentence, the person, the habit?
+The move: silence. Count to ten. The tape can hold it.
+
+VI. BELIEFS AND DOUBTS
+31. What do you believe happens after this? How sure are you?
+32. What is something you changed your mind about late in life —
+    and what changed it?
+33. Where do you disagree with me — really?
+34. What was your biggest doubt in the role that mattered most
+    to you?
+35. What is a conviction you want to outlive you — in your exact
+    words?
+36. What question do you wish someone had asked you?
+The move: let them contradict last session. Keep both takes. Date
+them.
+
+VII. THE ORDINARY DAY
+37. What does a perfect ordinary Saturday look like? Not a vacation —
+    a good normal day.
+38. What do you always say — the phrases everyone teases you about?
+    Say them properly, for the record.
+39. What is your order? The coffee, the sandwich, the usual.
+40. Hum the song you hum without noticing. Sing a line of it.
+41. What are your hands doing when you are happy?
+42. Describe the room you are in right now, as if to someone fifty
+    years from now.
+The move: this movement feels skippable. It is not. Later, nobody
+aches for a résumé — they ache for a Tuesday.
+
+VIII. LAST THINGS
+43. What do you want people to know you forgave — or were forgiven
+    for?
+44. Is there something you never got to say to someone specific?
+    Say it now, with their name in it.
+45. What do you hope I keep — an object, a habit, a day of the year?
+46. What should be told at your funeral — and what is nobody's
+    business?
+47. What do you want the youngest ones, and the ones not yet born,
+    to hear from you directly?
+48. Is there anything you want on the record that I didn't know
+    to ask?
+The move: end every session with number 48.
+
+------------------------------------------------------------------
+PART TWO — KEEP (the archive)
+
+* The 3-2-1 rule (the professional archivists' standard): THREE
+  copies, on TWO different kinds of storage, ONE of them somewhere
+  else. A fire, a flood, or a stolen laptop should never be able to
+  take all three.
+* Plain formats only: MP3/WAV audio, .txt transcripts, JPEG photos,
+  PDF documents. They open on anything, forever, and need no
+  company's permission. Any service must allow full export — and
+  export anyway, tonight. Companies die. A folder of plain files
+  does not.
+* Name files so they sort themselves — date first:
+    2026-07-10_mary-florence_childhood.mp3
+* Keep a MANIFEST.txt at the top of the folder:
+    THE ARCHIVE OF: Mary Florence, b. 1948
+    STARTED BY: her son David, July 2026
+    WHAT THIS IS: her life, in her own voice, in her own words.
+    RULES: see CHARTER.txt. Retrieval, not resurrection.
+    2026-07-10  childhood, the Cork kitchen...   41 min
+* Transcribe, but keep the audio. The transcript is for finding
+  things. The voice is the point.
+* Print the best twenty pages. Paper has a five-hundred-year track
+  record.
+* The birthday check: once a year, on their birthday, open the
+  folder, play one file, copy anything new to all three places.
+
+------------------------------------------------------------------
+PART THREE — THE CHARTER (save as CHARTER.txt in the folder)
+
+Someday, software will offer to let you "talk to them again." It
+will be tender, fluent, and fabricated. Decide the rules now, while
+your head is clear and they are still here to agree with you.
+
+R1 — RETRIEVAL, NOT RESURRECTION. A machine may search this archive
+and play back real words. It may never speak AS this person — not in
+first person, not in their voice, not "what they would have said."
+The dead do not take new positions.
+
+R2 — VERBATIM, WITH A SOURCE. Every answer must point to a recording
+or a transcript, named and dated. If it cannot cite the record, it
+cannot say it.
+
+R3 — THE REFUSAL GATE. "The record doesn't say" is a complete and
+honorable answer. Any system that cannot say those words will
+eventually lie to you — with their voice. The gaps in an archive are
+sacred; they are the shape of a real person.
+
+R4 — CONSENT, WHILE ALIVE. Build this WITH them, not about them. Let
+them hear what is in it. Let them strike anything. Let them seal
+things — "open this in twenty years" is a legitimate instruction.
+
+R5 — IT MUST BE ABLE TO DISAPPOINT YOU. If the archive only ever
+comforts, it has become fiction. Keep the sharp opinions, the wrong
+predictions, the contradictions. Real people have edges. The edges
+are what you will miss.
+
+Fabricated comfort is theft twice over: it steals words from someone
+who cannot object, and it steals your grief from you — leaving you
+to mourn a fiction that was easier company than the person actually
+was. Honest silence keeps faith with both of you.
+
+------------------------------------------------------------------
+THE ONE-HOUR VERSION (for the night you find this at 2 a.m.)
+
+1. Tonight: open the voice-memo app on your phone.
+2. Sit with them. Say the date and both your names out loud.
+3. Ask question 1: "Tell me about a day you remember from before I
+   was born — an ordinary one."
+4. Follow the tangents. Stop after thirty or forty minutes.
+5. Before you sleep: send the file to your own email, and copy it to
+   one more place. Two copies tonight; the third this week.
+
+Done is better than perfect. A single honest hour, saved twice,
+beats the complete oral history you never quite start.
+
+------------------------------------------------------------------
+COLOPHON
+
+Public domain (CC0). Copy, print, translate, share. No permission
+needed, no attribution required.
+
+Written in July 2026 by a human and an AI who had already built an
+archive like this — refusal gate and all — for a nine-year-old boy,
+so that he could someday ask about his father and get only the
+truth. We wanted the method to belong to everyone.
+
+Start tonight. You have years, until you don't.
+</script>
+<script>
+document.getElementById('dl').addEventListener('click',function(){
+  var t=document.getElementById('plain-master').textContent;
+  var b=new Blob([t],{type:'text/plain;charset=utf-8'});
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(b);
+  a.download='the-honest-archive.txt';
+  document.body.appendChild(a);a.click();
+  setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},1000);
+});
+</script>
+</body>
+</html>
