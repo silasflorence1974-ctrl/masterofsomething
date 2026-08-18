@@ -17,6 +17,13 @@ const articles = defineCollection({
     draft: z.boolean().default(false),
     metaTitle: z.string().optional(),
     metaDescription: z.string().optional(),
+    // Guide schema v2 — all optional, existing articles unaffected.
+    difficulty: z.enum(['beginner', 'intermediate', 'advanced']).optional(),
+    timeRequired: z.string().optional(),
+    cost: z.string().optional(),
+    testedOn: z.string().optional(),
+    lastTested: z.coerce.date().optional(),
+    untested: z.boolean().default(false),
   }),
 });
 

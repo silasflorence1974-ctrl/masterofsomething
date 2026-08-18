@@ -16,6 +16,12 @@ interface Props {
   tags: string[];
   metaTitle?: string;
   metaDescription?: string;
+  difficulty?: 'beginner' | 'intermediate' | 'advanced';
+  timeRequired?: string;
+  cost?: string;
+  testedOn?: string;
+  lastTested?: Date;
+  untested?: boolean;
 }
 
 const {
@@ -30,7 +36,15 @@ const {
   tags,
   metaTitle,
   metaDescription,
+  difficulty,
+  timeRequired,
+  cost,
+  testedOn,
+  lastTested,
+  untested,
 } = Astro.props;
+
+const hasSpecStrip = Boolean(difficulty || timeRequired || cost);
 
 const url = new URL(Astro.url.pathname, Astro.site).toString();
 
@@ -78,6 +92,45 @@ const dateStr = publishDate.toLocaleDateString('en-US', { year: 'numeric', month
         <span>{readTime}</span>
       </div>
     </header>
+
+    {untested && (
+      <div class="mb-8 rounded-lg border-2 border-red-500/70 bg-red-500/10 px-5 py-4">
+        <p class="text-sm font-semibold text-red-400 uppercase tracking-wide mb-1">Untested adaptation</p>
+        <p class="text-sm text-[var(--color-text-secondary)]">
+          We haven't run every step of this ourselves — it's adapted from something we did test.
+          Expect rough edges.
+        </p>
+      </div>
+    )}
+
+    {hasSpecStrip && (
+      <div class="mb-10 grid grid-cols-2 sm:grid-cols-4 gap-4 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-5 text-sm">
+        {difficulty && (
+          <div>
+            <div class="text-xs uppercase tracking-widest text-[var(--color-text-secondary)] mb-1">Difficulty</div>
+            <div class="text-[var(--color-text-primary)] capitalize">{difficulty}</div>
+          </div>
+        )}
+        {timeRequired && (
+          <div>
+            <div class="text-xs uppercase tracking-widest text-[var(--color-text-secondary)] mb-1">Time</div>
+            <div class="text-[var(--color-text-primary)]">{timeRequired}</div>
+          </div>
+        )}
+        {cost && (
+          <div>
+            <div class="text-xs uppercase tracking-widest text-[var(--color-text-secondary)] mb-1">Cost</div>
+            <div class="text-[var(--color-text-primary)]">{cost}</div>
+          </div>
+        )}
+        {testedOn && (
+          <div>
+            <div class="text-xs uppercase tracking-widest text-[var(--color-text-secondary)] mb-1">Tested on</div>
+            <div class="text-[var(--color-text-primary)]">{testedOn}</div>
+          </div>
+        )}
+      </div>
+    )}
 
     <div class="article-body
       [&>h2]:text-2xl [&>h2]:font-semibold [&>h2]:mt-10 [&>h2]:mb-4 [&>h2]:text-[var(--color-text-primary)]

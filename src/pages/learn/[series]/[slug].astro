@@ -29,6 +29,12 @@ const { Content } = await render(article);
   tags={article.data.tags}
   metaTitle={article.data.metaTitle}
   metaDescription={article.data.metaDescription}
+  difficulty={article.data.difficulty}
+  timeRequired={article.data.timeRequired}
+  cost={article.data.cost}
+  testedOn={article.data.testedOn}
+  lastTested={article.data.lastTested}
+  untested={article.data.untested}
 >
   <Content />
 </ArticleLayout>
