@@ -55,6 +55,7 @@ const url = canonicalURL ?? new URL(Astro.url.pathname, Astro.site).toString();
     <footer class="shed-footer">
       <span class="mono">In Practice Media</span>
       <p>The personal side of masterofsomething.com. <a href="/our-story">Who's talking →</a></p>
+      <p class="statement">Free. No ads. No tracking. Tested before published.</p>
     </footer>
   </body>
 </html>
@@ -121,4 +122,5 @@ const url = canonicalURL ?? new URL(Astro.url.pathname, Astro.site).toString();
     display: block;
     margin-bottom: 0.4rem;
   }
+  .shed-footer .statement { margin-top: 0.4rem; font-size: 0.85rem; }
 </style>
