@@ -1,0 +1,96 @@
+---
+// Static Pagefind search — index built post-build (`postbuild: pagefind --site dist`),
+// UI assets loaded lazily from /pagefind/ only when opened. No tracking, no service call.
+---
+
+<button
+  id="search-toggle"
+  type="button"
+  aria-label="Search"
+  data-pagefind-ignore
+  class="flex items-center gap-2 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] border border-[var(--color-border)] rounded-md px-3 py-1.5 hover:border-[var(--color-accent)] transition-colors"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" class="w-4 h-4" aria-hidden="true">
+    <path d="M9 3a6 6 0 104.472 10.06l3.234 3.234a1 1 0 001.415-1.415l-3.234-3.234A6 6 0 009 3zm-4 6a4 4 0 118 0 4 4 0 01-8 0z" fill="currentColor" />
+  </svg>
+  <span class="hidden sm:inline">Search</span>
+</button>
+
+<div id="search-modal" data-pagefind-ignore class="hidden fixed inset-0 z-50">
+  <div id="search-backdrop" class="absolute inset-0 bg-black/70"></div>
+  <div class="relative max-w-2xl mx-auto mt-24 mx-4 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-5 shadow-2xl">
+    <div class="flex justify-end mb-2">
+      <button id="search-close" type="button" aria-label="Close search" class="text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] text-sm">
+        Close ✕
+      </button>
+    </div>
+    <div id="search"></div>
+  </div>
+</div>
+
+<script>
+  const toggle = document.getElementById('search-toggle');
+  const modal = document.getElementById('search-modal');
+  const backdrop = document.getElementById('search-backdrop');
+  const closeBtn = document.getElementById('search-close');
+  let loaded = false;
+
+  function loadScript(src: string) {
+    return new Promise<void>((resolve, reject) => {
+      const el = document.createElement('script');
+      el.src = src;
+      el.onload = () => resolve();
+      el.onerror = () => reject(new Error(`failed to load ${src}`));
+      document.body.appendChild(el);
+    });
+  }
+
+  async function ensureLoaded() {
+    if (loaded) return;
+    loaded = true;
+    if (!document.querySelector('link[href="/pagefind/pagefind-ui.css"]')) {
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = '/pagefind/pagefind-ui.css';
+      document.head.appendChild(link);
+    }
+    // Plain <script> tag, not an ESM import — these files only exist after the
+    // postbuild `pagefind --site dist` step, not at Vite/Rollup build time.
+    await loadScript('/pagefind/pagefind-ui.js');
+    // @ts-ignore — global set by pagefind-ui.js
+    new window.PagefindUI({ element: '#search', showSubResults: true, showImages: false });
+  }
+
+  async function openSearch() {
+    modal?.classList.remove('hidden');
+    await ensureLoaded();
+    modal?.querySelector('input')?.focus();
+  }
+
+  function closeSearch() {
+    modal?.classList.add('hidden');
+  }
+
+  toggle?.addEventListener('click', openSearch);
+  backdrop?.addEventListener('click', closeSearch);
+  closeBtn?.addEventListener('click', closeSearch);
+  document.addEventListener('keydown', e => {
+    if (e.key === '/' && document.activeElement?.tagName !== 'INPUT') {
+      e.preventDefault();
+      openSearch();
+    }
+    if (e.key === 'Escape') closeSearch();
+  });
+</script>
+
+<style>
+  #search-modal :global(.pagefind-ui) {
+    --pagefind-ui-scale: 0.9;
+    --pagefind-ui-primary: #e87c2e;
+    --pagefind-ui-text: #f0f0f0;
+    --pagefind-ui-background: #111111;
+    --pagefind-ui-border: #2a2a2a;
+    --pagefind-ui-tag: #1a1a1a;
+    --pagefind-ui-font: var(--font-sans, Inter, system-ui, sans-serif);
+  }
+</style>

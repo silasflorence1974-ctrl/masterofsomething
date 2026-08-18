@@ -45,14 +45,14 @@ const url = canonicalURL ?? new URL(Astro.url.pathname, Astro.site).toString();
     <link rel="alternate" type="application/rss+xml" title="masterofsomething.com" href="/rss.xml" />
   </head>
   <body>
-    <header class="shed-header">
+    <header class="shed-header" data-pagefind-ignore>
       <a href="/" class="back">← the workshop</a>
       <span class="tag">the shed</span>
     </header>
     <main>
       <slot />
     </main>
-    <footer class="shed-footer">
+    <footer class="shed-footer" data-pagefind-ignore>
       <span class="mono">In Practice Media</span>
       <p>The personal side of masterofsomething.com. <a href="/our-story">Who's talking →</a></p>
       <p class="statement">Free. No ads. No tracking. Tested before published.</p>
