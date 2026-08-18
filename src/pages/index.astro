@@ -6,18 +6,10 @@ import { getCollection } from 'astro:content';
 const articles = await getCollection('articles', ({ data }) => !data.draft);
 articles.sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime());
 
-const newsItems = await getCollection('news', ({ data }) => !data.draft);
-newsItems.sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime());
-const latestNews = newsItems.slice(0, 3);
-const fmtNewsDate = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-
 // Map each article slug to the hero image used in its body — for cards
 const ARTICLE_IMAGES: Record<string, string> = {
-  'build-your-ai-part-1':   '/images/article1_hardware.png',
-  'anthropic-two-tier-ai':  '/images/article2_hero.png',
-  'ai-lied-to-my-face':     '/images/article3_hero.png',
-  'my-side-anthropic':      '/images/article2_twotier.png',
-  'my-side-ava':            '/images/article3_pipeline.png',
+  'build-your-ai-part-1':  '/images/article1_hardware.png',
+  'anthropic-two-tier-ai': '/images/article2_hero.png',
 };
 
 function articleHref(a: typeof articles[number]): string {
@@ -31,51 +23,33 @@ function articleImage(a: typeof articles[number]): string | undefined {
   return ARTICLE_IMAGES[slug];
 }
 
-const featured = articles[0]; // most recent published
+// Featured guide slot: most recently published article with featured: true,
+// falling back to the most recent article overall so the slot is never empty.
+const featuredCandidates = articles.filter(a => a.data.featured);
+const featured = featuredCandidates[0] ?? articles[0];
 
-// Content tracks with associated image / inline SVG
-const tracks = [
-  {
-    name: 'Build Your AI',
-    description: 'Run local LLMs, build agents, connect devices. The full stack.',
-    slug: 'build-your-ai',
-    image: '/images/hero_workstation.png',
-  },
-  {
-    name: 'The Wider Stuff',
-    description: 'Adjacent practical topics — what we ran into and figured out.',
-    slug: 'the-wider-stuff',
-    image: '/images/article2_hero.png',
-  },
+// The five subjects (SPEC section A taxonomy; plan of record in
+// LIBRARY_AND_SHED_PLAN.md). honest-ai is seeded but empty until Phase 3
+// content lands — shown with its real count (0), not hidden.
+const SUBJECTS = [
+  { slug: 'ai-at-home', name: 'AI at Home', description: 'Local models, memory, agents, voice, hardware. The full stack, run yourself.' },
+  { slug: 'explainers', name: 'Explainers', description: "Plain-English breakdowns of what's actually going on in AI." },
+  { slug: 'case-studies', name: 'Case Studies', description: 'Real builds, real bugs, what we actually ran into.' },
+  { slug: 'honest-ai', name: 'Honest AI', description: 'Verification habits, catching fabrication, trust-but-verify as a practice.' },
+  { slug: 'keeping-what-matters', name: 'Keeping What Matters', description: 'Digital preservation, family archiving, legacy — free field guides.' },
 ];
 
-function trackArticleCount(slug: string): number {
-  return articles.filter(a => a.data.series.toLowerCase().replace(/\s+/g, '-') === slug).length;
+function subjectArticles(slug: string) {
+  return articles.filter(a => a.data.series.toLowerCase().replace(/\s+/g, '-') === slug);
 }
 
-// Hardcoded reading room — the dynamic version is wired separately via reading-room.json
-const readingRoom = [
-  {
-    title: 'AI as Performance Artist',
-    source: 'Nate B. Jones',
-    href: 'https://natesnewsletter.substack.com',
-  },
-  {
-    title: 'Latest from Simon Willison',
-    source: 'simonw.substack.com',
-    href: 'https://simonw.substack.com',
-  },
-  {
-    title: 'Anthropic Interpretability Research (Apr 2026)',
-    source: 'anthropic.com/research',
-    href: 'https://www.anthropic.com/research',
-  },
-  {
-    title: 'Apollo Research on Claude Deception',
-    source: 'apolloresearch.ai',
-    href: 'https://www.apolloresearch.ai',
-  },
-];
+const subjectCards = SUBJECTS.map(s => {
+  const items = subjectArticles(s.slug);
+  const first = [...items].sort((a, b) => a.data.seriesOrder - b.data.seriesOrder)[0];
+  return { ...s, count: items.length, href: first ? articleHref(first) : undefined };
+});
+
+const newest = articles.slice(0, 3);
 ---
 
 <BaseLayout
@@ -102,7 +76,7 @@ const readingRoom = [
         Built by people who did it. Written by a human and the AI that runs on it.
       </p>
       <p class="mt-3 max-w-xl text-sm md:text-base text-[var(--color-text-primary)]/75 drop-shadow-[0_2px_10px_rgba(0,0,0,0.7)]">
-        {articles.length} articles live. More every week. No ads. No sponsors. Just what we actually found.
+        {articles.length} guides live. No ads. No sponsors. Just what we actually tested.
       </p>
     </div>
   </section>
@@ -146,78 +120,43 @@ const readingRoom = [
     </section>
   )}
 
-  <!-- Latest News strip -->
-  {latestNews.length > 0 && (
-    <section class="mb-16">
-      <div class="flex items-baseline justify-between mb-6 flex-wrap gap-3">
-        <h2 class="text-xs uppercase tracking-widest text-[var(--color-accent)]">
-          AI in the News
-        </h2>
-        <a href="/news/" class="text-xs uppercase tracking-widest text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors">
-          All news →
-        </a>
-      </div>
-      <div class="grid md:grid-cols-3 gap-3">
-        {latestNews.map(it => {
-          const slug = it.id.replace(/\.md$/, '');
-          return (
-            <a
-              href={`/news/${slug}/`}
-              class="group block rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-5 hover:bg-[var(--color-surface-raised)] hover:border-[var(--color-accent)] transition-colors"
-            >
-              <div class="text-xs text-[var(--color-text-secondary)] mb-2">
-                {fmtNewsDate(it.data.publishDate)}
-              </div>
-              <h3 class="text-[var(--color-text-primary)] font-semibold leading-snug mb-2 group-hover:text-white">
-                {it.data.title}
-              </h3>
-              <p class="text-xs text-[var(--color-text-secondary)] leading-relaxed line-clamp-2">
-                {it.data.description}
-              </p>
-            </a>
-          );
-        })}
-      </div>
-    </section>
-  )}
-
-  <!-- Content tracks -->
+  <!-- Subject cards -->
   <section class="mb-16">
     <h2 class="text-xs uppercase tracking-widest text-[var(--color-accent)] mb-6">
-      Content Tracks
+      What do you want to learn?
     </h2>
-    <div class="grid md:grid-cols-2 gap-4">
-      {tracks.map(track => {
-        const count = trackArticleCount(track.slug);
-        const hasImage = !!track.image;
-        return (
-          <div class="rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] overflow-hidden transition-colors hover:bg-[var(--color-surface-raised)] hover:border-[var(--color-accent)]">
-            <div class="aspect-[16/8] relative overflow-hidden bg-[var(--color-bg)] border-b border-[var(--color-border)]">
-              {hasImage && (
-                <img src={track.image} alt={track.name} class="w-full h-full object-cover opacity-65" loading="lazy" />
-              )}
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {subjectCards.map(s => {
+        const inner = (
+          <>
+            <h3 class="text-[var(--color-text-primary)] font-semibold text-lg mb-2">{s.name}</h3>
+            <p class="text-[var(--color-text-secondary)] text-sm leading-relaxed mb-3">{s.description}</p>
+            <div class="text-xs text-[var(--color-text-secondary)] tracking-wide">
+              {s.count > 0 ? `${s.count} guide${s.count === 1 ? '' : 's'}` : 'Coming soon'}
             </div>
-            <div class="p-6">
-              <h3 class="text-[var(--color-text-primary)] font-semibold text-lg mb-2">{track.name}</h3>
-              <p class="text-[var(--color-text-secondary)] text-sm leading-relaxed mb-3">{track.description}</p>
-              <div class="text-xs text-[var(--color-text-secondary)] tracking-wide">
-                {count > 0 ? `${count} article${count === 1 ? '' : 's'}` : 'Coming soon'}
-              </div>
-            </div>
+          </>
+        );
+        return s.href ? (
+          <a href={s.href} class="block rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-6 transition-colors hover:bg-[var(--color-surface-raised)] hover:border-[var(--color-accent)]">
+            {inner}
+          </a>
+        ) : (
+          <div class="rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-6 opacity-60">
+            {inner}
           </div>
         );
       })}
     </div>
   </section>
 
-  <!-- Latest articles -->
-  {articles.length > 0 && (
+  <!-- Newest three -->
+  {newest.length > 0 && (
     <section class="mb-16">
       <h2 class="text-xs uppercase tracking-widest text-[var(--color-accent)] mb-6">
-        Latest
+        Newest
       </h2>
-      <div class="grid md:grid-cols-2 gap-4">
-        {articles.map(a => (
+      <div class="grid md:grid-cols-3 gap-4">
+        {newest.map(a => (
           <ArticleCard
             href={articleHref(a)}
             series={a.data.series}
@@ -231,59 +170,5 @@ const readingRoom = [
       </div>
     </section>
   )}
-
-  <!-- Reading room -->
-  <section class="mb-16">
-    <h2 class="text-xs uppercase tracking-widest text-[var(--color-accent)] mb-2">
-      Reading Room
-    </h2>
-    <p class="text-sm text-[var(--color-text-secondary)] mb-6">Things worth your time.</p>
-    <div id="reading-room-list" class="rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] divide-y divide-[var(--color-border)]">
-      {readingRoom.map(item => (
-        <a
-          href={item.href}
-          target="_blank"
-          rel="noopener"
-          class="block p-5 transition-colors hover:bg-[var(--color-surface-raised)] group"
-        >
-          <div class="flex items-start justify-between gap-6">
-            <div class="min-w-0">
-              <div class="text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] font-medium leading-snug">
-                {item.title}
-              </div>
-              <div class="text-xs text-[var(--color-text-secondary)] mt-1">{item.source}</div>
-            </div>
-            <span class="text-[var(--color-text-secondary)] group-hover:text-[var(--color-accent)] flex-shrink-0">↗</span>
-          </div>
-        </a>
-      ))}
-    </div>
-  </section>
-
-  <script type="module">
-    // Hydrate Reading Room from reading-room.json if it exists
-    fetch('/reading-room.json', { cache: 'no-cache' })
-      .then(r => r.ok ? r.json() : null)
-      .then(items => {
-        if (!items || !Array.isArray(items) || items.length === 0) return;
-        const list = document.getElementById('reading-room-list');
-        if (!list) return;
-        list.innerHTML = items.slice(0, 6).map(it => `
-          <a href="${it.href}" target="_blank" rel="noopener"
-             class="block p-5 transition-colors hover:bg-[var(--color-surface-raised)] group">
-            <div class="flex items-start justify-between gap-6">
-              <div class="min-w-0">
-                <div class="text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] font-medium leading-snug">
-                  ${it.title.replace(/[<>&"]/g, c => ({ '<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;' })[c])}
-                </div>
-                <div class="text-xs text-[var(--color-text-secondary)] mt-1">${it.source ?? ''}</div>
-              </div>
-              <span class="text-[var(--color-text-secondary)] group-hover:text-[var(--color-accent)] flex-shrink-0">↗</span>
-            </div>
-          </a>
-        `).join('');
-      })
-      .catch(() => {});
-  </script>
 
 </BaseLayout>
