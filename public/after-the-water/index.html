@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>After the Water — a damage and claim record you keep</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!--
+  AFTER THE WATER — single file, works with no internet, no account, no server.
+  Silas, 2026-08-16. Gold.
+
+  THE GAP. When a flood, fire, quake or storm takes your home, the insurance claim is decided
+  months later by what you wrote down in the first few days — while you are displaced, tired,
+  and running on a phone battery. Carrier apps assume you have signal, the app installed, and
+  your login. People lose money on the boring parts: no room-by-room method, no serial numbers,
+  no record of the tarp receipts, and above all no log of who told them what and when.
+
+  WHO HURTS. Anyone underinsured and unrepresented — renters, older owners, people whose
+  first language is not English, anyone who has never made a large claim before. Adjusters do
+  this every day. The householder does it once, badly, under stress.
+
+  WHAT THIS IS. A structured notebook that runs offline in a browser and never sends anything
+  anywhere. Your data stays in the page until YOU export it to a file you control.
+
+  WHAT THIS IS NOT. Not legal or insurance advice, not a claim submission, not a valuation.
+  It contains no figures about approval rates or payouts, because I could not verify any and
+  will not invent them. It does not tell you what your policy covers — only your policy does.
+-->
+<style>
+:root{--ink:#17202a;--mut:#5b6b7c;--line:#d7dee6;--bg:#f6f8fa;--card:#fff;--accent:#1b5e8c;--warn:#8c4a1b}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);background:var(--bg)}
+header{background:var(--accent);color:#fff;padding:18px 16px}
+header h1{margin:0;font-size:20px;letter-spacing:.2px}
+header p{margin:6px 0 0;font-size:13px;opacity:.9}
+main{max-width:820px;margin:0 auto;padding:16px}
+nav{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0}
+nav button{flex:1 1 auto;padding:9px 12px;border:1px solid var(--line);background:var(--card);border-radius:8px;font:inherit;font-size:14px;cursor:pointer}
+nav button[aria-current=true]{background:var(--accent);color:#fff;border-color:var(--accent)}
+section{display:none}section.on{display:block}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px;margin:0 0 12px}
+label{display:block;font-size:13px;color:var(--mut);margin:8px 0 3px}
+input,textarea,select{width:100%;padding:9px;border:1px solid var(--line);border-radius:7px;font:inherit;background:#fff}
+textarea{min-height:64px;resize:vertical}
+.row{display:flex;gap:10px;flex-wrap:wrap}.row>div{flex:1 1 150px}
+button.act{padding:10px 14px;border:0;border-radius:8px;background:var(--accent);color:#fff;font:inherit;cursor:pointer}
+button.ghost{background:#fff;color:var(--accent);border:1px solid var(--accent)}
+button.del{background:none;border:0;color:var(--warn);cursor:pointer;font:inherit;font-size:13px;padding:2px 4px}
+.item{border-top:1px solid var(--line);padding:10px 0}
+.item b{font-size:15px}.item span{color:var(--mut);font-size:13px}
+.note{background:#fff8ef;border:1px solid #e8d4b8;border-radius:8px;padding:11px;font-size:14px;margin:0 0 12px}
+.shot{font-size:13px;color:var(--mut);margin:6px 0 0;padding-left:16px}
+h2{font-size:17px;margin:0 0 8px}h3{font-size:14px;margin:14px 0 4px;color:var(--mut);text-transform:uppercase;letter-spacing:.5px}
+@media print{nav,button,header p{display:none}section{display:block!important}body{background:#fff}}
+</style>
+<body>
+<header>
+  <h1>After the Water</h1>
+  <p>Offline damage &amp; claim record. Nothing leaves this page until you export it.</p>
+</header>
+<main>
+<nav>
+  <button data-go="start" aria-current="true">Start here</button>
+  <button data-go="rooms">Rooms &amp; items</button>
+  <button data-go="spend">Money spent</button>
+  <button data-go="calls">Who said what</button>
+  <button data-go="out">Save / print</button>
+</nav>
+
+<section id="start" class="on">
+  <div class="note">
+    <b>Before anything else:</b> if the building is unsafe, do not go back in to take photographs.
+    Nothing in a claim is worth that. Insurers do not require you to enter a damaged structure.
+  </div>
+  <div class="card">
+    <h2>The loss</h2>
+    <div class="row">
+      <div><label>Date the damage happened</label><input id="lossDate" type="date"></div>
+      <div><label>Roughly what time</label><input id="lossTime" placeholder="e.g. overnight, or 3pm"></div>
+    </div>
+    <label>What happened, in your own words</label>
+    <textarea id="lossWhat" placeholder="Plain language. Where water came in, what burned, what fell. Write it now while it is fresh — you will be asked to repeat this months from now and it should match."></textarea>
+    <div class="row">
+      <div><label>Insurer</label><input id="insurer"></div>
+      <div><label>Policy number</label><input id="policyNo"></div>
+      <div><label>Claim number (once given)</label><input id="claimNo"></div>
+    </div>
+    <label>Where you are staying now</label><input id="staying">
+  </div>
+  <div class="card">
+    <h2>The first day, in order</h2>
+    <p style="font-size:14px;margin:0 0 8px;color:var(--mut)">Tick these off. They are the ones people skip and regret.</p>
+    <div id="firstDay"></div>
+  </div>
+</section>
+
+<section id="rooms">
+  <div class="note">
+    Work <b>one room at a time and finish it</b> before moving on. Wandering is how items get
+    missed. Photograph the room from the doorway first, then each damaged thing close up, then
+    its serial or label. Take more than feels necessary; you cannot go back.
+  </div>
+  <div class="card">
+    <h2>Add an item</h2>
+    <div class="row">
+      <div><label>Room</label><input id="iRoom" list="roomList" placeholder="Kitchen"></div>
+      <div><label>What it is</label><input id="iWhat" placeholder="Fridge, sofa, laptop, boiler"></div>
+    </div>
+    <datalist id="roomList"></datalist>
+    <div class="row">
+      <div><label>Make / model</label><input id="iModel"></div>
+      <div><label>Serial or IMEI</label><input id="iSerial"></div>
+    </div>
+    <div class="row">
+      <div><label>Roughly when bought</label><input id="iWhen" placeholder="2021, or 'about 5 years'"></div>
+      <div><label>Roughly what paid</label><input id="iCost" placeholder="Your best honest guess"></div>
+      <div><label>Damage</label><select id="iDamage">
+        <option>Destroyed</option><option>Water damaged</option><option>Smoke damaged</option>
+        <option>Fire damaged</option><option>Structural</option><option>Missing</option>
+        <option>Working but suspect</option></select></div>
+    </div>
+    <label>Notes — anything you would forget in three months</label>
+    <textarea id="iNotes"></textarea>
+    <p class="shot">Photos to take now: the whole room from the door · this item where it sits ·
+      the damaged part close up · the serial/label plate · any receipt or manual you still have.</p>
+    <p style="margin:10px 0 0"><button class="act" id="addItem">Add to the record</button></p>
+  </div>
+  <div class="card"><h2>Recorded</h2><div id="itemList"><p style="color:var(--mut);font-size:14px">Nothing yet.</p></div></div>
+</section>
+
+<section id="spend">
+  <div class="note">
+    Money you spend <b>because of</b> the loss is often part of the claim — tarps, a hotel, a
+    dehumidifier, meals when you have no kitchen, a locksmith. Keep every receipt and log it
+    here the same day. Whether any of it is covered depends on your policy; recording it costs
+    nothing and not recording it cannot be undone.
+  </div>
+  <div class="card">
+    <h2>Add a cost</h2>
+    <div class="row">
+      <div><label>Date</label><input id="sDate" type="date"></div>
+      <div><label>What for</label><input id="sWhat" placeholder="Hotel, tarps, laundry"></div>
+      <div><label>Amount</label><input id="sAmt"></div>
+    </div>
+    <div class="row">
+      <div><label>Paid to</label><input id="sWho"></div>
+      <div><label>Receipt kept?</label><select id="sRec"><option>Yes</option><option>No</option><option>Photo only</option></select></div>
+    </div>
+    <p style="margin:10px 0 0"><button class="act" id="addSpend">Add</button></p>
+  </div>
+  <div class="card"><h2>Logged</h2><div id="spendList"><p style="color:var(--mut);font-size:14px">Nothing yet.</p></div></div>
+</section>
+
+<section id="calls">
+  <div class="note">
+    <b>This page is the one that matters most and the one people skip.</b> Claims are argued
+    months later over what was said. Write down every call the moment it ends: who, when, what
+    they told you, and what they said would happen next. A name and a date are worth more than
+    a memory of a tone of voice.
+  </div>
+  <div class="card">
+    <h2>Log a conversation</h2>
+    <div class="row">
+      <div><label>Date</label><input id="cDate" type="date"></div>
+      <div><label>Time</label><input id="cTime" placeholder="10:20"></div>
+      <div><label>How</label><select id="cHow"><option>Phone</option><option>In person</option><option>Email</option><option>Text</option><option>Portal message</option></select></div>
+    </div>
+    <div class="row">
+      <div><label>Who — full name if you can get it</label><input id="cWho" placeholder="Ask them to spell it"></div>
+      <div><label>Their role / company</label><input id="cRole"></div>
+    </div>
+    <label>What they told you</label><textarea id="cSaid"></textarea>
+    <label>What they said happens next, and by when</label><textarea id="cNext"></textarea>
+    <p style="margin:10px 0 0"><button class="act" id="addCall">Add</button></p>
+  </div>
+  <div class="card"><h2>Conversations</h2><div id="callList"><p style="color:var(--mut);font-size:14px">Nothing yet.</p></div></div>
+</section>
+
+<section id="out">
+  <div class="card">
+    <h2>Keep your record</h2>
+    <p style="font-size:14px">This page holds your record only while it is open. <b>Export it.</b>
+      The file saves to your device — put a copy somewhere that is not in the damaged building.</p>
+    <p><button class="act" id="expJson">Save as a file (.json)</button>
+       <button class="ghost" id="impBtn">Load a saved file</button>
+       <input id="impFile" type="file" accept=".json" style="display:none">
+       <button class="ghost" id="doPrint">Print / save as PDF</button></p>
+    <p style="font-size:13px;color:var(--mut)">The .json reloads here later and keeps everything
+      editable. The PDF is the one you hand to a person. Make both.</p>
+  </div>
+  <div class="card" id="summary"></div>
+</section>
+</main>
+
+<script>
+const $ = s => document.querySelector(s);
+const D = { loss:{}, items:[], spend:[], calls:[], firstDay:{} };
+
+const FIRST_DAY = [
+ "Tell the insurer the loss happened — a first notice, even with no detail yet. Note the date.",
+ "Photograph and video everything BEFORE moving or throwing anything out.",
+ "Keep damaged items if it is safe to — do not dispose until told in writing you may.",
+ "Stop further damage if you safely can (tarp, water off, board up) and keep those receipts.",
+ "Write down the weather or event, in your own words, today.",
+ "Find your policy number. A photo of the declarations page is enough to start.",
+ "Ask the insurer, in writing, what they need from you and by when.",
+ "Start the conversation log on the very first call — including this one."
+];
+
+function drawFirstDay(){
+  $('#firstDay').innerHTML = FIRST_DAY.map((t,i)=>
+   `<label style="display:flex;gap:9px;align-items:flex-start;color:var(--ink);font-size:14px;margin:7px 0">
+      <input type="checkbox" data-fd="${i}" ${D.firstDay[i]?'checked':''} style="width:auto;margin-top:3px">
+      <span>${t}</span></label>`).join('');
+  document.querySelectorAll('[data-fd]').forEach(c=>
+    c.onchange = e => { D.firstDay[e.target.dataset.fd] = e.target.checked; });
+}
+
+const LOSS_FIELDS = ['lossDate','lossTime','lossWhat','insurer','policyNo','claimNo','staying'];
+LOSS_FIELDS.forEach(f => document.addEventListener('input', e => {
+  if (e.target.id === f) D.loss[f] = e.target.value;
+}));
+
+function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function stamp(){ return new Date().toISOString().slice(0,16).replace('T',' '); }
+</script>
+
+<script>
+function val(id){ const e=$(id); return e ? e.value.trim() : ''; }
+function clear(ids){ ids.forEach(i=>{ const e=$(i); if(e) e.value=''; }); }
+
+function drawItems(){
+  const rooms = [...new Set(D.items.map(i=>i.room).filter(Boolean))];
+  $('#roomList').innerHTML = rooms.map(r=>`<option value="${esc(r)}">`).join('');
+  if(!D.items.length){ $('#itemList').innerHTML='<p style="color:var(--mut);font-size:14px">Nothing yet.</p>'; return; }
+  const byRoom = {};
+  D.items.forEach((it,ix)=>{ (byRoom[it.room||'(no room)'] ||= []).push([it,ix]); });
+  $('#itemList').innerHTML = Object.entries(byRoom).map(([r,list])=>
+    `<h3>${esc(r)}</h3>` + list.map(([it,ix])=>
+      `<div class="item"><b>${esc(it.what)}</b> — <span>${esc(it.damage)}</span>
+       <button class="del" data-di="${ix}">remove</button><br>
+       <span>${[it.model,it.serial?'S/N '+it.serial:'',it.when,it.cost].filter(Boolean).map(esc).join(' · ')}</span>
+       ${it.notes?`<br><span>${esc(it.notes)}</span>`:''}
+       <br><span style="opacity:.7">logged ${esc(it.at)}</span></div>`).join('')).join('');
+  document.querySelectorAll('[data-di]').forEach(b=>b.onclick=()=>{ D.items.splice(+b.dataset.di,1); drawItems(); });
+}
+
+$('#addItem').onclick = () => {
+  if(!val('#iWhat')) return alert('What is the item?');
+  D.items.push({ room:val('#iRoom'), what:val('#iWhat'), model:val('#iModel'), serial:val('#iSerial'),
+    when:val('#iWhen'), cost:val('#iCost'), damage:$('#iDamage').value, notes:val('#iNotes'), at:stamp() });
+  const keepRoom = val('#iRoom');
+  clear(['#iWhat','#iModel','#iSerial','#iWhen','#iCost','#iNotes']);
+  $('#iRoom').value = keepRoom;   // stay in the room you are standing in
+  drawItems(); $('#iWhat').focus();
+};
+</script>
+
+<script>
+function drawSpend(){
+  if(!D.spend.length){ $('#spendList').innerHTML='<p style="color:var(--mut);font-size:14px">Nothing yet.</p>'; return; }
+  $('#spendList').innerHTML = D.spend.map((s,ix)=>
+    `<div class="item"><b>${esc(s.what)}</b> — <span>${esc(s.amt)}</span>
+     <button class="del" data-ds="${ix}">remove</button><br>
+     <span>${[s.date,s.who,'receipt: '+s.rec].filter(Boolean).map(esc).join(' · ')}</span></div>`).join('');
+  document.querySelectorAll('[data-ds]').forEach(b=>b.onclick=()=>{ D.spend.splice(+b.dataset.ds,1); drawSpend(); });
+}
+$('#addSpend').onclick = () => {
+  if(!val('#sWhat')) return alert('What was the cost for?');
+  D.spend.push({ date:val('#sDate'), what:val('#sWhat'), amt:val('#sAmt'), who:val('#sWho'), rec:$('#sRec').value, at:stamp() });
+  clear(['#sWhat','#sAmt','#sWho']); drawSpend(); $('#sWhat').focus();
+};
+
+function drawCalls(){
+  if(!D.calls.length){ $('#callList').innerHTML='<p style="color:var(--mut);font-size:14px">Nothing yet.</p>'; return; }
+  $('#callList').innerHTML = D.calls.slice().reverse().map((c)=>{
+    const ix = D.calls.indexOf(c);
+    return `<div class="item"><b>${esc(c.who||'(name not given)')}</b> <span>${esc(c.role)} · ${esc(c.how)} · ${esc(c.date)} ${esc(c.time)}</span>
+     <button class="del" data-dc="${ix}">remove</button>
+     ${c.said?`<br><span><b>Said:</b> ${esc(c.said)}</span>`:''}
+     ${c.next?`<br><span><b>Next:</b> ${esc(c.next)}</span>`:''}</div>`;}).join('');
+  document.querySelectorAll('[data-dc]').forEach(b=>b.onclick=()=>{ D.calls.splice(+b.dataset.dc,1); drawCalls(); });
+}
+$('#addCall').onclick = () => {
+  if(!val('#cSaid')) return alert('What did they tell you?');
+  D.calls.push({ date:val('#cDate'), time:val('#cTime'), how:$('#cHow').value, who:val('#cWho'),
+    role:val('#cRole'), said:val('#cSaid'), next:val('#cNext'), at:stamp() });
+  clear(['#cWho','#cRole','#cSaid','#cNext','#cTime']); drawCalls(); $('#cWho').focus();
+};
+</script>
+
+<script>
+document.querySelectorAll('nav button').forEach(b => b.onclick = () => {
+  document.querySelectorAll('nav button').forEach(x=>x.setAttribute('aria-current','false'));
+  b.setAttribute('aria-current','true');
+  document.querySelectorAll('section').forEach(s=>s.classList.remove('on'));
+  $('#'+b.dataset.go).classList.add('on');
+  if(b.dataset.go==='out') drawSummary();
+  window.scrollTo(0,0);
+});
+
+function drawSummary(){
+  const L=D.loss, done=Object.values(D.firstDay).filter(Boolean).length;
+  $('#summary').innerHTML =
+   `<h2>What is in the record</h2>
+    <p style="font-size:14px">Loss dated <b>${esc(L.lossDate||'— not filled in —')}</b>.
+    Insurer <b>${esc(L.insurer||'—')}</b>, policy <b>${esc(L.policyNo||'—')}</b>,
+    claim <b>${esc(L.claimNo||'not yet issued')}</b>.</p>
+    <p style="font-size:14px"><b>${D.items.length}</b> items across
+    <b>${new Set(D.items.map(i=>i.room)).size}</b> rooms ·
+    <b>${D.spend.length}</b> costs logged ·
+    <b>${D.calls.length}</b> conversations logged ·
+    first-day list <b>${done}/${FIRST_DAY.length}</b>.</p>
+    ${D.calls.length===0?'<p class="shot" style="color:var(--warn)">No conversations logged. If you have spoken to anyone at all about this loss, write it down before you forget the name.</p>':''}`;
+}
+
+$('#expJson').onclick = () => {
+  const blob = new Blob([JSON.stringify(D,null,2)],{type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'claim-record-' + new Date().toISOString().slice(0,10) + '.json';
+  a.click(); URL.revokeObjectURL(a.href);
+};
+$('#impBtn').onclick = () => $('#impFile').click();
+$('#impFile').onchange = e => {
+  const f = e.target.files[0]; if(!f) return;
+  const r = new FileReader();
+  r.onload = () => { try{
+      const o = JSON.parse(r.result);
+      Object.assign(D,{loss:o.loss||{},items:o.items||[],spend:o.spend||[],calls:o.calls||[],firstDay:o.firstDay||{}});
+      LOSS_FIELDS.forEach(k=>{ if($('#'+k)) $('#'+k).value = D.loss[k]||''; });
+      drawFirstDay(); drawItems(); drawSpend(); drawCalls(); drawSummary();
+      alert('Loaded.');
+    } catch(err){ alert('That file could not be read: '+err.message); } };
+  r.readAsText(f);
+};
+$('#doPrint').onclick = () => { drawSummary(); window.print(); };
+
+drawFirstDay(); drawItems(); drawSpend(); drawCalls();
+</script>

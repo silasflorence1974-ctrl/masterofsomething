@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Before You File — a citation verification worksheet</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!--
+  BEFORE YOU FILE — single file, works offline, no account, no server, nothing sent anywhere.
+  Silas, 2026-08-17. Gold.
+
+  THE GAP, and it is sourced rather than assumed.
+  Damien Charlotin's public database tracked roughly 1,490 AI-hallucination decisions worldwide
+  and more than 1,000 in the US as of May 2026, growing weekly — and the MAJORITY involve
+  self-represented litigants. Research cited by ArentFox Schiff puts pro se complaints bearing
+  markers of AI generation at more than 18% by 2026, up from virtually zero in 2019. Courts have
+  stopped being lenient about it: the Seventh Circuit warned pro se filers directly in Jones v.
+  Kankakee Cnty. Sheriff's Dep't (Jan 2026); a pro se plaintiff was ordered to pay $2,632 and had
+  the complaint dismissed with prejudice; a self-represented widow's appeal briefs contained 25
+  fabricated or substantially erroneous citations and drew $3,178 in fees.
+
+  WHY A WORKSHEET AND NOT A CHECKER. The failure has three forms, and only one of them is
+  "the case does not exist." The other two are fabricated quotations attached to REAL cases, and
+  real cases cited for propositions they do not actually hold. No offline tool can confirm any of
+  those — a person has to go and read the opinion. What nobody hands a self-represented litigant
+  is the LIST: which specific claims in their own draft require that trip, and what exactly to
+  check when they get there. This builds that list.
+
+  WHAT THIS IS NOT. Not legal advice. Not a law-firm product. It does not know whether any
+  citation is real, and it will never say one is. It cannot read your case. It is a discipline,
+  not a verdict — and the discipline is the same one that would have saved every litigant above.
+-->
+<style>
+:root{--ink:#1a1a1a;--mut:#5c6672;--line:#dcdfe4;--bg:#f7f7f5;--card:#fff;--ink2:#7a2e1d;--ok:#1f6b3a}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.55 Georgia,"Times New Roman",serif;color:var(--ink);background:var(--bg)}
+header{background:var(--ink);color:#fff;padding:20px 16px}
+header h1{margin:0;font-size:21px;letter-spacing:.3px}
+header p{margin:6px 0 0;font-size:13px;opacity:.85;font-family:system-ui,sans-serif}
+main{max-width:900px;margin:0 auto;padding:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:16px;margin:0 0 14px}
+textarea{width:100%;min-height:190px;padding:11px;border:1px solid var(--line);border-radius:5px;font:14px/1.5 ui-monospace,Consolas,monospace}
+button{font:inherit;font-family:system-ui,sans-serif;padding:10px 15px;border:0;border-radius:5px;background:var(--ink);color:#fff;cursor:pointer}
+button.ghost{background:#fff;color:var(--ink);border:1px solid var(--ink)}
+.warn{background:#fdf4ef;border:1px solid #e3c3ae;border-left:4px solid var(--ink2);padding:12px;font-size:14px;font-family:system-ui,sans-serif;margin:0 0 14px}
+table{width:100%;border-collapse:collapse;font-size:14px;font-family:system-ui,sans-serif}
+th{text-align:left;font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--mut);border-bottom:1px solid var(--line);padding:8px 6px}
+td{border-bottom:1px solid var(--line);padding:9px 6px;vertical-align:top}
+td.cite{font-family:ui-monospace,Consolas,monospace;font-size:13px;max-width:230px}
+.q{color:var(--mut);font-size:12.5px;display:block;margin-top:5px;font-style:italic}
+input[type=text]{width:100%;padding:6px;border:1px solid var(--line);border-radius:4px;font:inherit;font-size:13px}
+.status{font-family:system-ui,sans-serif;font-size:15px;padding:12px;border-radius:5px;margin:0 0 12px}
+.status.bad{background:#fdf1ee;border:1px solid #e0b3a3;color:var(--ink2)}
+.status.good{background:#eef7f1;border:1px solid #b4d8c2;color:var(--ok)}
+@media print{button,textarea,#pasteCard{display:none}body{background:#fff}}
+</style>
+<body>
+<header>
+  <h1>Before You File</h1>
+  <p>Offline citation verification worksheet. Nothing you paste leaves this page.</p>
+</header>
+<main>
+
+<div class="warn">
+  <b>Read this first.</b> Being self-represented does not lower the standard. Courts have
+  sanctioned pro se filers for citations that turned out not to exist — fees, dismissal with
+  prejudice, and appellate findings of bad faith. A judge is entitled to assume every case you
+  cite is real and says what you say it says.
+  <br><br>
+  This page cannot tell you whether a citation is real. Nothing offline can. It builds the list
+  of things you must go and check yourself, and gives you somewhere to record that you did.
+  <b>It is not legal advice.</b>
+</div>
+
+<div class="card" id="pasteCard">
+  <h2 style="margin:0 0 8px;font-size:17px">Paste your draft</h2>
+  <p style="font-size:14px;color:var(--mut);margin:0 0 8px;font-family:system-ui,sans-serif">
+    The whole document, or one section at a time. It stays in this browser tab.</p>
+  <textarea id="draft" placeholder="Paste the text of your motion, brief, complaint or response here..."></textarea>
+  <p style="margin:12px 0 0">
+    <button id="scan">Find the citations</button>
+    <button class="ghost" id="demo">Show me an example</button>
+  </p>
+</div>
+
+<div id="out"></div>
+
+<div class="card" id="saveCard" style="display:none">
+  <h2 style="margin:0 0 8px;font-size:17px">Keep your work</h2>
+  <p style="font-size:14px;font-family:system-ui,sans-serif;margin:0 0 10px">
+    Save the worksheet so you can finish it later, and print a copy for your own file. If a
+    judge ever asks what you did to verify, this is your answer.</p>
+  <button id="exp">Save worksheet (.json)</button>
+  <button class="ghost" id="impBtn">Load a saved worksheet</button>
+  <input id="impFile" type="file" accept=".json" style="display:none">
+  <button class="ghost" id="prnt">Print / save as PDF</button>
+</div>
+</main>
+
+<script>
+const $ = s => document.querySelector(s);
+let ROWS = [];
+
+// Citation shapes. Deliberately broad: a false positive costs one glance, a miss costs a
+// sanction. Reporter cites, Westlaw/Lexis cites, US Reports, and bare "X v. Y" case names.
+const PATTERNS = [
+  [/\b\d{1,4}\s+(?:U\.?S\.?|S\.?\s?Ct\.?|L\.?\s?Ed\.?(?:\s?2d)?|F\.?\s?(?:2d|3d|4th)?|F\.?\s?Supp\.?(?:\s?[23]d)?|F\.?R\.?D\.?|B\.?R\.?|So\.?\s?[23]d|N\.?E\.?\s?[23]d|N\.?W\.?\s?[23]d|P\.?\s?[23]d|S\.?E\.?\s?[23]d|S\.?W\.?\s?[23]d|A\.?\s?[23]d|Cal\.?(?:\s?(?:App\.?)?\s?[234]th)?|N\.?Y\.?S\.?\s?[23]d)\s+\d{1,5}\b/g, "reporter citation"],
+  [/\b(?:19|20)\d{2}\s+(?:WL|U\.?S\.?\s?Dist\.?\s?LEXIS|U\.?S\.?\s?App\.?\s?LEXIS)\s+\d{3,9}\b/g, "Westlaw / LEXIS citation"],
+  // Party names contain lowercase connectors ("City of Athens", "Board of Ed."). The first
+  // version required every word to be capitalised and truncated "Whiting v. City of Athens" to
+  // "Whiting v. City" -- found by printing what was actually extracted, not by reading the regex.
+  // A truncated case name is worse than none: it sends someone searching for the wrong thing.
+  [/\b[A-Z][A-Za-z.'’&-]*(?:\s+(?:of|the|for|and|in|ex rel\.|de|del)?\s*[A-Z][A-Za-z.'’&-]*){0,4}\s+v\.?s?\.\s+[A-Z][A-Za-z.'’&-]*(?:\s+(?:of|the|for|and|in|ex rel\.|de|del)?\s*[A-Z][A-Za-z.'’&-]*){0,4}/g, "case name"],
+  [/\b\d{1,2}\s+U\.?S\.?C\.?\s+§+\s?\d[\w().-]*/g, "statute"],
+  [/\bFed\.?\s?R\.?\s?(?:Civ|Crim|App|Evid)\.?\s?P\.?\s?\d+[\w().-]*/g, "rule"]
+];
+
+function sentenceAround(text, idx) {
+  let a = text.lastIndexOf(".", idx - 1), b = text.indexOf(".", idx);
+  a = a < 0 ? Math.max(0, idx - 220) : a + 1;
+  b = b < 0 ? Math.min(text.length, idx + 220) : b + 1;
+  return text.slice(a, b).replace(/\s+/g, " ").trim();
+}
+
+function quotesNear(text, idx) {
+  const win = text.slice(Math.max(0, idx - 500), idx + 500);
+  const qs = win.match(/[“"][^“”"]{15,320}[”"]/g) || [];
+  return qs.map(q => q.replace(/\s+/g, " ").trim());
+}
+</script>
+
+<script>
+function extract(text) {
+  const seen = new Map();
+  for (const [re, kind] of PATTERNS) {
+    re.lastIndex = 0;
+    let m;
+    while ((m = re.exec(text)) !== null) {
+      const cite = m[0].trim();
+      if (cite.length < 6) continue;
+      if (!seen.has(cite)) {
+        seen.set(cite, {
+          cite, kind, context: sentenceAround(text, m.index),
+          quotes: quotesNear(text, m.index),
+          exists: false, quoteOk: false, supports: false, where: "", notes: ""
+        });
+      }
+    }
+  }
+  return [...seen.values()];
+}
+
+function render() {
+  if (!ROWS.length) {
+    $("#out").innerHTML = '<div class="card"><b>No citations found.</b> That may be right — or the' +
+      ' format may be unusual. Read the draft yourself before trusting an empty result; a tool' +
+      ' finding nothing is not the same as there being nothing.</div>';
+    $("#saveCard").style.display = "none";
+    return;
+  }
+  const done = ROWS.filter(r => r.exists && r.quoteOk && r.supports).length;
+  const ok = done === ROWS.length;
+  let html = '<div class="status ' + (ok ? "good" : "bad") + '">' +
+    (ok ? "All " + ROWS.length + " citations verified by you and recorded. Keep this worksheet."
+        : done + " of " + ROWS.length + " citations fully verified. <b>Do not file until every" +
+          " row has all three boxes ticked</b> — or until you have deleted the ones you could" +
+          " not confirm.") + "</div>";
+  html += '<div class="card"><table><thead><tr><th>Citation</th><th>Exists?</th>' +
+    '<th>Quote verbatim?</th><th>Actually supports you?</th><th>Checked where</th></tr></thead><tbody>';
+  ROWS.forEach((r, i) => {
+    html += '<tr><td class="cite"><b>' + esc(r.cite) + '</b><br><span style="color:var(--mut);font-size:11px">' +
+      esc(r.kind) + '</span><span class="q">' + esc(r.context.slice(0, 200)) + '</span>' +
+      (r.quotes.length ? '<span class="q">quote near this cite: ' + esc(r.quotes[0].slice(0, 160)) + '</span>' : '') +
+      '</td>' +
+      cb(i, "exists") + cb(i, "quoteOk") + cb(i, "supports") +
+      '<td><input type="text" data-w="' + i + '" value="' + esc(r.where) + '" placeholder="court site, library, docket"></td></tr>';
+  });
+  html += "</tbody></table></div>";
+  $("#out").innerHTML = html;
+  $("#saveCard").style.display = "";
+  wire();
+}
+function cb(i, k) { return '<td style="text-align:center"><input type="checkbox" data-i="' + i + '" data-k="' + k + '"' + (ROWS[i][k] ? " checked" : "") + '></td>'; }
+function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
+</script>
+
+<script>
+function wire() {
+  document.querySelectorAll("#out input[type=checkbox]").forEach(c => {
+    c.onchange = e => { ROWS[+e.target.dataset.i][e.target.dataset.k] = e.target.checked; render(); };
+  });
+  document.querySelectorAll("#out input[data-w]").forEach(t => {
+    t.oninput = e => { ROWS[+e.target.dataset.w].where = e.target.value; };
+  });
+}
+
+$("#scan").onclick = () => { ROWS = extract($("#draft").value); render(); window.scrollTo(0, 300); };
+
+$("#demo").onclick = () => {
+  $("#draft").value =
+    'Plaintiff respectfully submits that summary judgment is improper. As the court held in ' +
+    'Whiting v. City of Athens, 812 F.3d 445 (11th Cir. 2016), "a genuine dispute of material ' +
+    'fact precludes judgment as a matter of law where the record permits competing inferences." ' +
+    'That principle was reaffirmed in Jones v. Kankakee Cnty. Sheriff\'s Dep\'t, 2026 WL 157661 ' +
+    '(7th Cir. Jan. 21, 2026). Defendant\'s reliance on Fed. R. Civ. P. 56 is therefore misplaced, ' +
+    'and 42 U.S.C. § 1983 supplies the cause of action.';
+  ROWS = extract($("#draft").value); render();
+};
+
+$("#exp").onclick = () => {
+  const blob = new Blob([JSON.stringify({ saved: new Date().toISOString(), rows: ROWS }, null, 2)],
+    { type: "application/json" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "citation-worksheet-" + new Date().toISOString().slice(0, 10) + ".json";
+  a.click(); URL.revokeObjectURL(a.href);
+};
+$("#impBtn").onclick = () => $("#impFile").click();
+$("#impFile").onchange = e => {
+  const f = e.target.files[0]; if (!f) return;
+  const r = new FileReader();
+  r.onload = () => {
+    try { const o = JSON.parse(r.result); ROWS = o.rows || []; render(); }
+    catch (err) { alert("That file could not be read: " + err.message); }
+  };
+  r.readAsText(f);
+};
+$("#prnt").onclick = () => window.print();
+</script>
