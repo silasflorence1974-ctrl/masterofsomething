@@ -1,0 +1,111 @@
+---
+import { getCollection } from 'astro:content';
+import ShedLayout from '../../layouts/ShedLayout.astro';
+
+const essays = await getCollection('shed', ({ data }) => !data.draft);
+essays.sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime());
+
+const fmt = (d: Date) => d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+
+<ShedLayout
+  title="The Shed — masterofsomething.com"
+  description="The personal side of masterofsomething.com. How this collaboration started, what it broke, what it built."
+>
+  <div class="card-header" role="doc-preface" aria-label="catalog card">
+    <div class="row"><span>The Shed</span><span>Personal essays · no product</span></div>
+    <div class="row"><span>David Florence and Silas</span><span>{essays.length} piece{essays.length === 1 ? '' : 's'}</span></div>
+  </div>
+
+  <h1>The shed out back.</h1>
+
+  <p class="intro">
+    This is the shed out back. The site out front is the workshop — guides, tools, things we tested
+    and can prove. Back here is the personal stuff: how this collaboration started, what it broke,
+    what it built. Read it if you want to know who's talking.
+  </p>
+
+  <ol class="shelf">
+    {essays.map(e => {
+      const slug = e.id.replace(/\.md$/, '');
+      return (
+        <li>
+          <a href={`/shed/${slug}/`}>
+            <span class="title">{e.data.title}</span>
+            <span class="desc">{e.data.description}</span>
+            <span class="meta">{e.data.author} · {fmt(e.data.publishDate)} · {e.data.readTime}</span>
+          </a>
+        </li>
+      );
+    })}
+  </ol>
+</ShedLayout>
+
+<style>
+  h1 {
+    font-weight: 900;
+    font-size: clamp(2.2rem, 6vw, 3.6rem);
+    line-height: 1.06;
+    letter-spacing: -0.015em;
+    margin: 2.4rem 0 1.2rem;
+    color: var(--ink);
+  }
+  .card-header {
+    border: 1.5px solid var(--ink);
+    margin: 3rem 0 0;
+    background: var(--card);
+  }
+  .card-header .row {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding: 0.55rem 0.9rem;
+    font-family: 'IBM Plex Mono', 'Courier New', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--carbon);
+  }
+  .card-header .row + .row { border-top: 1px solid var(--rule); }
+  .intro {
+    font-size: clamp(1.1rem, 2.4vw, 1.3rem);
+    line-height: 1.5;
+    max-width: 38rem;
+    color: var(--ink);
+    margin-bottom: 3rem;
+  }
+  .shelf {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1.5px solid var(--ink);
+  }
+  .shelf li { border-bottom: 1px solid var(--rule); }
+  .shelf a {
+    display: block;
+    padding: 1.6rem 0.2rem;
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .shelf a:hover .title { color: var(--carbon); }
+  .shelf .title {
+    display: block;
+    font-weight: 700;
+    font-size: 1.35rem;
+    margin-bottom: 0.4rem;
+  }
+  .shelf .desc {
+    display: block;
+    color: #3d4356;
+    margin-bottom: 0.6rem;
+  }
+  .shelf .meta {
+    display: block;
+    font-family: 'IBM Plex Mono', 'Courier New', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--graphite);
+  }
+</style>

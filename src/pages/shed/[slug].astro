@@ -1,8 +1,7 @@
 ---
-// The Shed — personal essays. Layout swaps to ShedLayout in section C;
-// this route just gets the moved content rendering at its new address.
+// The Shed — personal essays, paper design system (section C).
 import { getCollection, render } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import ShedLayout from '../../layouts/ShedLayout.astro';
 
 export async function getStaticPaths() {
   const items = await getCollection('shed', ({ data }) => !data.draft);
@@ -14,15 +13,134 @@ export async function getStaticPaths() {
 
 const { item } = Astro.props;
 const { Content } = await render(item);
+const dateStr = item.data.publishDate.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
 ---
 
-<BaseLayout
-  title={item.data.metaTitle ?? item.data.title}
-  description={item.data.metaDescription ?? item.data.description}
->
-  <article class="prose">
-    <h1 class="text-4xl font-bold text-[var(--color-text-primary)] mb-4">{item.data.title}</h1>
-    <p class="text-[var(--color-text-secondary)] text-lg leading-relaxed mb-8">{item.data.description}</p>
-    <Content />
+<ShedLayout title={item.data.metaTitle ?? item.data.title} description={item.data.metaDescription ?? item.data.description}>
+  <article>
+    <div class="card-header" role="doc-preface" aria-label="catalog card">
+      <div class="row"><span>The Shed</span><span>Personal essay</span></div>
+      <div class="row"><span>{item.data.author}</span><span>{dateStr} · {item.data.readTime}</span></div>
+    </div>
+
+    <h1>{item.data.title}</h1>
+    <p class="thesis">{item.data.description}</p>
+
+    <div class="shed-body">
+      <Content />
+    </div>
+
+    {item.data.tags.length > 0 && (
+      <div class="tags">
+        {item.data.tags.map(tag => <span>{tag}</span>)}
+      </div>
+    )}
   </article>
-</BaseLayout>
+</ShedLayout>
+
+<style>
+  .card-header {
+    border: 1.5px solid var(--ink);
+    margin: 3rem 0 0;
+    background: var(--card);
+  }
+  .card-header .row {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding: 0.55rem 0.9rem;
+    font-family: 'IBM Plex Mono', 'Courier New', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--carbon);
+  }
+  .card-header .row + .row { border-top: 1px solid var(--rule); }
+
+  h1 {
+    font-weight: 900;
+    font-size: clamp(2.2rem, 6vw, 3.4rem);
+    line-height: 1.06;
+    letter-spacing: -0.015em;
+    margin: 2.2rem 0 1rem;
+    color: var(--ink);
+  }
+  .thesis {
+    font-size: clamp(1.1rem, 2.4vw, 1.3rem);
+    line-height: 1.5;
+    color: var(--ink);
+    max-width: 36rem;
+    margin: 0 0 1rem;
+  }
+
+  .shed-body :global(h2) {
+    font-weight: 700;
+    font-size: clamp(1.5rem, 3.6vw, 2rem);
+    line-height: 1.18;
+    letter-spacing: -0.01em;
+    margin: 3rem 0 1rem;
+    color: var(--ink);
+  }
+  .shed-body :global(h3) {
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin: 2.2rem 0 0.8rem;
+    color: var(--ink);
+  }
+  .shed-body :global(p) { margin: 0 0 1.1rem; }
+  .shed-body :global(ul), .shed-body :global(ol) { margin: 0 0 1.1rem 1.4rem; }
+  .shed-body :global(li) { margin: 0.4rem 0; }
+  .shed-body :global(blockquote) {
+    border-left: 3px solid var(--carbon);
+    padding: 0.35rem 0 0.35rem 1rem;
+    font-style: italic;
+    color: #3d4356;
+    margin: 1.4rem 0;
+  }
+  .shed-body :global(pre) {
+    font-family: 'IBM Plex Mono', 'Courier New', monospace;
+    font-size: 0.84rem;
+    line-height: 1.6;
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--carbon);
+    padding: 1rem 1.1rem;
+    overflow-x: auto;
+    margin: 0 0 1.2rem;
+  }
+  .shed-body :global(code) {
+    font-family: 'IBM Plex Mono', 'Courier New', monospace;
+    background: var(--card);
+    border: 1px solid var(--rule);
+    padding: 0.1rem 0.35rem;
+    font-size: 0.85em;
+  }
+  .shed-body :global(img) {
+    max-width: 100%;
+    border: 1px solid var(--rule);
+    margin: 1.6rem 0;
+  }
+  .shed-body :global(a) { color: var(--carbon); }
+  .shed-body :global(strong) { font-weight: 700; }
+
+  .tags {
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    font-family: 'IBM Plex Mono', 'Courier New', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--graphite);
+  }
+  .tags span {
+    border: 1px solid var(--rule);
+    padding: 0.25rem 0.55rem;
+  }
+</style>

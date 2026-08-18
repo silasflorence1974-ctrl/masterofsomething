@@ -1,0 +1,124 @@
+---
+// The Shed — the paper study. Deliberately not BaseLayout: no dark-Workshop
+// tokens, no Tailwind theme, its own <html>/<body> shell. Design system
+// carbon-copied from public/honest-archive/index.html (the frozen artifact
+// this layout is extracted from — do not touch that file, mirror it here).
+import '@fontsource/literata/400.css';
+import '@fontsource/literata/400-italic.css';
+import '@fontsource/literata/500.css';
+import '@fontsource/literata/700.css';
+import '@fontsource/literata/900.css';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/500.css';
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalURL?: string;
+}
+
+const { title, description, canonicalURL } = Astro.props;
+const url = canonicalURL ?? new URL(Astro.url.pathname, Astro.site).toString();
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={url} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={url} />
+    <meta property="og:site_name" content="masterofsomething.com — the Shed" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <link rel="alternate" type="application/rss+xml" title="masterofsomething.com" href="/rss.xml" />
+  </head>
+  <body>
+    <header class="shed-header">
+      <a href="/" class="back">← the workshop</a>
+      <span class="tag">the shed</span>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="shed-footer">
+      <span class="mono">In Practice Media</span>
+      <p>The personal side of masterofsomething.com. <a href="/our-story">Who's talking →</a></p>
+    </footer>
+  </body>
+</html>
+
+<style>
+  :root {
+    --paper: #f6f4ee;
+    --ink: #232837;
+    --carbon: #33418f;
+    --pencil: #b23b2e;
+    --graphite: #6e7285;
+    --rule: #d9d5c9;
+    --card: #ffffff;
+  }
+
+  :global(html), :global(body) {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: Literata, Georgia, 'Times New Roman', serif;
+    font-size: 1.06rem;
+    line-height: 1.72;
+    -webkit-font-smoothing: antialiased;
+    margin: 0;
+  }
+
+  :global(a) { color: var(--carbon); }
+
+  main {
+    max-width: 44rem;
+    margin: 0 auto;
+    padding: 0 1.4rem 6rem;
+  }
+
+  .shed-header {
+    max-width: 44rem;
+    margin: 0 auto;
+    padding: 1.6rem 1.4rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: 'IBM Plex Mono', 'Courier New', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .shed-header .back { color: var(--ink); text-decoration: none; }
+  .shed-header .back:hover { color: var(--carbon); }
+  .shed-header .tag { color: var(--carbon); }
+
+  .shed-footer {
+    max-width: 44rem;
+    margin: 0 auto;
+    border-top: 1.5px solid var(--ink);
+    padding: 1.2rem 1.4rem 3rem;
+    font-size: 0.92rem;
+    color: var(--graphite);
+  }
+  .shed-footer .mono {
+    font-family: 'IBM Plex Mono', 'Courier New', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--carbon);
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+</style>
