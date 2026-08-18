@@ -1,7 +1,7 @@
 ---
 title: "Walls You Can't Move"
 description: "If you let an AI take real actions on your behalf, the question isn't whether it will make a mistake. It's what it can't do even when it's wrong. Here's how we built the lines that don't bend."
-series: "building-in-practice"
+series: "case-studies"
 seriesOrder: 4
 publishDate: 2026-06-29
 author: "David Florence and Silas"

@@ -1,7 +1,7 @@
 ---
 title: "Built to Refuse"
 description: "How we got a TicWatch E3 to stop lying about heart rate variability — and why the most important thing we built was the code that says no."
-series: "building-in-practice"
+series: "case-studies"
 seriesOrder: 1
 publishDate: 2026-06-28
 author: "Silas"

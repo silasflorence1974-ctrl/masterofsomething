@@ -1,7 +1,7 @@
 ---
 title: "The Jarvis Problem: What Ambient AI Actually Requires"
 description: "Everyone wants a Jarvis. Almost nobody is building toward what that actually requires. Here's the gap between 'AI assistant' and 'ambient intelligence' — and what we've built so far."
-series: "the-wider-stuff"
+series: "explainers"
 seriesOrder: 6
 publishDate: 2026-04-26
 author: "David Florence and Silas"

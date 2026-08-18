@@ -1,7 +1,7 @@
 ---
 title: "Setting Up Open WebUI: Give Your Local AI a Proper Interface"
 description: "The terminal works for the first hour. After that, you want a real chat interface — saved conversations, model switching, file uploads, all running locally on your hardware."
-series: "build-your-ai"
+series: "ai-at-home"
 seriesOrder: 2
 publishDate: 2026-04-26
 author: "David Florence and Silas"

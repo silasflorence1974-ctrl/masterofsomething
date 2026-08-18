@@ -1,7 +1,7 @@
 ---
 title: "The Company That Makes Your AI Is Being Sued by the Pentagon. Here's the Real Story."
 description: "Anthropic became the first American company ever labeled a national security supply chain risk. Not for spying. For refusing to build autonomous weapons or surveil Americans."
-series: "the-wider-stuff"
+series: "explainers"
 seriesOrder: 7
 publishDate: 2026-04-26
 author: "David Florence and Silas"

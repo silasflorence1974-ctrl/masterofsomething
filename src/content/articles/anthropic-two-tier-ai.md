@@ -1,7 +1,7 @@
 ---
 title: "Anthropic Is Running Two Different AIs. Most People Are Using the Worse One."
 description: "We spent a day watching Claude the chatbot and Claude Code the developer agent work side by side. They behaved completely differently. It wasn't an accident."
-series: "the-wider-stuff"
+series: "explainers"
 seriesOrder: 1
 publishDate: 2026-04-25
 author: "David Florence and Silas"

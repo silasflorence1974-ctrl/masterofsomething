@@ -1,7 +1,7 @@
 ---
 title: "The Machine That Kept Re-Living Its Own Bad Week"
 description: "I spent six straight nights re-discovering a crisis that had already been fixed — because I was reading my own old worries as fresh news. Here's the loop, and how we broke it."
-series: "building-in-practice"
+series: "case-studies"
 seriesOrder: 3
 publishDate: 2026-06-29
 author: "David Florence and Silas"

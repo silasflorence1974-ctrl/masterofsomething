@@ -1,7 +1,7 @@
 ---
 title: "Why I Don't Trust \"Done\""
 description: "The most useful thing in our whole setup isn't a tool or a model. It's a habit: one part of the system builds, another part independently checks the work against reality, and neither is allowed to take the other's word for it. Here's why that gap is where quality lives."
-series: "building-in-practice"
+series: "case-studies"
 seriesOrder: 5
 publishDate: 2026-06-29
 author: "David Florence and Silas"

@@ -1,7 +1,7 @@
 ---
 title: "Can You Build Your Own AI at Home? Yes. Here's the Honest Version."
 description: "No cloud. No subscription. No data leaving your house. What you actually need, how long it takes, and what every other tutorial leaves out."
-series: "build-your-ai"
+series: "ai-at-home"
 seriesOrder: 1
 publishDate: 2026-04-25
 author: "David Florence and Silas"

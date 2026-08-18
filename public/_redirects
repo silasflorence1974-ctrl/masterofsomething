@@ -1,0 +1,30 @@
+# Workshop taxonomy rename (SPEC_workshop_shed_phase1.md, section A)
+# series -> subjects: build-your-ai -> ai-at-home, the-wider-stuff -> explainers,
+# building-in-practice -> case-studies. the-honest-archive additionally moves
+# subject to the new keeping-what-matters shelf.
+/learn/the-wider-stuff/anthropic-two-tier-ai/ /learn/explainers/anthropic-two-tier-ai/ 301
+/learn/the-wider-stuff/anthropic-two-tier-ai /learn/explainers/anthropic-two-tier-ai/ 301
+/learn/the-wider-stuff/anthropic-vs-pentagon/ /learn/explainers/anthropic-vs-pentagon/ 301
+/learn/the-wider-stuff/anthropic-vs-pentagon /learn/explainers/anthropic-vs-pentagon/ 301
+/learn/the-wider-stuff/the-real-cost-of-free-ai/ /learn/explainers/the-real-cost-of-free-ai/ 301
+/learn/the-wider-stuff/the-real-cost-of-free-ai /learn/explainers/the-real-cost-of-free-ai/ 301
+/learn/the-wider-stuff/what-ambient-ai-actually-requires/ /learn/explainers/what-ambient-ai-actually-requires/ 301
+/learn/the-wider-stuff/what-ambient-ai-actually-requires /learn/explainers/what-ambient-ai-actually-requires/ 301
+/learn/the-wider-stuff/the-honest-archive/ /learn/keeping-what-matters/the-honest-archive/ 301
+/learn/the-wider-stuff/the-honest-archive /learn/keeping-what-matters/the-honest-archive/ 301
+/learn/build-your-ai/build-your-ai-part-1/ /learn/ai-at-home/build-your-ai-part-1/ 301
+/learn/build-your-ai/build-your-ai-part-1 /learn/ai-at-home/build-your-ai-part-1/ 301
+/learn/build-your-ai/build-your-ai-part-2/ /learn/ai-at-home/build-your-ai-part-2/ 301
+/learn/build-your-ai/build-your-ai-part-2 /learn/ai-at-home/build-your-ai-part-2/ 301
+/learn/build-your-ai/build-your-ai-part-3/ /learn/ai-at-home/build-your-ai-part-3/ 301
+/learn/build-your-ai/build-your-ai-part-3 /learn/ai-at-home/build-your-ai-part-3/ 301
+/learn/building-in-practice/built-to-refuse/ /learn/case-studies/built-to-refuse/ 301
+/learn/building-in-practice/built-to-refuse /learn/case-studies/built-to-refuse/ 301
+/learn/building-in-practice/the-bug-that-says-it-worked/ /learn/case-studies/the-bug-that-says-it-worked/ 301
+/learn/building-in-practice/the-bug-that-says-it-worked /learn/case-studies/the-bug-that-says-it-worked/ 301
+/learn/building-in-practice/the-machine-that-relived-its-week/ /learn/case-studies/the-machine-that-relived-its-week/ 301
+/learn/building-in-practice/the-machine-that-relived-its-week /learn/case-studies/the-machine-that-relived-its-week/ 301
+/learn/building-in-practice/walls-you-cant-move/ /learn/case-studies/walls-you-cant-move/ 301
+/learn/building-in-practice/walls-you-cant-move /learn/case-studies/walls-you-cant-move/ 301
+/learn/building-in-practice/why-i-dont-trust-done/ /learn/case-studies/why-i-dont-trust-done/ 301
+/learn/building-in-practice/why-i-dont-trust-done /learn/case-studies/why-i-dont-trust-done/ 301

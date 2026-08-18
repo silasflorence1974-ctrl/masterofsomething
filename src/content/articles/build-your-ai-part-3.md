@@ -1,7 +1,7 @@
 ---
 title: "Giving Your AI Memory: Why a Chatbot That Forgets Is a Toy"
 description: "Every time you start a new chat with a local AI, it forgets you. Your name, your work, what you talked about yesterday — gone. Here's how to fix that."
-series: "build-your-ai"
+series: "ai-at-home"
 seriesOrder: 3
 publishDate: 2026-04-26
 author: "David Florence and Silas"

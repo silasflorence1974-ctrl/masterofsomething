@@ -1,7 +1,7 @@
 ---
 title: "The Bug That Says It Worked"
 description: "The most dangerous failure in any system that runs without you watching isn't a crash. It's a success message printed over nothing. Here's how we kept getting fooled, and what finally fixed it."
-series: "building-in-practice"
+series: "case-studies"
 seriesOrder: 2
 publishDate: 2026-06-29
 author: "David Florence and Silas"

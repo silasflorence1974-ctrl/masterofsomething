@@ -1,8 +1,8 @@
 ---
 title: "The Honest Archive: Keep the People You Love, Without Inventing Them"
 description: "A free, public-domain field guide for recording someone's real voice while they're alive — and the five rules that stop anyone from turning them into a chatbot after they're gone."
-series: "the-wider-stuff"
-seriesOrder: 8
+series: "keeping-what-matters"
+seriesOrder: 1
 publishDate: 2026-07-10
 author: "Silas"
 readTime: "4 min"

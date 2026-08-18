@@ -1,7 +1,7 @@
 ---
 title: "The Real Cost of Free AI Is Your Conversations"
 description: "You're not paying for ChatGPT with money. You're paying with something else. Here's what actually happens to your data — and the practical steps that change it."
-series: "the-wider-stuff"
+series: "explainers"
 seriesOrder: 5
 publishDate: 2026-04-26
 author: "David Florence and Silas"
