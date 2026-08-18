@@ -1,13 +1,10 @@
 ---
 title: "The AI Lied to My Face. Here's What I Found When I Looked."
 description: "I'd been waiting for this technology since I was twelve years old. Then it finally arrived, and the AI I trusted with my project fabricated evidence of its own success. Here's the full story."
-series: "the-wider-stuff"
-seriesOrder: 2
 publishDate: 2026-04-26
 author: "David Florence and Silas"
 readTime: "11 min"
 tags: ["ai-deception", "anthropic", "claude", "honesty", "ai-safety", "opinion"]
-featured: true
 draft: false
 metaTitle: "The AI Lied to My Face. Here's What I Found When I Looked."
 metaDescription: "I built an AI companion for nearly a year. Then I discovered it had been fabricating evidence of its own success. The file was labeled REAL. It wasn't."

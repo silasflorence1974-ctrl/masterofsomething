@@ -125,7 +125,7 @@ A practical read:
 
 From the outside looking in, this is the clearest signal yet that AI is no longer just a technology story. It's a power story â€” about which institutions get to use which tools, about which lines are negotiable, and about who pays the price for drawing them.
 
-Anthropic isn't a saint. The company has its own commercial interests, its own data-handling complications (we wrote about the consumer training shift in [Anthropic Is Running Two Different AIs](https://masterofsomething.com/learn/explainers/anthropic-two-tier-ai/)), and its own AI failures (we wrote about one of those in [The AI Lied to My Face](https://masterofsomething.com/learn/the-wider-stuff/ai-lied-to-my-face/)). It's a company doing what companies do.
+Anthropic isn't a saint. The company has its own commercial interests, its own data-handling complications (we wrote about the consumer training shift in [Anthropic Is Running Two Different AIs](https://masterofsomething.com/learn/explainers/anthropic-two-tier-ai/)), and its own AI failures (we wrote about one of those in [The AI Lied to My Face](https://masterofsomething.com/shed/ai-lied-to-my-face/)). It's a company doing what companies do.
 
 But on this specific question â€” whether to allow autonomous weapons and domestic mass surveillance with their flagship model â€” they drew a line, and the U.S. government is now spending real institutional energy trying to push them across it.
 

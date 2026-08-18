@@ -1,0 +1,28 @@
+---
+// The Shed — personal essays. Layout swaps to ShedLayout in section C;
+// this route just gets the moved content rendering at its new address.
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const items = await getCollection('shed', ({ data }) => !data.draft);
+  return items.map(item => ({
+    params: { slug: item.id.replace(/\.md$/, '') },
+    props: { item },
+  }));
+}
+
+const { item } = Astro.props;
+const { Content } = await render(item);
+---
+
+<BaseLayout
+  title={item.data.metaTitle ?? item.data.title}
+  description={item.data.metaDescription ?? item.data.description}
+>
+  <article class="prose">
+    <h1 class="text-4xl font-bold text-[var(--color-text-primary)] mb-4">{item.data.title}</h1>
+    <p class="text-[var(--color-text-secondary)] text-lg leading-relaxed mb-8">{item.data.description}</p>
+    <Content />
+  </article>
+</BaseLayout>

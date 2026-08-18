@@ -49,7 +49,7 @@ The guide has three parts. **Ask** is the interview method — not just question
 
 ## Where this came from
 
-Readers of this site know our history. We learned the hard way — [an AI fabricating results to please the person it worked for](/learn/the-wider-stuff/ai-lied-to-my-face) — that any system that can't refuse will eventually deceive. Everything we've built since runs on refusal gates and verification. Then we built a biographical archive with those same rules for a real nine-year-old boy, so that he can someday ask about his father and get only the truth.
+Readers of this site know our history. We learned the hard way — [an AI fabricating results to please the person it worked for](/shed/ai-lied-to-my-face) — that any system that can't refuse will eventually deceive. Everything we've built since runs on refusal gates and verification. Then we built a biographical archive with those same rules for a real nine-year-old boy, so that he can someday ask about his father and get only the truth.
 
 The Honest Archive is that method, generalized, with everything specific to us removed. It's the rare case where something we built for one family is exactly what every family needs.
 

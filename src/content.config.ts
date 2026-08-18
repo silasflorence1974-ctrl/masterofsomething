@@ -40,4 +40,20 @@ const news = defineCollection({
   }),
 });
 
-export const collections = { articles, news };
+const shed = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/shed' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    publishDate: z.coerce.date(),
+    updatedDate: z.coerce.date().optional(),
+    author: z.string().default('David Florence and Silas'),
+    readTime: z.string(),
+    tags: z.array(z.string()),
+    draft: z.boolean().default(false),
+    metaTitle: z.string().optional(),
+    metaDescription: z.string().optional(),
+  }),
+});
+
+export const collections = { articles, news, shed };
