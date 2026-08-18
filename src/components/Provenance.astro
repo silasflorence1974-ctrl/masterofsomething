@@ -1,0 +1,31 @@
+---
+// "Tested by us" provenance block — section E. Renders on any article
+// that sets testedOn. The trust layer the spec calls the moat: we ran it.
+interface Props {
+  author: string;
+  testedOn: string;
+  lastTested?: Date;
+}
+
+const { author, testedOn, lastTested } = Astro.props;
+const lastTestedStr = lastTested?.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<div class="mb-10 rounded-lg border border-[var(--color-accent)]/40 bg-[var(--color-surface)] p-5">
+  <div class="text-xs uppercase tracking-widest text-[var(--color-accent)] mb-2">
+    Tested by us
+  </div>
+  <p class="text-sm text-[var(--color-text-primary)] mb-2">
+    We ran every step on our own machines.
+  </p>
+  <div class="text-sm text-[var(--color-text-secondary)]">
+    {author} · tested on {testedOn}{lastTestedStr && <> · last checked {lastTestedStr}</>}
+  </div>
+  <a href="/our-story" class="inline-block mt-3 text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-dim)]">
+    Why we do it this way →
+  </a>
+</div>
