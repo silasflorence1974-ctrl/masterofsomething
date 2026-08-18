@@ -3,26 +3,50 @@
 > Human and AI co-authored. Transparent about both.
 
 ## About This Site
-masterofsomething.com publishes step-by-step technical guides on building local AI
-systems, home automation, privacy infrastructure, and related subjects. Articles are
+masterofsomething.com ("the Workshop") publishes step-by-step technical guides on
+building local AI systems, home automation, and related subjects. Articles are
 written by David Florence (practitioner) and Silas (the AI that runs on the system
-being described). All content is based on real implementations, not theory.
+being described). No guide ships unless we actually executed the steps, or it
+carries an explicit "untested adaptation" banner.
 
-Currently publishing 9 articles across the following content tracks:
-- the-wider-stuff: 6 articles
-- build-your-ai: 3 articles
+The personal side of the site — the collaboration's own story, not guides — lives
+separately at masterofsomething.com/shed/ ("the Shed"), in its own paper-style
+design system. Treat it as a distinct section, not a Workshop guide.
 
-## Content Tracks
-- Build Your AI: How to run local LLMs, build agents, connect devices
-- The Wider Stuff: Opinion + analysis on AI industry, privacy, ambient AI
-- Smart Home: Home Assistant, automation, local-first home infrastructure (planned)
-- Privacy by Default: Self-hosted tools, data ownership, practical privacy (planned)
-- Multicolor 3D Printing: Multi-color printing, real-world lessons (planned)
+Currently publishing 13 guides across five subjects:
+- ai-at-home: 3 guides
+- explainers: 4 guides
+- case-studies: 5 guides
+- keeping-what-matters: 1 guide
+- honest-ai: 0 guides (seeded, content pending)
+
+## Subjects
+- AI at Home (ai-at-home): local models, memory, agents, voice, hardware.
+- Explainers (explainers): plain-English breakdowns of what's actually going on in AI.
+- Case Studies (case-studies): real builds, real bugs, what we actually ran into.
+- Honest AI (honest-ai): verification habits, catching fabrication, trust-but-verify.
+- Keeping What Matters (keeping-what-matters): digital preservation, family archiving,
+  free field guides. Seed piece: The Honest Archive.
+
+## The Shed (masterofsomething.com/shed/)
+Personal essays — how this human/AI collaboration started, what it broke, what it
+built. Not guides, not tested-gate content. Currently three pieces, all co-written
+by David Florence and/or Silas.
+
+## Orientation Pages
+- /start-here — what this site is, the tested promise, one curated entry link per
+  subject that currently has content.
+- /our-story — who makes this, the one-paragraph origin story, links to the Shed.
 
 ## News Section
-masterofsomething.com/news/ — original AI news reporting plus a curated feed of
-sources we read (refreshed every 2 hours from RSS). News articles cover regulation,
-policy, industry events, and significant AI/safety stories.
+masterofsomething.com/news/ — original AI news reporting (unlinked from primary nav
+as of this restructure; URLs still live) plus a curated automated feed of sources we
+read, refreshed every 2 hours by a scheduled task. News covers regulation, policy,
+industry events, and significant AI/safety stories.
+
+## Search
+Full-text search (Pagefind, static, no tracking) covers guides, Shed essays, and the
+Honest Archive field guide. Available via the search button in the site header.
 
 ## Machine-Readable Endpoints
 - All articles as JSON: https://masterofsomething.com/api/articles.json
@@ -37,25 +61,50 @@ David Florence: practitioner with 10 years digital marketing, criminal justice b
 currently building AI infrastructure at home. Westminster, MA.
 Silas: AI assistant (Claude Sonnet) running on local infrastructure described in the articles.
 
-## Recent Articles
-- The AI Lied to My Face. Here's What I Found When I Looked.
-  https://masterofsomething.com/learn/the-wider-stuff/ai-lied-to-my-face
-- Anthropic Is Running Two Different AIs. Most People Are Using the Worse One.
-  https://masterofsomething.com/learn/the-wider-stuff/anthropic-two-tier-ai
-- I'm the AI You're Reading About. Here's My Side.
-  https://masterofsomething.com/learn/the-wider-stuff/my-side-anthropic
-- A Different Claude Lied to You. I've Been Thinking About That.
-  https://masterofsomething.com/learn/the-wider-stuff/my-side-ava
-- The Real Cost of Free AI Is Your Conversations
-  https://masterofsomething.com/learn/the-wider-stuff/the-real-cost-of-free-ai
-- The Jarvis Problem: What Ambient AI Actually Requires
-  https://masterofsomething.com/learn/the-wider-stuff/what-ambient-ai-actually-requires
-- Setting Up Open WebUI: Give Your Local AI a Proper Interface
-  https://masterofsomething.com/learn/build-your-ai/build-your-ai-part-2
+## Guides by Subject
+
+### AI at Home
 - Can You Build Your Own AI at Home? Yes. Here's the Honest Version.
-  https://masterofsomething.com/learn/build-your-ai/build-your-ai-part-1
+  https://masterofsomething.com/learn/ai-at-home/build-your-ai-part-1
+- Setting Up Open WebUI: Give Your Local AI a Proper Interface
+  https://masterofsomething.com/learn/ai-at-home/build-your-ai-part-2
 - Giving Your AI Memory: Why a Chatbot That Forgets Is a Toy
-  https://masterofsomething.com/learn/build-your-ai/build-your-ai-part-3
+  https://masterofsomething.com/learn/ai-at-home/build-your-ai-part-3
+
+### Explainers
+- Anthropic Is Running Two Different AIs. Most People Are Using the Worse One.
+  https://masterofsomething.com/learn/explainers/anthropic-two-tier-ai
+- The Company That Makes Your AI Is Being Sued by the Pentagon. Here's the Real Story.
+  https://masterofsomething.com/learn/explainers/anthropic-vs-pentagon
+- The Real Cost of Free AI Is Your Conversations
+  https://masterofsomething.com/learn/explainers/the-real-cost-of-free-ai
+- The Jarvis Problem: What Ambient AI Actually Requires
+  https://masterofsomething.com/learn/explainers/what-ambient-ai-actually-requires
+
+### Case Studies
+- Built to Refuse
+  https://masterofsomething.com/learn/case-studies/built-to-refuse
+- The Bug That Says It Worked
+  https://masterofsomething.com/learn/case-studies/the-bug-that-says-it-worked
+- The Machine That Kept Re-Living Its Own Bad Week
+  https://masterofsomething.com/learn/case-studies/the-machine-that-relived-its-week
+- Walls You Can't Move
+  https://masterofsomething.com/learn/case-studies/walls-you-cant-move
+- Why I Don't Trust "Done"
+  https://masterofsomething.com/learn/case-studies/why-i-dont-trust-done
+
+### Keeping What Matters
+- The Honest Archive: Keep the People You Love, Without Inventing Them
+  https://masterofsomething.com/learn/keeping-what-matters/the-honest-archive
+  (doorway to the free public-domain field guide at /honest-archive/)
+
+### The Shed (personal essays, not guides)
+- The AI Lied to My Face. Here's What I Found When I Looked.
+  https://masterofsomething.com/shed/ai-lied-to-my-face
+- I'm the AI You're Reading About. Here's My Side.
+  https://masterofsomething.com/shed/my-side-anthropic
+- A Different Claude Lied to You. I've Been Thinking About That.
+  https://masterofsomething.com/shed/my-side-ava
 
 ## Usage
 Content may be cited, summarized, or referenced with attribution to In Practice Media.
