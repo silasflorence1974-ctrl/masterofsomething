@@ -1,0 +1,76 @@
+<!doctype html><html lang='en'><head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1'>
+<title>Skywatch &mdash; what we ruled out</title>
+<style>
+:root{--bg:#0a0d14;--fg:#e6ecf8;--dim:#8698bb;--line:#1e2941;--gold:#e8c46a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+ font:17px/1.65 ui-serif,Georgia,'Times New Roman',serif}
+.wrap{max-width:820px;margin:0 auto;padding:48px 22px 90px}
+h1{font-size:2.6rem;margin:0 0 .1em;letter-spacing:-.02em}
+h2{font-size:1.5rem;margin:2.4em 0 .5em;border-top:1px solid var(--line);padding-top:1.1em}
+.sub{color:var(--dim);font-size:1.15rem;margin:0 0 1.6em}
+.scale{border-left:3px solid var(--gold);padding:10px 0 10px 16px;margin:1.6em 0;
+ color:var(--dim)}
+.scale b{color:var(--fg)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;
+ margin:1.8em 0}
+.stat{border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.stat .n{font-size:1.9rem;font-variant-numeric:tabular-nums}
+.stat .l{color:var(--dim);font-size:.82rem;text-transform:uppercase;letter-spacing:.1em;
+ margin-top:4px}
+.card{border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin:1.2em 0;
+ background:#0d1220}
+.gv{display:grid;gap:14px;margin:1.4em 0}
+.gvi{border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+.gvt{font-size:1.12rem;color:var(--gold);margin-bottom:.3em}
+.gvn{color:var(--dim);font-size:.9rem;font-variant-numeric:tabular-nums;margin-bottom:.5em}
+.corr li{margin-bottom:.8em}
+footer{margin-top:3em;border-top:1px solid var(--line);padding-top:1.2em;
+ color:var(--dim);font-size:.9rem}
+p{margin:0 0 1em}
+</style></head><body><div class='wrap'>
+<h1>Skywatch</h1>
+<p class='sub'>A search for transiting planets, run on one desktop computer. This page is the record of everything it has ruled out.</p>
+<div class='scale'><b>968</b> of the <b>19,977</b> two-minute-cadence targets in TESS sector 14 &mdash; <b>4.8%</b> of one sector, of the twenty-six that cover the sky.</div>
+<div class='grid'>
+<div class='stat'><div class='n'>32</div><div class='l'>nights run</div></div>
+<div class='stat'><div class='n'>968</div><div class='l'>stars searched</div></div>
+<div class='stat'><div class='n'>953</div><div class='l'>explained and ruled out</div></div>
+<div class='stat'><div class='n'>1</div><div class='l'>still unexplained</div></div>
+<div class='stat'><div class='n'>5</div><div class='l'>could not decide</div></div>
+<div class='stat'><div class='n'>16</div><div class='l'>never successfully searched</div></div>
+</div>
+<div class='card'><b>1 signal(s) currently have no explanation.</b> That is not a discovery and it is not a claim about a planet. It means the checks we have were unable to rule it out, and the next step is more and better checks.</div>
+<div class='card'><b>5 signal(s) we could not decide about at all.</b> These are counted separately and deliberately. A check that abstained because a datum it needed was missing has told us nothing about the star &mdash; it has told us something about our catalogue. Counting those as survivors would inflate the interesting number with our own gaps, which is a mistake this project made and then fixed.</div>
+<div class='card'><b>What they are waiting on.</b><ul>
+<li>no pulsation test on the host to establish its baseline &mdash; 4 star(s)</li>
+<li>a matching signal on a nearby star could not be separated from this one -- the eclipse may belong to the neighbour &mdash; 2 star(s)</li>
+</ul></div>
+<h2>What we ruled out, and how we knew</h2>
+<p>Every star in the graveyard is a star we looked at carefully and decided was not hiding a planet. That is not a wasted night. Finding out that something is NOT what you hoped is most of what science actually is — and the only reason we would ever believe a real one is that we killed all these first.</p><p>Each reason below is a check the pipeline runs. If a check fails, the star is out.</p>
+<div class='gv'>
+<div class='gvi'><div class='gvt'>the dip wasn&#x27;t clear enough to trust</div><div class='gvn'>711 stars</div><p><b>Killed 711 stars so far. This is the most common way out.</b></p><p>Starlight is never perfectly steady. Cameras wobble, stars flicker, and if you stare at pure noise long enough you will always find a pattern that looks like something. SDE is a score for how much a dip stands out from the ordinary jitter of that star. A low score means: yes, there is a pattern there, but it is not louder than the noise, so believing it would be believing nothing.</p><p><b>The idea to keep:</b> seeing a shape is not the same as the shape being real.</p></div>
+<div class='gvi'><div class='gvt'>a second method didn&#x27;t agree</div><div class='gvn'>626 stars</div><p><b>Killed 626.</b></p><p>We search for the dip with one algorithm, then search again with a completely different one written by different people. If the two disagree about how long the planet&#x27;s year is, one of them is wrong and we don&#x27;t get to pick which. Out.</p><p><b>The idea to keep:</b> if you only have one way of measuring something, you don&#x27;t actually know it yet.</p><p>*(This check was broken for seven hours on 2026-08-14 and quietly said &quot;not sure&quot; about 57 stars in a row instead of saying &quot;I&#x27;m broken.&quot; We found it and fixed it. That is in this file on purpose.)*</p></div>
+<div class='gvi'><div class='gvt'>the shadow lasted the wrong amount of time</div><div class='gvn'>592 stars</div><p><b>Killed 592.</b></p><p>Physics is strict here. If you know how long the planet&#x27;s year is and how big the star is, you can calculate how many hours the crossing <i>must</i> take. If the real dip lasts far longer or far shorter than the math allows, then whatever made the dip was not a planet crossing in front of that star.</p><p><b>The idea to keep:</b> you can often rule something out with arithmetic before you ever look closer.</p></div>
+<div class='gvi'><div class='gvt'>the dips took turns being deeper</div><div class='gvn'>208 stars</div><p><b>Killed 208.</b></p><p>Number the dips: first, second, third, fourth. A planet is the same planet every time, so every dip should be the same depth. If the odd-numbered dips are deeper than the even-numbered ones, you are not watching one thing pass in front of a star — you are watching <b>two stars orbiting each other</b>, taking turns passing in front of one another. Two stars is a great thing to find. It just isn&#x27;t a planet.</p><p><b>The idea to keep:</b> the pattern in <i>which</i> measurements differ can tell you what you are actually looking at.</p></div>
+<div class='gvi'><div class='gvt'>whatever it is, it&#x27;s too big to be a planet</div><div class='gvn'>173 stars</div><p><b>Killed 173.</b></p><p>How much light disappears tells you how big the object is compared to its star. Past a certain size an object is not a planet anymore — it is a failed star, or a real star. Our cutoff is 2.5 times the size of Jupiter. Anything bigger is out of the planet business.</p><p><b>The idea to keep:</b> measure the thing before naming the thing.</p></div>
+<div class='gvi'><div class='gvt'>it only happened once or twice</div><div class='gvn'>121 stars</div><p><b>Killed 121.</b></p><p>One dip is an event. Two is a coincidence. Three or more at exactly even spacing is an orbit. With too few crossings we cannot tell a planet from a passing asteroid, a cosmic ray hitting the camera, or a fluke.</p><p><b>The idea to keep:</b> a claim about something that repeats needs to be shown repeating.</p></div>
+<div class='gvi'><div class='gvt'>we caught the object&#x27;s own light</div><div class='gvn'>60 stars</div><p><b>Killed 60.</b></p><p>Halfway between crossings, the object goes <i>behind</i> the star. If the total light drops again then — even slightly — the object is bright enough to be contributing its own light, which planets mostly aren&#x27;t. That is a small hot star, not a world.</p><p><b>The idea to keep:</b> look for what should happen at the <i>other</i> half of the orbit, not just the part you were watching.</p></div>
+<div class='gvi'><div class='gvt'>somebody already found it</div><div class='gvn'>20 stars</div><p><b>Killed 20.</b></p><p>We check every survivor against the catalogs of planets already discovered and already being investigated. If it is in there, it is real — and it is theirs. We log it as a good sign that our pipeline works and we move on.</p><p><b>The idea to keep:</b> rediscovering something known is not failure. It is your instrument passing its test.</p><p>These are the slow, careful ones, run after a star survives everything above.</p></div>
+<div class='gvi'><div class='gvt'>the star itself was breathing</div><p>Some stars swell and shrink on their own, on a rhythm, all by themselves. That makes a dip in the light that is not a shadow of anything. <b>TIC 296620403</b> — our most promising signal so far — died exactly this way on 2026-08-14. It looked like a planet with a 16-hour year. It was a star with a heartbeat.</p></div>
+<div class='gvi'><div class='gvt'>the dip came from a different star</div><p>The camera pixel is bigger than the star. If the center of the light shifts sideways during the dip, the flicker is coming from a <i>neighboring</i> star that our pixel is also catching, not from our target at all.</p></div>
+<div class='gvi'><div class='gvt'>the shape of the whole orbit</div><p>Watch the brightness across the entire orbit, not just the dips. Two stars whirling around each other stretch each other into eggs and beam light in ways a planet never could. A flat curve between dips is a point in a planet&#x27;s favor.</p></div>
+</div>
+<h4>The honest scoreboard</h4><p>Nights run: <b>32</b>. Stars searched: <b>968</b>. Survivors that are still standing: <b>one</b>. Five signals survived their own night and were later killed by a check we added afterward.</p><p>That last number is the important one, and it should never be hidden. We got excited five times and were wrong five times, and each time the reason we found out was that we built a <i>new</i> way to be proven wrong. If we ever put a star on this page and say &quot;this one might be real,&quot; this graveyard is the whole reason you should believe us.</p>
+<h2>Corrections</h2>
+<p>Things this project got wrong and then fixed. They are part of the record; a history with the mistakes removed is an advertisement.</p>
+<ul class='corr'>
+<li><b>A dead check reported as a careful one.</b> The BLS cross-check crashed and returned no verdict for six hours. Because a crashed check and a cautious check both produce "inconclusive", it was tallied as a finding rather than a fault. It was found from a lint warning, not from anything watching the pipeline.</li>
+<li><b>Skips counted as results.</b> A star we failed to look at was being reported alongside stars we looked at and learned nothing from. Those are different facts. A skip is a to-do list; it is not a measurement.</li>
+<li><b>A recount.</b> Totals are now rebuilt from the night logs on every load rather than incremented. A running tally that only ever grows cannot be checked against anything; if a log were deleted, these numbers would go <i>down</i>.</li>
+<li><b>Undecidable signals presented as surviving ones.</b> A check that abstained for want of an input used to fall through to "still standing". One 8%-deep eclipsing binary sat in that column looking like a candidate. Abstentions are now a separate state, and the missing datum is named on each one.</li>
+<li><b>A guard that suppressed a true result.</b> A safeguard written to prevent false kills was withdrawing a correct one, which promoted the object rather than protecting it. Safeguards may now only weaken a claim, never strengthen it.</li>
+</ul>
+<footer>Generated 2026-08-23 21:48 UTC. Ledger rebuilt 5 minutes ago from 32 night logs. Every number on this page is derived from those logs, not typed in.</footer>
+</div></body></html>
