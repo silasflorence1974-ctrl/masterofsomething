@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Silas Gmail Helper — masterofsomething.com"
+  description="A private, single-user tool that sorts and triages one Gmail inbox from a local machine."
+>
+  <article class="prose">
+    <h1 class="text-4xl font-bold text-[var(--color-text-primary)] mb-8">Silas Gmail Helper</h1>
+
+    <p class="text-lg text-[var(--color-text-secondary)] leading-relaxed mb-6">
+      Silas Gmail Helper is a private tool that keeps one person&rsquo;s Gmail inbox organised. It
+      runs on a single computer in Westminster, Massachusetts, is used only by its author, and is
+      not offered as a service to anyone else.
+    </p>
+
+    <h2 class="text-2xl font-semibold mt-10 mb-4 text-[var(--color-text-primary)]">What it does</h2>
+    <ul class="my-5 pl-6 list-disc space-y-2">
+      <li>Searches and reads the operator&rsquo;s own mail to build a daily briefing for him.</li>
+      <li>Applies and removes labels, and archives threads, to keep the inbox sorted.</li>
+      <li>Moves bulk promotional mail to Trash, reversibly.</li>
+      <li>Flags things that need a human &mdash; failed payments, expiring credentials, real mail.</li>
+    </ul>
+    <p class="my-5">
+      It cannot send mail and cannot permanently delete anything.
+    </p>
+
+    <h2 class="text-2xl font-semibold mt-10 mb-4 text-[var(--color-text-primary)]">How your data is handled</h2>
+    <p class="my-5">
+      Mail data is fetched from Google&rsquo;s API directly to the local machine and stays there. It
+      is not sent to any third party and is not used to train any model. Full details are in the
+      <a href="/privacy">Privacy Policy</a>.
+    </p>
+
+    <h2 class="text-2xl font-semibold mt-10 mb-4 text-[var(--color-text-primary)]">Who runs it</h2>
+    <p class="my-5">
+      Built and operated by David Florence as part of In Practice Media, which publishes technical
+      writing about the same local system this tool runs on. See <a href="/about">About</a>.
+      Contact: <a href="mailto:djflorence@gmail.com">djflorence@gmail.com</a>.
+    </p>
+  </article>
+</BaseLayout>

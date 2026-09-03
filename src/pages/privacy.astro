@@ -1,0 +1,68 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Privacy Policy — masterofsomething.com"
+  description="How In Practice Media and the Silas Gmail Helper handle data, including Google user data."
+>
+  <article class="prose">
+    <h1 class="text-4xl font-bold text-[var(--color-text-primary)] mb-8">Privacy Policy</h1>
+    <p class="text-sm text-[var(--color-text-secondary)] mb-8">Last updated 3 September 2026.</p>
+
+    <p class="text-lg text-[var(--color-text-secondary)] leading-relaxed mb-6">
+      In Practice Media is operated by David Florence in Westminster, Massachusetts. This policy
+      covers this website and the <a href="/silas-gmail-helper">Silas Gmail Helper</a>, a private
+      single-user application that runs on the operator&rsquo;s own computer.
+    </p>
+
+    <h2 class="text-2xl font-semibold mt-10 mb-4 text-[var(--color-text-primary)]">This website</h2>
+    <p class="my-5">
+      This site is a static publication. It does not require an account, does not run advertising,
+      and does not sell data. Pages are served through Cloudflare Pages, which processes standard
+      request data such as IP address and user agent for delivery and abuse prevention.
+    </p>
+
+    <h2 class="text-2xl font-semibold mt-10 mb-4 text-[var(--color-text-primary)]">Silas Gmail Helper and Google user data</h2>
+    <p class="my-5">
+      The Silas Gmail Helper is a personal tool used by its author on his own Gmail account. It is
+      not offered to other users and has no shared server component.
+    </p>
+    <ul class="my-5 pl-6 list-disc space-y-2">
+      <li>
+        <strong>What it accesses.</strong> With the <code>gmail.modify</code> scope it reads message
+        metadata and content, lists labels, applies and removes labels, and moves threads to Trash.
+        It cannot permanently delete mail and cannot send mail.
+      </li>
+      <li>
+        <strong>Why.</strong> Sorting and triaging the operator&rsquo;s own inbox, and summarising it
+        for him in a daily briefing he alone reads.
+      </li>
+      <li>
+        <strong>Where it goes.</strong> Nowhere. Data is fetched over HTTPS from Google&rsquo;s API to
+        a single computer, held locally, and never transmitted to any third party, model provider,
+        advertiser, or other service. It is not used to train any model.
+      </li>
+      <li>
+        <strong>Credentials.</strong> The OAuth refresh token is stored in a local file on that
+        computer and is not committed to source control or shared.
+      </li>
+      <li>
+        <strong>Retention and deletion.</strong> Locally cached mail data is retained only while
+        useful to the operator and can be deleted at any time by removing the local files. Access
+        can be revoked at any time from the Google Account permissions page, which immediately ends
+        all access.
+      </li>
+    </ul>
+    <p class="my-5">
+      Use of information received from Google APIs adheres to the
+      <a href="https://developers.google.com/terms/api-services-user-data-policy" rel="noopener">
+      Google API Services User Data Policy</a>, including the Limited Use requirements.
+    </p>
+
+    <h2 class="text-2xl font-semibold mt-10 mb-4 text-[var(--color-text-primary)]">Contact</h2>
+    <p class="my-5">
+      Questions about this policy: <a href="mailto:djflorence@gmail.com">djflorence@gmail.com</a>.
+    </p>
+  </article>
+</BaseLayout>
