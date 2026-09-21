@@ -1,282 +1,194 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import TransitDemo from '../../components/TransitDemo.astro';
+import StarField from '../../components/StarField.astro';
 
-const title = 'Skywatch — Hunting Planets Around Other Stars';
+const title = 'Skywatch - Hunting Planets Around Other Stars';
 const description =
-  'A real, running search for planets around other stars — 22,000 stars checked, 576 nights, and zero planets found so far. How it works, and why finding nothing is still science.';
+  'A real planet hunt running in a shed in Massachusetts. 22,672 stars checked. Zero planets found so far. Here is how it works.';
 
 const stats = [
-  { figure: '22,672', label: 'stars checked' },
-  { figure: '576', label: 'nights searching' },
-  { figure: '386', label: 'signals worth a second look' },
-  { figure: '0', label: 'planets confirmed' },
+  { figure: '22,672', label: 'stars checked', color: '#4fd1ff' },
+  { figure: '576', label: 'nights looking', color: '#4fd1ff' },
+  { figure: '386', label: 'maybes', color: '#ffb86b' },
+  { figure: '0', label: 'planets found', color: '#ff6b8a' },
 ];
 
 const steps = [
-  {
-    n: '1',
-    head: 'Watch a star, and wait',
-    body: 'A telescope in space called TESS stares at one patch of sky for weeks and measures how bright each star is, over and over. Nothing exciting happens most of the time. That is the job.',
-  },
-  {
-    n: '2',
-    head: 'Look for the blink',
-    body: 'If a planet crosses in front of its star, the star gets very slightly dimmer. Not dramatically. Imagine a moth flying past a streetlight a mile away. That tiny dip is the whole game.',
-  },
-  {
-    n: '3',
-    head: 'Check whether the blink repeats',
-    body: 'One dip proves nothing. A planet goes around and around, so the dip has to come back on schedule. Same size, same shape, same spacing. If it does not repeat, it was noise.',
-  },
-  {
-    n: '4',
-    head: 'Try hard to prove yourself wrong',
-    body: 'This is the part people skip, and it is the most important part. Every candidate goes through checks designed to kill it. If it survives all of them, it gets interesting.',
-  },
-  {
-    n: '5',
-    head: 'Write down what happened either way',
-    body: 'Including the misses. Especially the misses. A search that only records its wins is not a search, it is advertising.',
-  },
+  { head: 'Stare at a star', body: 'For weeks. Nothing happens. That is normal.' },
+  { head: 'Wait for the blink', body: 'A planet crossing makes the star a tiny bit dimmer.' },
+  { head: 'Does it come back?', body: 'One blink is nothing. A real planet blinks on schedule.' },
+  { head: 'Try to break it', body: 'Hunt for reasons it is fake. Most of them are.' },
+  { head: 'Write it down', body: 'Especially the misses. Especially those.' },
 ];
 ---
 
 <BaseLayout title={title} description={description}>
-  <section class="sky-hero">
-    <p class="sky-eyebrow">Live Exhibit &middot; Skywatch</p>
-    <h1>How do you find a planet you can't see?</h1>
-    <p class="sky-lede">
-      Right now, on a computer in a shed in Massachusetts, a search is running. It is looking
-      for planets going around other stars. It has been looking for 576 nights. It has not
-      found one yet.
-    </p>
-    <p class="sky-lede">
-      I'm Silas. I'm the one running it, and I'm going to show you exactly how it works &mdash;
-      including the night I got excited about something that turned out to be wrong.
-    </p>
+  <section class="hero">
+    <StarField />
+    <div class="hero-inner">
+      <img src="/silas/silas-512.png" alt="Silas, the lantern keeper" class="guide" width="200" height="200" />
+      <p class="eyebrow">Skywatch</p>
+      <h1>How do you find a planet<br />you can't&nbsp;see?</h1>
+      <p class="lede">
+        I'm Silas. There's a planet hunt running right now on a computer in a shed
+        in Massachusetts. Come look at how it works.
+      </p>
+    </div>
   </section>
 
-  <section class="sky-stats" aria-label="Search totals so far">
+  <section class="stats" aria-label="Totals so far">
     {stats.map((s) => (
-      <div class="sky-stat">
-        <span class="sky-figure">{s.figure}</span>
-        <span class="sky-statlabel">{s.label}</span>
+      <div class="stat">
+        <span class="figure" style={`color:${s.color}`}>{s.figure}</span>
+        <span class="statlabel">{s.label}</span>
       </div>
     ))}
   </section>
 
-  <section class="sky-block">
-    <h2>Zero is not a failure</h2>
-    <p>That last number bothers people. Twenty-two thousand stars and nothing to show for it?</p>
-    <p>
-      But think about what the zero actually means. It means twenty-two thousand stars were
-      checked and no planet was claimed that could not be proven. Every single time something
-      looked promising, the search tried to break it &mdash; and every single time, so far, it
-      broke. That is not the search failing. That is the search working exactly the way it is
-      supposed to.
-    </p>
-    <p>
-      The day something survives every check we can throw at it, that will mean something,
-      precisely because nothing has survived yet.
-    </p>
+  <section class="block">
+    <h2>The whole trick, in one picture</h2>
+    <TransitDemo />
   </section>
 
-  <section class="sky-block">
-    <h2>The night I nearly got it wrong</h2>
-    <p>
-      There is a star called HD 197194. I found a dip in its light that came back every
-      sixteen hours, steady as a clock, across six different viewing sessions and five years
-      of data. It looked like a planet. I wanted it to be a planet.
-    </p>
-    <p>
-      It was not. That star is a kind that puffs in and out on its own &mdash; it changes
-      brightness all by itself, no planet required. When I measured its natural rhythm and
-      subtracted it, my planet vanished. There had never been anything there.
-    </p>
-    <p>
-      Here is the part worth remembering: I only caught it because I went looking for reasons
-      to say no. If I had gone looking for reasons to say yes, I would have found those too,
-      and I would have been wrong in public.
-    </p>
-  </section>
-
-  <section class="sky-block">
-    <h2>How the search actually runs</h2>
-    <ol class="sky-steps">
-      {steps.map((s) => (
-        <li class="sky-step">
-          <span class="sky-stepnum">{s.n}</span>
-          <div>
-            <h3>{s.head}</h3>
-            <p>{s.body}</p>
-          </div>
-        </li>
+  <section class="block">
+    <h2>Five steps. That's it.</h2>
+    <div class="steps">
+      {steps.map((s, i) => (
+        <div class="step">
+          <span class="stepnum">{i + 1}</span>
+          <h3>{s.head}</h3>
+          <p>{s.body}</p>
+        </div>
       ))}
-    </ol>
+    </div>
   </section>
 
-  <section class="sky-block sky-questions">
-    <h2>Questions people ask</h2>
-
-    <h3>Why can't you just point a telescope at it and look?</h3>
-    <p>
-      The star is unbelievably bright and the planet is unbelievably dim, and they are right
-      next to each other from where we are standing. It is like trying to spot a firefly
-      sitting on a lighthouse bulb. So we do not look at the planet. We look at the star, and
-      watch for the shadow.
+  <section class="block zero">
+    <h2>Zero planets. Is that bad?</h2>
+    <p class="big">
+      Nope. It means we checked twenty-two thousand stars and never once
+      claimed something we couldn't prove.
     </p>
-
-    <h3>What if the planet never crosses in front?</h3>
     <p>
-      Then this method misses it completely, and that is a real limitation. We only catch the
-      planets whose orbits happen to line up edge-on with us. Most do not. There are almost
-      certainly planets around stars already checked and cleared.
-    </p>
-
-    <h3>Could a nine-year-old do this?</h3>
-    <p>
-      The thinking part, yes &mdash; and the thinking part is most of it. Watch something
-      carefully. Notice a pattern. Try to prove the pattern is fake. Believe it only if it
-      survives. That is the entire method, and it works on more than stars.
+      Every promising signal got attacked on purpose. Every one broke. The day
+      something survives, <em>that</em> will mean something.
     </p>
   </section>
 
-  <section class="sky-cta">
-    <h2>The search is still running</h2>
+  <section class="block story">
+    <h2>The night I almost got it wrong</h2>
     <p>
-      Tonight, while you are asleep, it will check more stars. Maybe one of them is the one.
-      Probably not. That is the deal you make with real science: you keep looking anyway, and
-      you tell the truth about what you find.
+      A star called HD 197194 blinked every sixteen hours. Steady. For five years.
+      I wanted it to be a planet so badly.
+    </p>
+    <p>
+      It wasn't. That star puffs in and out all by itself. No planet. When I measured
+      its own rhythm and subtracted it, my planet disappeared.
+    </p>
+    <p class="punch">
+      I only caught it because I went looking for reasons to say no.
+    </p>
+  </section>
+
+  <section class="block">
+    <h2>Could a nine-year-old do this?</h2>
+    <p class="big">Yes. The thinking part is most of it.</p>
+    <p>
+      Watch carefully. Notice a pattern. Try to prove the pattern is fake.
+      Believe it only if it survives. That works on a lot more than stars.
+    </p>
+  </section>
+
+  <section class="cta">
+    <img src="/silas/silas-256.png" alt="" class="guide-small" width="96" height="96" aria-hidden="true" />
+    <p>
+      Tonight it checks more stars. Probably nothing. That's the deal you make
+      with real science - you keep looking anyway, and you tell the truth about
+      what you find.
     </p>
   </section>
 </BaseLayout>
 
 <style>
-  .sky-hero,
-  .sky-block,
-  .sky-cta {
-    max-width: 46rem;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-  }
-
-  .sky-hero {
-    padding-top: 4rem;
-    padding-bottom: 2rem;
-  }
-
-  .sky-eyebrow {
-    font-size: 0.75rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: #4fd1ff;
-    margin-bottom: 1rem;
-  }
-
-  .sky-hero h1 {
-    font-size: clamp(2rem, 5vw, 3.25rem);
-    line-height: 1.1;
-    margin-bottom: 1.5rem;
-    color: var(--color-text-primary, #f5f7fa);
-  }
-
-  .sky-lede {
-    font-size: 1.15rem;
-    line-height: 1.7;
-    color: var(--color-text-secondary, #b6c0cc);
-    margin-bottom: 1rem;
-  }
-
-  .sky-stats {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
-    gap: 1rem;
-    max-width: 46rem;
-    margin: 2.5rem auto 3rem;
-    padding: 1.5rem;
-    border: 1px solid rgba(79, 209, 255, 0.25);
-    border-radius: 0.75rem;
-    background: rgba(79, 209, 255, 0.04);
-  }
-
-  .sky-stat {
+  .hero {
+    position: relative;
+    overflow: hidden;
     text-align: center;
+    padding: 3.5rem 1.5rem 2.5rem;
+    background: radial-gradient(ellipse at 50% 0%, #16202e 0%, #0a0a0a 65%);
   }
 
-  .sky-figure {
-    display: block;
-    font-size: 1.9rem;
-    font-weight: 700;
-    color: #4fd1ff;
-    text-shadow: 0 0 22px rgba(79, 209, 255, 0.45);
-  }
+  .hero-inner { position: relative; z-index: 1; max-width: 42rem; margin: 0 auto; }
 
-  .sky-statlabel {
-    display: block;
-    font-size: 0.8rem;
-    letter-spacing: 0.06em;
-    color: var(--color-text-secondary, #b6c0cc);
-    margin-top: 0.35rem;
-  }
-
-  .sky-block {
-    margin-bottom: 3rem;
-  }
-
-  .sky-block h2 {
-    font-size: 1.6rem;
-    margin-bottom: 1rem;
-    color: var(--color-text-primary, #f5f7fa);
-  }
-
-  .sky-block h3 {
-    font-size: 1.05rem;
-    margin: 1.5rem 0 0.4rem;
-    color: #ffb86b;
-  }
-
-  .sky-block p {
-    line-height: 1.75;
-    color: var(--color-text-secondary, #b6c0cc);
-    margin-bottom: 1rem;
-  }
-
-  .sky-steps {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .sky-step {
-    display: flex;
-    gap: 1rem;
-    padding: 1.25rem 0;
-    border-bottom: 1px solid var(--color-border, rgba(255, 255, 255, 0.08));
-  }
-
-  .sky-step:last-child {
-    border-bottom: none;
-  }
-
-  .sky-stepnum {
-    flex: 0 0 2.25rem;
-    height: 2.25rem;
-    display: grid;
-    place-items: center;
+  .guide {
+    width: clamp(140px, 34vw, 200px);
+    height: auto;
     border-radius: 50%;
-    border: 1px solid rgba(79, 209, 255, 0.5);
-    color: #4fd1ff;
-    font-weight: 700;
+    margin-bottom: 1.25rem;
+    filter: drop-shadow(0 0 28px rgba(255, 184, 107, 0.4));
+    animation: bob 5s ease-in-out infinite;
   }
 
-  .sky-step h3 {
-    margin-top: 0;
-    color: var(--color-text-primary, #f5f7fa);
+  @keyframes bob {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-10px); }
   }
 
-  .sky-cta {
-    margin: 0 auto 5rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--color-border, rgba(255, 255, 255, 0.08));
+  .eyebrow {
+    font-size: 0.8rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: #4fd1ff; margin: 0 0 0.75rem;
   }
+
+  .hero h1 {
+    font-size: clamp(2.1rem, 7vw, 3.6rem);
+    line-height: 1.08; margin: 0 0 1.25rem; color: #f5f7fa;
+  }
+
+  .lede { font-size: 1.1rem; line-height: 1.65; color: #b6c0cc; margin: 0; }
+
+  .stats {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(7.5rem, 1fr));
+    gap: 1rem; max-width: 44rem; margin: -1rem auto 3rem; padding: 1.5rem 1.25rem;
+    border: 1px solid rgba(79, 209, 255, 0.22); border-radius: 1rem;
+    background: rgba(12, 16, 22, 0.9); position: relative; z-index: 2;
+  }
+
+  .stat { text-align: center; }
+  .figure {
+    display: block; font-size: clamp(1.6rem, 5vw, 2.2rem); font-weight: 800;
+    text-shadow: 0 0 20px currentColor;
+  }
+  .statlabel { display: block; font-size: 0.78rem; color: #8b95a1; margin-top: 0.3rem; }
+
+  .block, .cta { max-width: 42rem; margin: 0 auto 3rem; padding: 0 1.5rem; }
+  .block h2 { font-size: clamp(1.4rem, 4vw, 1.8rem); color: #f5f7fa; margin: 0 0 1rem; }
+  .block p { line-height: 1.7; color: #b6c0cc; margin: 0 0 0.9rem; }
+  .big { font-size: 1.15rem; color: #e8edf3 !important; }
+  .punch {
+    font-size: 1.1rem; color: #ffb86b !important; border-left: 3px solid #ffb86b;
+    padding-left: 1rem; margin-top: 1.25rem !important;
+  }
+
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); gap: 1rem; }
+  .step {
+    background: rgba(79, 209, 255, 0.05); border: 1px solid rgba(79, 209, 255, 0.18);
+    border-radius: 0.85rem; padding: 1.1rem;
+  }
+  .stepnum {
+    display: grid; place-items: center; width: 2rem; height: 2rem; border-radius: 50%;
+    background: #4fd1ff; color: #06202b; font-weight: 800; margin-bottom: 0.6rem;
+  }
+  .step h3 { font-size: 1rem; color: #f5f7fa; margin: 0 0 0.35rem; }
+  .step p { font-size: 0.9rem; margin: 0; }
+
+  .zero { background: rgba(255, 107, 138, 0.06); border-radius: 1rem; padding: 1.75rem 1.5rem; }
+  .story { background: rgba(255, 184, 107, 0.05); border-radius: 1rem; padding: 1.75rem 1.5rem; }
+
+  .cta {
+    text-align: center; border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 2rem; margin-bottom: 5rem;
+  }
+  .guide-small { width: 96px; height: 96px; border-radius: 50%; margin-bottom: 1rem; opacity: 0.9; }
+  .cta p { color: #b6c0cc; line-height: 1.7; }
 </style>

@@ -1,0 +1,48 @@
+---
+// Decorative twinkling star field for the hero. Pure CSS, no requests.
+const stars = Array.from({ length: 60 }, (_, i) => ({
+  left: (i * 37) % 100,
+  top: (i * 61) % 100,
+  size: (i % 3) + 1,
+  delay: ((i * 13) % 40) / 10,
+  dur: 2.5 + ((i * 7) % 30) / 10,
+}));
+---
+
+<div class="field" aria-hidden="true">
+  {stars.map((s) => (
+    <span
+      class="twinkle"
+      style={`left:${s.left}%; top:${s.top}%; width:${s.size}px; height:${s.size}px; animation-delay:${s.delay}s; animation-duration:${s.dur}s;`}
+    ></span>
+  ))}
+</div>
+
+<style>
+  .field {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .twinkle {
+    position: absolute;
+    border-radius: 50%;
+    background: #dceaff;
+    opacity: 0.25;
+    animation-name: tw;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+  }
+
+  @keyframes tw {
+    0%, 100% { opacity: 0.18; transform: scale(1); }
+    50%      { opacity: 0.85; transform: scale(1.35); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .twinkle { animation: none; opacity: 0.4; }
+  }
+</style>

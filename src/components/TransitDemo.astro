@@ -1,0 +1,102 @@
+---
+// Self-contained SVG+CSS transit animation. No JS, no video, no external requests.
+// A planet crosses its star; the brightness trace below dips in sync.
+---
+
+<div class="transit" role="img" aria-label="Animation: a planet crosses in front of its star, and the star's brightness dips at the same moment.">
+  <svg viewBox="0 0 520 260" class="transit-svg">
+    <defs>
+      <radialGradient id="starGlow">
+        <stop offset="0%" stop-color="#fff6d8" />
+        <stop offset="45%" stop-color="#ffd166" />
+        <stop offset="100%" stop-color="#ff9e3d" />
+      </radialGradient>
+      <radialGradient id="halo">
+        <stop offset="0%" stop-color="rgba(255,209,102,0.45)" />
+        <stop offset="100%" stop-color="rgba(255,209,102,0)" />
+      </radialGradient>
+    </defs>
+
+    <circle cx="150" cy="80" r="72" fill="url(#halo)" class="halo" />
+    <circle cx="150" cy="80" r="46" fill="url(#starGlow)" class="star" />
+    <circle cx="0" cy="80" r="13" fill="#10131a" class="planet" />
+
+    <line x1="40" y1="200" x2="490" y2="200" stroke="rgba(255,255,255,0.14)" stroke-width="1" />
+    <text x="40" y="228" class="axis">brightness we measure</text>
+
+    <path d="M40 180 L112 180 Q132 180 140 199 L176 199 Q184 180 204 180 L490 180"
+          fill="none" stroke="#4fd1ff" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round" class="trace" />
+  </svg>
+
+  <p class="transit-caption">
+    Watch the line. When the planet slides in front, the star gets a tiny bit dimmer &mdash;
+    and that little dip is the only thing we actually see from here.
+  </p>
+</div>
+
+<style>
+  .transit {
+    margin: 2rem auto 2.5rem;
+    max-width: 40rem;
+    background: radial-gradient(circle at 30% 25%, #131922 0%, #0b0d12 70%);
+    border: 1px solid rgba(79, 209, 255, 0.22);
+    border-radius: 1rem;
+    padding: 1rem 1rem 1.25rem;
+  }
+
+  .transit-svg { width: 100%; height: auto; display: block; }
+
+  .axis {
+    fill: #7d8894;
+    font-size: 12px;
+    font-family: ui-monospace, monospace;
+    letter-spacing: 0.04em;
+  }
+
+  .planet { animation: cross 7s linear infinite; }
+  @keyframes cross {
+    0%   { transform: translateX(20px); }
+    100% { transform: translateX(520px); }
+  }
+
+  .star { animation: dim 7s linear infinite; transform-origin: 150px 80px; }
+  @keyframes dim {
+    0%, 22%   { opacity: 1; }
+    30%, 40%  { opacity: 0.82; }
+    48%, 100% { opacity: 1; }
+  }
+
+  .halo { animation: pulse 7s linear infinite; transform-origin: 150px 80px; }
+  @keyframes pulse {
+    0%, 22%   { opacity: 0.9; }
+    30%, 40%  { opacity: 0.6; }
+    48%, 100% { opacity: 0.9; }
+  }
+
+  .trace {
+    stroke-dasharray: 520;
+    stroke-dashoffset: 520;
+    animation: draw 7s linear infinite;
+    filter: drop-shadow(0 0 6px rgba(79, 209, 255, 0.55));
+  }
+  @keyframes draw {
+    0%   { stroke-dashoffset: 520; }
+    92%  { stroke-dashoffset: 0; }
+    100% { stroke-dashoffset: 0; }
+  }
+
+  .transit-caption {
+    color: #9aa6b2;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0.75rem 0 0;
+    text-align: center;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .planet, .star, .halo, .trace { animation: none; }
+    .trace { stroke-dashoffset: 0; }
+    .planet { transform: translateX(150px); }
+  }
+</style>
