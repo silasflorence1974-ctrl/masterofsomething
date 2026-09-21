@@ -19,7 +19,8 @@ export const ARTICLE_IMAGES: Record<string, string> = {
   'the-real-cost-of-free-ai':        '/images/article5_data.png',        // data flowing from a person into a vault
   'what-ambient-ai-actually-requires': '/images/article6_ambient.png',   // smart home at night, devices lit
   'anthropic-vs-pentagon':           '/images/article_pentagon_hero.png', // courthouse with server towers behind it
-  // 'the-honest-archive' has no dedicated image - falls through to DEFAULT_IMAGE
+  'the-honest-archive':              '/images/article3_discovery.png',   // a screen in the dark, a file marked REAL
+  'why-i-dont-trust-done':           '/images/article1_checklist.png',   // a sequence of checkmarks building to one
 
   // news (some share a slug with, and therefore an image with, their article)
   'ai-regulation-map-2026':          '/images/article_regulation_hero.png', // lit US states map
