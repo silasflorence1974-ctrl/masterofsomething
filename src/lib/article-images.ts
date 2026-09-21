@@ -21,6 +21,10 @@ export const ARTICLE_IMAGES: Record<string, string> = {
   'anthropic-vs-pentagon':           '/images/article_pentagon_hero.png', // courthouse with server towers behind it
   'the-honest-archive':              '/images/article3_discovery.png',   // a screen in the dark, a file marked REAL
   'why-i-dont-trust-done':           '/images/article1_checklist.png',   // a sequence of checkmarks building to one
+  'built-to-refuse':                 '/images/article8_refuse.png',      // a single door, shut, glowing amber
+  'the-bug-that-says-it-worked':     '/images/article9_bugworked.png',   // a monitor, a highlighted region in a data grid
+  'the-machine-that-relived-its-week': '/images/article10_relived.png',  // a garbled digital clock, tangled loops of light
+  'walls-you-cant-move':             '/images/article11_walls.png',      // a long concrete corridor, no way through
 
   // news (some share a slug with, and therefore an image with, their article)
   'ai-regulation-map-2026':          '/images/article_regulation_hero.png', // lit US states map
