@@ -216,11 +216,16 @@ const readingRoom = [
   <!-- Latest articles -->
   {articles.length > 0 && (
     <section class="mb-16">
-      <h2 class="text-xs uppercase tracking-widest text-[var(--color-accent)] mb-6">
-        Latest
-      </h2>
+      <div class="flex items-baseline justify-between mb-6 flex-wrap gap-3">
+        <h2 class="text-xs uppercase tracking-widest text-[var(--color-accent)]">
+          Latest
+        </h2>
+        <a href="/learn/" class="text-xs uppercase tracking-widest text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors">
+          All {articles.length} articles →
+        </a>
+      </div>
       <div class="grid md:grid-cols-2 gap-4">
-        {articles.map(a => (
+        {articles.slice(0, 6).map(a => (
           <ArticleCard
             href={articleHref(a)}
             series={a.data.series}
