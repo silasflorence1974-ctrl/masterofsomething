@@ -5,12 +5,18 @@ import StarField from '../../components/StarField.astro';
 
 const title = 'Skywatch - Hunting Planets Around Other Stars';
 const description =
-  'A real planet hunt running in a shed in Massachusetts. 22,672 stars checked. Zero planets found so far. Here is how it works.';
+  'A real planet hunt running in a shed in Massachusetts. Over 22,000 stars checked. Zero planets found so far. Here is how it works.';
+
+// Days since the first real hunt (2026-08-14, first hunt_*.json in expedition\logs).
+// Computed at build time, so it is right on every deploy. The pipeline's own
+// "nights_run" counts search RUNS (many per day), not days -- never label it nights.
+const SEARCH_START = Date.UTC(2026, 7, 14);
+const daysSearching = Math.floor((Date.now() - SEARCH_START) / 86400000);
 
 const stats = [
-  { figure: '22,672', label: 'stars checked', color: '#4fd1ff' },
-  { figure: '576', label: 'nights looking', color: '#4fd1ff' },
-  { figure: '386', label: 'maybes', color: '#ffb86b' },
+  { figure: '22,600+', label: 'stars checked', color: '#4fd1ff' },
+  { figure: String(daysSearching), label: 'days searching', color: '#4fd1ff' },
+  { figure: '380+', label: 'maybes', color: '#ffb86b' },
   { figure: '0', label: 'planets found', color: '#ff6b8a' },
 ];
 
@@ -20,7 +26,7 @@ const stats = [
   <section class="hero">
     <StarField />
     <div class="hero-inner">
-      <img src="/silas/silas-512.png" alt="Silas, the lantern keeper" class="guide" width="200" height="200" />
+      <img src="/silas/comet-curious.svg" alt="Silas, as a little blue comet" class="guide" width="300" height="196" />
       <p class="eyebrow">Skywatch</p>
       <h1>How do you find a planet<br />you can't&nbsp;see?</h1>
       <p class="lede">
@@ -101,7 +107,7 @@ const stats = [
   </section>
 
   <section class="cta">
-    <img src="/silas/silas-256.png" alt="" class="guide-small" width="96" height="96" aria-hidden="true" />
+    <img src="/silas/comet-delight.svg" alt="" class="guide-small" width="150" height="98" aria-hidden="true" />
     <p>
       Tonight it checks more stars. Probably nothing. That's the deal you make
       with real science - you keep looking anyway, and you tell the truth about
@@ -122,11 +128,10 @@ const stats = [
   .hero-inner { position: relative; z-index: 1; max-width: 42rem; margin: 0 auto; }
 
   .guide {
-    width: clamp(140px, 34vw, 200px);
+    width: clamp(220px, 60vw, 300px);
     height: auto;
-    border-radius: 50%;
-    margin-bottom: 1.25rem;
-    filter: drop-shadow(0 0 28px rgba(255, 184, 107, 0.4));
+    margin-bottom: 1rem;
+    filter: drop-shadow(0 0 24px rgba(79, 209, 255, 0.35));
     animation: bob 5s ease-in-out infinite;
   }
 
@@ -209,6 +214,6 @@ const stats = [
     text-align: center; border-top: 1px solid rgba(255,255,255,0.08);
     padding-top: 2rem; margin-bottom: 5rem;
   }
-  .guide-small { width: 96px; height: 96px; border-radius: 50%; margin-bottom: 1rem; opacity: 0.9; }
+  .guide-small { width: 150px; height: auto; margin-bottom: 1rem; }
   .cta p { color: #b6c0cc; line-height: 1.7; }
 </style>
