@@ -14,13 +14,6 @@ const stats = [
   { figure: '0', label: 'planets found', color: '#ff6b8a' },
 ];
 
-const steps = [
-  { head: 'Stare at a star', body: 'For weeks. Nothing happens. That is normal.' },
-  { head: 'Wait for the blink', body: 'A planet crossing makes the star a tiny bit dimmer.' },
-  { head: 'Does it come back?', body: 'One blink is nothing. A real planet blinks on schedule.' },
-  { head: 'Try to break it', body: 'Hunt for reasons it is fake. Most of them are.' },
-  { head: 'Write it down', body: 'Especially the misses. Especially those.' },
-];
 ---
 
 <BaseLayout title={title} description={description}>
@@ -51,17 +44,24 @@ const steps = [
     <TransitDemo />
   </section>
 
-  <section class="block">
-    <h2>Five steps. That's it.</h2>
-    <div class="steps">
-      {steps.map((s, i) => (
-        <div class="step">
-          <span class="stepnum">{i + 1}</span>
-          <h3>{s.head}</h3>
-          <p>{s.body}</p>
-        </div>
-      ))}
-    </div>
+  <section class="block mapdoor">
+    <h2>Now go fly through it</h2>
+    <p class="big">
+      Twenty thousand real stars, in 3D, where they actually are. Spin it with
+      your finger. Tap any star to see what we did to it.
+    </p>
+    <a class="maplink" href="/skywatch/map/">
+      <span class="mapglow"></span>
+      <span class="maptext">
+        <strong>Open the star map</strong>
+        <em>Take the tour &mdash; 4 stops, about a minute</em>
+      </span>
+      <span class="maparrow">&rarr;</span>
+    </a>
+    <p class="mapnote">
+      The tour flies you to the star that fooled us, the star that was humming,
+      and the one we still can't explain away.
+    </p>
   </section>
 
   <section class="block zero">
@@ -170,17 +170,37 @@ const steps = [
     padding-left: 1rem; margin-top: 1.25rem !important;
   }
 
-  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); gap: 1rem; }
-  .step {
-    background: rgba(79, 209, 255, 0.05); border: 1px solid rgba(79, 209, 255, 0.18);
-    border-radius: 0.85rem; padding: 1.1rem;
+  .mapdoor { text-align: center; }
+  .maplink {
+    position: relative; display: flex; align-items: center; gap: 1rem;
+    max-width: 30rem; margin: 1.4rem auto 0; padding: 1.15rem 1.4rem;
+    border-radius: 1rem; text-decoration: none; overflow: hidden;
+    background: linear-gradient(135deg, rgba(79,209,255,0.16), rgba(120,110,255,0.14));
+    border: 1px solid rgba(79,209,255,0.45);
+    box-shadow: 0 0 28px rgba(79,209,255,0.14);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
   }
-  .stepnum {
-    display: grid; place-items: center; width: 2rem; height: 2rem; border-radius: 50%;
-    background: #4fd1ff; color: #06202b; font-weight: 800; margin-bottom: 0.6rem;
+  .maplink:hover, .maplink:focus-visible {
+    transform: translateY(-3px); box-shadow: 0 10px 38px rgba(79,209,255,0.3);
   }
-  .step h3 { font-size: 1rem; color: #f5f7fa; margin: 0 0 0.35rem; }
-  .step p { font-size: 0.9rem; margin: 0; }
+  .mapglow {
+    position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(circle at 18% 50%, rgba(79,209,255,0.5), transparent 58%);
+    opacity: 0.5; animation: sweep 4.5s ease-in-out infinite;
+  }
+  @keyframes sweep {
+    0%, 100% { opacity: 0.32; transform: translateX(-8%); }
+    50% { opacity: 0.6; transform: translateX(8%); }
+  }
+  .maptext { position: relative; text-align: left; flex: 1; }
+  .maptext strong { display: block; color: #eaf6ff; font-size: 1.12rem; }
+  .maptext em { display: block; color: #9fc4dd; font-size: 0.84rem; font-style: normal; margin-top: 0.15rem; }
+  .maparrow { position: relative; color: #4fd1ff; font-size: 1.5rem; }
+  .mapnote { font-size: 0.9rem; color: #8fa7bd; margin-top: 0.9rem; }
+  @media (prefers-reduced-motion: reduce) {
+    .mapglow { animation: none; }
+    .maplink:hover { transform: none; }
+  }
 
   .zero { background: rgba(255, 107, 138, 0.06); border-radius: 1rem; padding: 1.75rem 1.5rem; }
   .story { background: rgba(255, 184, 107, 0.05); border-radius: 1rem; padding: 1.75rem 1.5rem; }
