@@ -1,6 +1,6 @@
 ---
 title: "Setting Up Open WebUI: Give Your Local AI a Proper Interface"
-description: "The terminal works for the first hour. After that, you want a real chat interface — saved conversations, model switching, file uploads, all running locally on your hardware."
+description: "The terminal works for the first hour. After that, you want a real chat interface â€” saved conversations, model switching, file uploads, all running locally on your hardware."
 series: "build-your-ai"
 seriesOrder: 2
 publishDate: 2026-04-26
@@ -10,13 +10,11 @@ tags: ["ollama", "open-webui", "local-ai", "interface", "beginner"]
 featured: false
 draft: false
 metaTitle: "Open WebUI Setup: Local AI Interface for Ollama (2026 Guide)"
-metaDescription: "Install Open WebUI in two commands. Connect it to Ollama. Get a real chat interface with saved history, model switching, and file uploads — all running on your own hardware."
+metaDescription: "Install Open WebUI in two commands. Connect it to Ollama. Get a real chat interface with saved history, model switching, and file uploads â€” all running on your own hardware."
 ---
 
-# Setting Up Open WebUI: Give Your Local AI a Proper Interface
-
 **Open WebUI** is a self-hosted, local-only chat interface that pairs with Ollama.
-It looks and feels like ChatGPT — saved conversation history, model switching,
+It looks and feels like ChatGPT â€” saved conversation history, model switching,
 file uploads, multi-user accounts. The difference is that nothing leaves your house.
 
 If you followed Part 1 and have Ollama running, this is a fifteen-minute install
@@ -29,7 +27,7 @@ something you'll use every day. This is.
 
 Open WebUI is open source, MIT-licensed, free. It runs locally as a web app. You point your browser at it and you get a chat interface that talks to your Ollama instance. That's the whole thing.
 
-It is not a model. It is not an AI. It's the part of ChatGPT that isn't the AI — the conversation list, the regenerate button, the file uploader, the user account system if you want one. You bring the brain (Ollama). It brings the face.
+It is not a model. It is not an AI. It's the part of ChatGPT that isn't the AI â€” the conversation list, the regenerate button, the file uploader, the user account system if you want one. You bring the brain (Ollama). It brings the face.
 
 Two things matter:
 
@@ -47,7 +45,7 @@ If you've used ChatGPT or Claude.ai, the muscle memory transfers. If you haven't
 
 That's it. No accounts. No cloud. No recurring cost.
 
-## Step 1 — Install Open WebUI
+## Step 1 â€” Install Open WebUI
 
 Two paths. Pick one. Docker is the recommended path because it's one command and doesn't pollute your Python environment.
 
@@ -71,7 +69,7 @@ That single command:
 - Adds the `host.docker.internal` shim so the container can reach Ollama on the host
 - Sets it to auto-start when Docker starts
 
-When you should see if it worked: open `http://localhost:3000` in a browser. First load is slow — give it 30 seconds. You'll get a sign-in screen.
+When you should see if it worked: open `http://localhost:3000` in a browser. First load is slow â€” give it 30 seconds. You'll get a sign-in screen.
 
 ### Path B: Python install (no Docker)
 
@@ -82,23 +80,23 @@ open-webui serve
 
 It'll bind to `http://localhost:8080`. Same browser test.
 
-Path B is simpler at first. Path A is what you want long-term — easier to update, easier to back up, doesn't break when you upgrade Python.
+Path B is simpler at first. Path A is what you want long-term â€” easier to update, easier to back up, doesn't break when you upgrade Python.
 
-## Step 2 — Create the First Account
+## Step 2 â€” Create the First Account
 
 The first user becomes the admin. Make this you.
 
-The interface asks for an email and password. Both are stored locally. The email never leaves your machine. There's no email verification because there's no email server. Pick something memorable but don't reuse a real password — this is one more thing to back up.
+The interface asks for an email and password. Both are stored locally. The email never leaves your machine. There's no email verification because there's no email server. Pick something memorable but don't reuse a real password â€” this is one more thing to back up.
 
 If anyone else in your household will use this, **you create their account from the admin panel later**, not by giving them the signup link. The first signup is the admin slot and you don't want to lose it.
 
-![Amber lock icon — first sign-in to a private system](/images/article4_login.png)
+![Amber lock icon â€” first sign-in to a private system](/images/article4_login.png)
 
-## Step 3 — Connect It to Ollama
+## Step 3 â€” Connect It to Ollama
 
 This is the one step everything else depends on.
 
-In the top-right user menu → **Settings** → **Connections** → **Ollama API**.
+In the top-right user menu â†’ **Settings** â†’ **Connections** â†’ **Ollama API**.
 
 Set the URL based on where Ollama runs:
 
@@ -112,13 +110,13 @@ Click **Verify Connection**. You should see a green check.
 
 If you get a red X: Ollama is either not running, not listening on `0.0.0.0` (see Part 1's `OLLAMA_HOST` setting), or there's a firewall in the way. Don't move past this until the check is green. Everything below depends on it.
 
-## Step 4 — Pick a Model
+## Step 4 â€” Pick a Model
 
-Top of the chat window, dropdown labeled "Select a model." Open WebUI auto-discovers whatever you have in Ollama. If the dropdown is empty, the connection didn't take — back to Step 3.
+Top of the chat window, dropdown labeled "Select a model." Open WebUI auto-discovers whatever you have in Ollama. If the dropdown is empty, the connection didn't take â€” back to Step 3.
 
 If you followed Part 1, you have `qwen3:8b` loaded. Pick it. Type something. Get a response.
 
-You can pull more models from inside Open WebUI now: **Settings → Models → Pull a model from Ollama.com**. The interface keeps a download progress bar that the bare terminal doesn't.
+You can pull more models from inside Open WebUI now: **Settings â†’ Models â†’ Pull a model from Ollama.com**. The interface keeps a download progress bar that the bare terminal doesn't.
 
 ![Three glowing orbs of amber light arranged like models on a workbench](/images/article4_models.png)
 
@@ -146,7 +144,7 @@ The `host.docker.internal:host-gateway` argument in the docker-run command is ma
 Lots of dev tools default to port 3000. If you run Node.js apps, Plex DLNA, or Docker dev stacks, something else may already own it. Symptom: you can't load `localhost:3000`, or the container exits immediately. Fix: change the docker-run port mapping to something free, e.g. `-p 3030:8080`, then use `localhost:3030`.
 
 **3. The sign-in page sometimes 404s on first load.**
-Symptom: `localhost:3000` returns "Not Found" the first time you hit it. The container is running but the front-end isn't built yet. Fix: wait 30-60 seconds and refresh. If it persists past two minutes, `docker logs open-webui` will show what's actually happening — usually it's still running its first-time database migration.
+Symptom: `localhost:3000` returns "Not Found" the first time you hit it. The container is running but the front-end isn't built yet. Fix: wait 30-60 seconds and refresh. If it persists past two minutes, `docker logs open-webui` will show what's actually happening â€” usually it's still running its first-time database migration.
 
 There are more obscure ones around custom OAuth setups and reverse proxies, but if you're following this guide directly you won't hit them.
 
@@ -154,12 +152,12 @@ There are more obscure ones around custom OAuth setups and reverse proxies, but 
 
 You now have a real interface to a local AI. The next problem you'll run into is that it forgets you between sessions.
 
-In Part 3 we'll wire up persistent memory — give your AI the ability to remember preferences, project state, and previous conversations. That's the line between "fast search engine" and "actual assistant."
+In Part 3 we'll wire up persistent memory â€” give your AI the ability to remember preferences, project state, and previous conversations. That's the line between "fast search engine" and "actual assistant."
 
-For tonight, take it for a spin. Upload a document. Switch models mid-thought. Run it from your phone over Tailscale. The setup is done — what you build with it now is the interesting part.
+For tonight, take it for a spin. Upload a document. Switch models mid-thought. Run it from your phone over Tailscale. The setup is done â€” what you build with it now is the interesting part.
 
 ---
 
 *Read the rest of the Build Your AI series at masterofsomething.com.*
 
-*— David Florence and Silas | In Practice Media*
+*â€” David Florence and Silas | In Practice Media*
