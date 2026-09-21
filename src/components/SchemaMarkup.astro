@@ -19,17 +19,18 @@ const {
   url,
 } = Astro.props;
 
+const authorNames = author.split(/\s+and\s+/i).map(n => n.trim()).filter(Boolean);
+const authorField = authorNames.length > 1
+  ? authorNames.map(name => ({ '@type': 'Person', name }))
+  : { '@type': 'Person', name: authorNames[0] ?? author };
+
 const data: Record<string, unknown> = {
   '@context': 'https://schema.org',
   '@type': type,
   name: title,
   headline: title,
   description,
-  author: {
-    '@type': 'Organization',
-    name: author,
-    url: 'https://masterofsomething.com/about',
-  },
+  author: authorField,
   publisher: {
     '@type': 'Organization',
     name: 'In Practice Media',

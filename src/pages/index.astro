@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ArticleCard from '../components/ArticleCard.astro';
 import { getCollection } from 'astro:content';
+import { imageForSlug } from '../lib/article-images';
 
 const articles = await getCollection('articles', ({ data }) => !data.draft);
 articles.sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime());
@@ -12,13 +13,6 @@ const latestNews = newsItems.slice(0, 3);
 const fmtNewsDate = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 
 // Map each article slug to the hero image used in its body — for cards
-const ARTICLE_IMAGES: Record<string, string> = {
-  'build-your-ai-part-1':   '/images/article1_hardware.png',
-  'anthropic-two-tier-ai':  '/images/article2_hero.png',
-  'ai-lied-to-my-face':     '/images/article3_hero.png',
-  'my-side-anthropic':      '/images/article2_twotier.png',
-  'my-side-ava':            '/images/article3_pipeline.png',
-};
 
 function articleHref(a: typeof articles[number]): string {
   const seriesSlug = a.data.series.toLowerCase().replace(/\s+/g, '-');
@@ -26,9 +20,8 @@ function articleHref(a: typeof articles[number]): string {
   return `/learn/${seriesSlug}/${slug}`;
 }
 
-function articleImage(a: typeof articles[number]): string | undefined {
-  const slug = a.id.replace(/\.md$/, '');
-  return ARTICLE_IMAGES[slug];
+function articleImage(a: typeof articles[number]): string {
+  return imageForSlug(a.id.replace(/\.md$/, ''));
 }
 
 const featured = articles[0]; // most recent published

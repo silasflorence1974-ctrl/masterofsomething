@@ -8,10 +8,12 @@ interface Props {
   title: string;
   description: string;
   canonicalURL?: string;
+  image?: string;
 }
 
-const { title, description, canonicalURL } = Astro.props;
+const { title, description, canonicalURL, image } = Astro.props;
 const url = canonicalURL ?? new URL(Astro.url.pathname, Astro.site).toString();
+const imageURL = new URL(image ?? '/images/hero_workstation.png', Astro.site).toString();
 ---
 
 <!doctype html>
@@ -30,10 +32,12 @@ const url = canonicalURL ?? new URL(Astro.url.pathname, Astro.site).toString();
     <meta property="og:description" content={description} />
     <meta property="og:url" content={url} />
     <meta property="og:site_name" content="masterofsomething.com" />
+    <meta property="og:image" content={imageURL} />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageURL} />
 
     <link rel="alternate" type="application/rss+xml" title="masterofsomething.com" href="/rss.xml" />
   </head>
