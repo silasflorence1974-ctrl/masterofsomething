@@ -23,7 +23,7 @@ export const ARTICLE_IMAGES: Record<string, string> = {
   'why-i-dont-trust-done':           '/images/article1_checklist.png',   // a sequence of checkmarks building to one
   'built-to-refuse':                 '/images/article8_refuse.png',      // a single door, shut, glowing amber
   'the-bug-that-says-it-worked':     '/images/article9_bugworked.png',   // a monitor, a highlighted region in a data grid
-  'the-machine-that-relived-its-week': '/images/article10_relived.png',  // a garbled digital clock, tangled loops of light
+  'the-machine-that-relived-its-week': '/images/article7_continuity.png', // a thread of light connecting two sessions
   'walls-you-cant-move':             '/images/article11_walls.png',      // a long concrete corridor, no way through
 
   // news (some share a slug with, and therefore an image with, their article)
