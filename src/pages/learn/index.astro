@@ -1,0 +1,85 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const articles = await getCollection('articles', ({ data }) => !data.draft);
+
+const seriesInfo: Record<string, { name: string; blurb: string; order: number }> = {
+  'build-your-ai': {
+    name: 'Build Your AI',
+    blurb: 'Local AI from scratch, on your own hardware. Hardware, interface, memory - in order.',
+    order: 1,
+  },
+  'building-in-practice': {
+    name: 'Building in Practice',
+    blurb: "What actually happens running an AI system day to day - the failures, the fixes, and the habits that came out of them.",
+    order: 2,
+  },
+  'the-wider-stuff': {
+    name: 'The Wider Stuff',
+    blurb: 'AI as an industry, beyond this one system - Anthropic, the two-tier problem, what "ambient AI" really requires.',
+    order: 3,
+  },
+};
+
+const grouped = Object.entries(seriesInfo)
+  .sort((a, b) => a[1].order - b[1].order)
+  .map(([slug, info]) => {
+    const items = articles
+      .filter(a => a.data.series === slug)
+      .sort((a, b) => a.data.seriesOrder - b.data.seriesOrder);
+    return { slug, ...info, items };
+  });
+
+const totalArticles = articles.length;
+---
+
+<BaseLayout
+  title="Learn - masterofsomething.com"
+  description="Every article, organized by series. Build your own AI, what building it in practice actually looks like, and the wider AI industry."
+>
+  <article>
+    <header class="mb-12 max-w-3xl">
+      <h1 class="text-4xl md:text-5xl font-bold text-[var(--color-text-primary)] mb-4">Learn</h1>
+      <p class="text-[var(--color-text-secondary)] text-lg leading-relaxed">
+        {totalArticles} articles across three series. Start wherever fits - each series
+        stands on its own, and every article says where it sits in the order.
+      </p>
+    </header>
+
+    {grouped.map(series => (
+      <section class="mb-14">
+        <div class="mb-5 max-w-2xl">
+          <h2 class="text-2xl font-semibold text-[var(--color-text-primary)] mb-1">
+            {series.name}
+          </h2>
+          <p class="text-sm text-[var(--color-text-secondary)]">{series.blurb}</p>
+        </div>
+
+        <div class="grid gap-3">
+          {series.items.map(item => (
+            <a
+              href={`/learn/${series.slug}/${item.id.replace(/\.md$/, '')}/`}
+              class="group flex items-start gap-4 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-5 hover:bg-[var(--color-surface-raised)] hover:border-[var(--color-accent)] transition-colors"
+            >
+              <span class="text-[var(--color-accent)] font-semibold tabular-nums text-sm mt-0.5">
+                {String(item.data.seriesOrder).padStart(2, '0')}
+              </span>
+              <div class="flex-1">
+                <div class="flex items-center gap-3 flex-wrap mb-1">
+                  <h3 class="text-[var(--color-text-primary)] font-semibold group-hover:text-white">
+                    {item.data.title}
+                  </h3>
+                  <span class="text-xs text-[var(--color-text-secondary)]">{item.data.readTime}</span>
+                </div>
+                <p class="text-sm text-[var(--color-text-secondary)] leading-relaxed">
+                  {item.data.description}
+                </p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+    ))}
+  </article>
+</BaseLayout>
