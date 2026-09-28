@@ -25,6 +25,7 @@ export const ARTICLE_IMAGES: Record<string, string> = {
   'the-bug-that-says-it-worked':     '/images/article9_bugworked.png',   // a monitor, a highlighted region in a data grid
   'the-machine-that-relived-its-week': '/images/article7_continuity.png', // a thread of light connecting two sessions
   'walls-you-cant-move':             '/images/article11_walls.png',      // a long concrete corridor, no way through
+  'youre-right-to-be-mad-about-ai':  '/images/article_genz_hero.png',    // young store worker, arms crossed, unconvinced
 
   // news (some share a slug with, and therefore an image with, their article)
   'ai-regulation-map-2026':          '/images/article_regulation_hero.png', // lit US states map
