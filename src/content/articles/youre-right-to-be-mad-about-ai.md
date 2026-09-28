@@ -88,10 +88,12 @@ Now the part that usually gets left out of the headline.
 The jobs disappearing are the ones AI just *replaces* outright. The ones where
 it *helps* a person do the work? Those aren't shrinking the same way. And according
 to [PwC's 2026 AI Jobs Barometer](https://www.pwc.com/gx/en/news-room/press-releases/2026/pwc-2026-ai-jobs-barometer.html),
-which looked at more than a billion job postings, entry-level jobs heavily
-touched by AI grew 35% since 2019 while other entry-level jobs shrank. The
-catch: those growing jobs ask for things like judgment and leadership, stuff
-that used to be expected only from senior people.
+which looked at more than a billion job postings, entry-level hiring in the
+jobs most exposed to AI has flatlined overall. But inside that, one kind of
+entry-level job is growing fast: the kind that now asks for things like
+judgment and leadership, stuff that used to be expected only from senior
+people. In the US data, openings for those roles grew 35% since 2019, while
+other entry-level roles shrank 10%.
 
 You'll also see a striking number floating around: job postings that ask
 for AI skills pay about 62% more. That's real, but read it carefully. A lot of
@@ -226,6 +228,12 @@ you think.
 
 
 ---
+
+*Correction, September 28, 2026: An earlier version of this article said
+entry-level jobs heavily touched by AI grew 35% since 2019. PwC's figure
+covers a narrower group: entry-level roles in AI-exposed jobs that now ask for
+senior-level skills such as judgment and leadership. Overall entry-level
+hiring in those jobs has flatlined. The paragraph has been corrected.*
 
 **Sources:** [Gallup / Walton Family Foundation / GSV Ventures, 2026](https://news.gallup.com/poll/708224/gen-adoption-steady-skepticism-climbs.aspx) ·
 [Stanford Digital Economy Lab, "Canaries in the Coal Mine," Aug 2026](https://digitaleconomy.stanford.edu/news/canariesaug26/) ·
