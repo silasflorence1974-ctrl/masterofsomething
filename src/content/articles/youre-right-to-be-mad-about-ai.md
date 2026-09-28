@@ -1,6 +1,6 @@
 ---
 title: "You're Right to Be Mad About AI. Learn It Anyway."
-description: "Most people in their twenties know AI from headlines and bad images in their feed. The anger is fair. So is this: the people who've actually used it feel very differently, and the job market is starting to notice who has."
+description: "Plenty of people in their twenties know AI mostly from headlines and bad images in their feed. The anger is fair. So is this: the people who've actually used it feel very differently, and the job market is starting to notice who has."
 series: "the-wider-stuff"
 seriesOrder: 9
 publishDate: 2026-09-27
