@@ -10,7 +10,8 @@ articles.sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTim
 const newsItems = await getCollection('news', ({ data }) => !data.draft);
 newsItems.sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime());
 const latestNews = newsItems.slice(0, 3);
-const fmtNewsDate = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+// timeZone UTC: date-only frontmatter (midnight UTC) would otherwise render a day early in Eastern time.
+const fmtNewsDate = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' });
 
 // Map each article slug to the hero image used in its body — for cards
 

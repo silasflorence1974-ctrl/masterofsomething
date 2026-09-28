@@ -3,12 +3,15 @@ import { navLinks } from '../lib/nav';
 ---
 
 <header class="sticky top-0 z-40 border-b border-[var(--color-border)] backdrop-blur-md bg-[rgba(10,10,10,0.7)]">
-  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+  <!-- Phones (< md): brand on its own line, links wrap beneath it. One row needed 544px on a 390px phone, which
+       pushed Tools/About off-screen and made every page scroll sideways (found 2026-09-28). md+ is unchanged. -->
+  <div class="max-w-6xl mx-auto px-4 md:px-6 py-3 md:py-4 flex flex-col gap-1.5 md:flex-row md:items-center md:justify-between md:gap-0">
     <a href="/" class="text-[var(--color-text-primary)] font-medium tracking-tight text-lg hover:text-[var(--color-accent)] transition-colors">
       masterofsomething
     </a>
     <div class="flex items-center gap-6">
-      <nav class="flex items-center gap-5 text-sm">
+      <!-- < 390px: a balanced 3x2 grid (a ragged wrap left "About" alone on its own line); 390px+: one row. -->
+      <nav class="grid grid-cols-3 gap-x-3 gap-y-1 min-[390px]:flex min-[390px]:flex-wrap min-[390px]:items-center md:gap-5 text-[13px] md:text-sm">
         {navLinks.map(link => (
           <a href={link.href} class="text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]">
             {link.label}

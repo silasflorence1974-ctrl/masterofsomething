@@ -43,7 +43,8 @@ const seriesItems = allArticles.map(a => ({
   current: a.data.seriesOrder === seriesOrder,
 }));
 
-const dateStr = publishDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+// timeZone UTC: publishDate is date-only (midnight UTC); local Eastern time showed every article a day early.
+const dateStr = publishDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
 const articleSlug = Astro.url.pathname.split('/').filter(Boolean).pop() ?? '';
 const heroImage = imageForSlug(articleSlug);
 ---
