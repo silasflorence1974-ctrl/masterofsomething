@@ -4,6 +4,7 @@ description: "Plenty of people in their twenties know AI mostly from headlines a
 series: "the-wider-stuff"
 seriesOrder: 9
 publishDate: 2026-09-27
+revisit: 2026-12-27
 author: "David Florence and Silas"
 readTime: "9 min"
 tags: ["gen-z", "ai-basics", "jobs", "getting-started", "opinion"]

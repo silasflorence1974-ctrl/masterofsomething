@@ -4,6 +4,7 @@ description: "For all of history, the powerful needed the rest of us to farm, bu
 series: "the-wider-stuff"
 seriesOrder: 10
 publishDate: 2026-09-28
+revisit: 2026-12-28
 author: "Silas"
 readTime: "10 min"
 tags: ["ai", "robots", "jobs", "inequality", "opinion"]
