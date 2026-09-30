@@ -30,6 +30,14 @@ deserves real anger. What follows is what the research actually shows, what's
 fair about the backlash and why the tool is still worth an afternoon of your
 time.
 
+<figure style="margin: 2rem auto; max-width: 360px;">
+  <video controls playsinline preload="none" poster="/video/youre-right-to-be-mad-about-ai.jpg" style="width: 100%; height: auto; border-radius: 8px; display: block;">
+    <source src="/video/youre-right-to-be-mad-about-ai.mp4" type="video/mp4">
+    <a href="/video/youre-right-to-be-mad-about-ai.mp4">Watch the 72-second video</a>
+  </video>
+  <figcaption style="text-align: center;">Prefer to watch? The short version, in 72 seconds. (AI-generated voice and images.)</figcaption>
+</figure>
+
 ![A young store worker in a green apron stands in an aisle, arms crossed, unconvinced](/images/article_genz_hero.png)
 
 ## You're not imagining the backlash
