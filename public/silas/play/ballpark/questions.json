@@ -45,10 +45,10 @@
    "id": "bp006"
   },
   {
-   "q": "How many people are alive on Earth right now?",
-   "u": "People",
-   "a": 8200000000,
-   "h": "About <strong>8.2 billion</strong>. It passed 8 billion in late 2022.",
+   "q": "How many chromosomes are in a typical human cell?",
+   "u": "Chromosomes",
+   "a": 46,
+   "h": "<strong>46</strong>, in 23 pairs: one set from each parent.",
    "id": "bp007"
   },
   {
@@ -127,6 +127,326 @@
    "a": 104,
    "h": "A full-size US keyboard has <strong>104 keys</strong>; laptops usually drop to the high 70s or 80s.",
    "id": "bp018"
+  },
+  {
+   "q": "How far is the Earth from the Sun?",
+   "u": "Kilometers, on average",
+   "a": 149597871,
+   "h": "About <strong>150 million km</strong>, a distance so useful it has its own name: the astronomical unit.",
+   "src": "https://en.wikipedia.org/wiki/Astronomical_unit",
+   "id": "bp019"
+  },
+  {
+   "q": "How many Earths would fit side by side across Jupiter?",
+   "u": "Earths, across the middle",
+   "a": 11,
+   "h": "Jupiter is about <strong>11 Earths</strong> wide.",
+   "src": "https://science.nasa.gov/jupiter/facts/",
+   "id": "bp020"
+  },
+  {
+   "q": "How far does light travel in one year?",
+   "u": "Kilometers",
+   "a": 9460730472580,
+   "h": "One light-year is about <strong>9.46 trillion km</strong>: 300,000 km a second, for every second in a year.",
+   "src": "https://en.wikipedia.org/wiki/Light-year",
+   "id": "bp021"
+  },
+  {
+   "q": "How far away is the nearest star after the Sun?",
+   "u": "Light-years",
+   "a": 4.24,
+   "h": "Proxima Centauri, about <strong>4.24 light-years</strong> away. Its light left it more than four years ago.",
+   "src": "https://en.wikipedia.org/wiki/Proxima_Centauri",
+   "id": "bp022"
+  },
+  {
+   "q": "How old is the universe?",
+   "u": "Years",
+   "a": 13800000000,
+   "h": "About <strong>13.8 billion years</strong>.",
+   "src": "https://en.wikipedia.org/wiki/Age_of_the_universe",
+   "id": "bp023"
+  },
+  {
+   "q": "How old is the Earth?",
+   "u": "Years",
+   "a": 4540000000,
+   "h": "About <strong>4.54 billion years</strong>, roughly a third the age of the universe.",
+   "src": "https://en.wikipedia.org/wiki/Age_of_Earth",
+   "id": "bp024"
+  },
+  {
+   "q": "How wide is Mars?",
+   "u": "Kilometers, across",
+   "a": 6779,
+   "h": "About <strong>6,779 km</strong>, a little over half the width of Earth.",
+   "src": "https://en.wikipedia.org/wiki/Mars",
+   "id": "bp025"
+  },
+  {
+   "q": "How hot is the surface of the Sun?",
+   "u": "Kelvin",
+   "a": 5772,
+   "h": "About <strong>5,772 K</strong>, which is roughly 5,500 degrees Celsius.",
+   "src": "https://en.wikipedia.org/wiki/Sun",
+   "id": "bp026"
+  },
+  {
+   "q": "How long does moonlight take to reach Earth?",
+   "u": "Seconds",
+   "a": 1.28,
+   "h": "About <strong>1.3 seconds</strong>. Sunlight takes over eight minutes.",
+   "src": "https://en.wikipedia.org/wiki/Moon",
+   "id": "bp027"
+  },
+  {
+   "q": "How many Moons would fit inside the Earth?",
+   "u": "Moons, by volume",
+   "a": 49,
+   "h": "About <strong>49</strong>. The Moon is roughly a quarter of Earth's width, and volume goes with the cube.",
+   "src": "https://en.wikipedia.org/wiki/Moon",
+   "id": "bp028"
+  },
+  {
+   "q": "How far is Pluto from the Sun, on average?",
+   "u": "Kilometers",
+   "a": 5906000000,
+   "h": "About <strong>5.9 billion km</strong>, around 39 times as far as Earth.",
+   "src": "https://en.wikipedia.org/wiki/Pluto",
+   "id": "bp029"
+  },
+  {
+   "q": "How fast does the Earth travel around the Sun?",
+   "u": "Kilometers per hour",
+   "a": 107208,
+   "h": "About <strong>107,000 km/h</strong>: nearly 30 km every second.",
+   "src": "https://en.wikipedia.org/wiki/Earth%27s_orbit",
+   "id": "bp030"
+  },
+  {
+   "q": "How fast does sound travel through air?",
+   "u": "Meters per second, at room temperature",
+   "a": 343,
+   "h": "About <strong>343 m/s</strong>. Count the seconds between lightning and thunder and divide by three for kilometers.",
+   "src": "https://en.wikipedia.org/wiki/Speed_of_sound",
+   "id": "bp031"
+  },
+  {
+   "q": "How many teeth does an adult have?",
+   "u": "Teeth, a full set",
+   "a": 32,
+   "h": "<strong>32</strong>, counting the four wisdom teeth.",
+   "src": "https://en.wikipedia.org/wiki/Human_tooth",
+   "id": "bp032"
+  },
+  {
+   "q": "How many neurons are in a human brain?",
+   "u": "Neurons",
+   "a": 86000000000,
+   "h": "About <strong>86 billion</strong>.",
+   "src": "https://en.wikipedia.org/wiki/Human_brain",
+   "id": "bp033"
+  },
+  {
+   "q": "How much blood is in an adult body?",
+   "u": "Liters",
+   "a": 5,
+   "h": "About <strong>5 liters</strong>, roughly 7% of body weight.",
+   "src": "https://en.wikipedia.org/wiki/Blood_volume",
+   "id": "bp034"
+  },
+  {
+   "q": "How many bones are in one human hand?",
+   "u": "Bones, including the wrist",
+   "a": 27,
+   "h": "<strong>27</strong>: 8 in the wrist, 5 in the palm and 14 in the fingers.",
+   "src": "https://en.wikipedia.org/wiki/Hand",
+   "id": "bp035"
+  },
+  {
+   "q": "How tall is Mount Everest?",
+   "u": "Meters above sea level",
+   "a": 8849,
+   "h": "<strong>8,849 m</strong>, the 2020 joint China-Nepal survey figure.",
+   "src": "https://en.wikipedia.org/wiki/Mount_Everest",
+   "id": "bp036"
+  },
+  {
+   "q": "How deep is the deepest point in the ocean?",
+   "u": "Meters",
+   "a": 10935,
+   "h": "The Challenger Deep is about <strong>11,000 m</strong> down. Everest would fit in it with two kilometers to spare.",
+   "src": "https://en.wikipedia.org/wiki/Challenger_Deep",
+   "id": "bp037"
+  },
+  {
+   "q": "How much surface area does the Earth have?",
+   "u": "Square kilometers",
+   "a": 510000000,
+   "h": "About <strong>510 million km<sup>2</sup></strong>, around 71% of it ocean.",
+   "src": "https://en.wikipedia.org/wiki/Earth",
+   "id": "bp038"
+  },
+  {
+   "q": "How tall is the world's highest waterfall?",
+   "u": "Meters",
+   "a": 979,
+   "h": "Angel Falls in Venezuela drops <strong>979 m</strong>.",
+   "src": "https://en.wikipedia.org/wiki/Angel_Falls",
+   "id": "bp039"
+  },
+  {
+   "q": "How big is the Pacific Ocean?",
+   "u": "Square kilometers",
+   "a": 165250000,
+   "h": "About <strong>165 million km<sup>2</sup></strong>, more than all the land on Earth put together.",
+   "src": "https://en.wikipedia.org/wiki/Pacific_Ocean",
+   "id": "bp040"
+  },
+  {
+   "q": "How long is the Great Wall of China, counting all its branches?",
+   "u": "Kilometers",
+   "a": 21196,
+   "h": "About <strong>21,196 km</strong>, from a 2012 Chinese government survey.",
+   "src": "https://en.wikipedia.org/wiki/Great_Wall_of_China",
+   "id": "bp041"
+  },
+  {
+   "q": "How deep is Lake Baikal, the world's deepest lake?",
+   "u": "Meters",
+   "a": 1642,
+   "h": "<strong>1,642 m</strong> at its deepest.",
+   "src": "https://en.wikipedia.org/wiki/Lake_Baikal",
+   "id": "bp042"
+  },
+  {
+   "q": "How long is the Grand Canyon?",
+   "u": "Kilometers",
+   "a": 446,
+   "h": "About <strong>446 km</strong> long.",
+   "src": "https://en.wikipedia.org/wiki/Grand_Canyon",
+   "id": "bp043"
+  },
+  {
+   "q": "How big is the Sahara desert?",
+   "u": "Square kilometers",
+   "a": 9200000,
+   "h": "About <strong>9.2 million km<sup>2</sup></strong>, close to the size of the United States.",
+   "src": "https://en.wikipedia.org/wiki/Sahara",
+   "id": "bp044"
+  },
+  {
+   "q": "How tall is the Burj Khalifa?",
+   "u": "Meters",
+   "a": 828,
+   "h": "<strong>828 m</strong>, the tallest building in the world since 2010.",
+   "src": "https://en.wikipedia.org/wiki/Burj_Khalifa",
+   "id": "bp045"
+  },
+  {
+   "q": "How tall was the Great Pyramid of Giza when it was built?",
+   "u": "Meters",
+   "a": 146.6,
+   "h": "About <strong>146.6 m</strong>. It was the tallest structure humans had built for nearly 4,000 years.",
+   "src": "https://en.wikipedia.org/wiki/Great_Pyramid_of_Giza",
+   "id": "bp046"
+  },
+  {
+   "q": "How long is the main span of the Golden Gate Bridge?",
+   "u": "Meters",
+   "a": 1280,
+   "h": "<strong>1,280 m</strong> between the two towers.",
+   "src": "https://en.wikipedia.org/wiki/Golden_Gate_Bridge",
+   "id": "bp047"
+  },
+  {
+   "q": "How tall is the Statue of Liberty, from the ground to the torch?",
+   "u": "Meters",
+   "a": 93,
+   "h": "About <strong>93 m</strong> including the pedestal; the statue alone is 46 m.",
+   "src": "https://en.wikipedia.org/wiki/Statue_of_Liberty",
+   "id": "bp048"
+  },
+  {
+   "q": "How tall is the Empire State Building, to the tip of its antenna?",
+   "u": "Meters",
+   "a": 443,
+   "h": "About <strong>443 m</strong> to the tip; 381 m to the roof.",
+   "src": "https://en.wikipedia.org/wiki/Empire_State_Building",
+   "id": "bp049"
+  },
+  {
+   "q": "How wide is a Boeing 747-400, wingtip to wingtip?",
+   "u": "Meters",
+   "a": 64.4,
+   "h": "About <strong>64.4 m</strong>, wider than the length of the Wright brothers' entire first flight (37 m).",
+   "src": "https://en.wikipedia.org/wiki/Boeing_747-400",
+   "id": "bp050"
+  },
+  {
+   "q": "How many millimeters are in a mile?",
+   "u": "Millimeters",
+   "a": 1609344,
+   "h": "A mile is exactly 1,609.344 meters, so <strong>1,609,344 mm</strong>.",
+   "src": "https://en.wikipedia.org/wiki/Mile",
+   "id": "bp051"
+  },
+  {
+   "q": "How many seconds are in a week?",
+   "u": "Seconds",
+   "a": 604800,
+   "h": "7 x 24 x 60 x 60 = <strong>604,800</strong>.",
+   "src": "https://en.wikipedia.org/wiki/Week",
+   "id": "bp052"
+  },
+  {
+   "q": "How many US cups of water fit in a cubic meter?",
+   "u": "Cups",
+   "a": 4227,
+   "h": "A cubic meter is 1,000 liters and a US cup is about 0.237 liters: about <strong>4,227 cups</strong>.",
+   "src": "https://en.wikipedia.org/wiki/Cup_(unit)",
+   "id": "bp053"
+  },
+  {
+   "q": "How many inches are in a kilometer?",
+   "u": "Inches",
+   "a": 39370,
+   "h": "An inch is exactly 2.54 cm, so a kilometer is about <strong>39,370 inches</strong>.",
+   "src": "https://en.wikipedia.org/wiki/Inch",
+   "id": "bp054"
+  },
+  {
+   "q": "How many hours are in a century?",
+   "u": "Hours",
+   "a": 876600,
+   "h": "365.25 days x 24 hours x 100 years: about <strong>876,600</strong>.",
+   "src": "https://en.wikipedia.org/wiki/Century",
+   "id": "bp055"
+  },
+  {
+   "q": "How many feet are in a nautical mile?",
+   "u": "Feet",
+   "a": 6076,
+   "h": "A nautical mile is exactly 1,852 m: about <strong>6,076 feet</strong>.",
+   "src": "https://en.wikipedia.org/wiki/Nautical_mile",
+   "id": "bp056"
+  },
+  {
+   "q": "How many US pennies, stacked flat, would reach a mile high?",
+   "u": "Pennies",
+   "a": 1058779,
+   "h": "A penny is 1.52 mm thick and a mile is 1,609,344 mm: about <strong>1.06 million</strong> pennies.",
+   "src": "https://en.wikipedia.org/wiki/Penny_(United_States_coin)",
+   "id": "bp057"
+  },
+  {
+   "q": "How many keys are on a standard piano?",
+   "u": "Keys",
+   "a": 88,
+   "h": "<strong>88</strong>: 52 white and 36 black.",
+   "src": "https://en.wikipedia.org/wiki/Piano",
+   "id": "bp058"
   }
  ]
 }
