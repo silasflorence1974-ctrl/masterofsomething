@@ -1,0 +1,165 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+
+const title = "Ballpark - one estimate a day - Silas's Corner";
+const description = "One question a day with a number for an answer. Slide a ruler that jumps by ten at every tick, lock in a guess, and see how close you got - and how to get closer.";
+---
+
+<BaseLayout title={title} description={description} image="/silas/silas-512.png">
+  <div class="bp">
+    <p class="bp-crumb"><a href="/silas/">Silas's Corner</a> / <a href="/silas/play/">Fun &amp; games</a></p>
+    <header class="bp-head"><h1 class="bp-brand">Ballpark</h1><span class="bp-day" id="bp-day"></span></header>
+
+    <h2 class="bp-q" id="bp-q">Loading today's question...</h2>
+    <p class="bp-unit" id="bp-unit"></p>
+
+    <p class="bp-readout" id="bp-readout" aria-live="polite"></p>
+    <p class="bp-words" id="bp-words"></p>
+
+    <div class="bp-rule">
+      <label for="bp-slide" class="bp-sr">Your estimate, on a scale from 1 to 100 trillion</label>
+      <input type="range" id="bp-slide" min="0" max="1400" step="1" value="500" />
+      <div class="bp-ticks" id="bp-ticks"><div class="bp-marker" id="bp-marker"><b id="bp-markerLabel"></b></div></div>
+    </div>
+
+    <div class="bp-row">
+      <button id="bp-lock">Lock in my guess</button>
+      <button class="bp-ghost" id="bp-another">Try another one</button>
+    </div>
+
+    <section class="bp-result" id="bp-result" aria-live="polite">
+      <p class="bp-verdict" id="bp-verdict"></p>
+      <p class="bp-off" id="bp-off"></p>
+      <p class="bp-how" id="bp-how"></p>
+      <div class="bp-share" id="bp-share"></div>
+      <div class="bp-row"><button class="bp-ghost" id="bp-copy">Copy my result</button></div>
+    </section>
+
+    <p class="bp-foot">Slide to your best guess. The ruler jumps by ten at every big tick, so being off by a
+      little is fine and being off by a whole tick is the real miss. Everyone gets the same question each
+      day (it changes at midnight UTC). "Try another one" is for practice. Nothing here is tracked; your
+      guess for today is kept only in your own browser.</p>
+  </div>
+
+  <script is:inline>
+  (function () {
+    var MAXE = 14, $ = function (id) { return document.getElementById(id); };
+    var EPOCH = Date.UTC(2026, 9, 1);                 // day 0 = 2026-10-01 UTC
+    var now = new Date();
+    // UTC day, so every visitor gets the same question on the same day (spec 2026-10-02).
+    var dayN = Math.floor((Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()) - EPOCH) / 864e5);
+    var Q = [], idx = 0, practice = false, locked = false;
+
+    // STABLE as the list grows: day N is question N while there are enough (the list is append-only),
+    // so adding questions never changes today's or any earlier day's question. Only once every
+    // question has had its day does it cycle.
+    function dailyIndex(n, len) { return n >= 0 && n < len ? n : ((n % len) + len) % len; }
+
+    function fmt(n) { if (n >= 1e12) return sig(n / 1e12) + " trillion"; if (n >= 1e9) return sig(n / 1e9) + " billion"; if (n >= 1e6) return sig(n / 1e6) + " million"; return n < 10 ? String(Math.round(n * 100) / 100) : Math.round(n).toLocaleString("en-US"); }
+    function sig(x) { return x >= 100 ? Math.round(x).toString() : x >= 10 ? (Math.round(x * 10) / 10).toString() : (Math.round(x * 100) / 100).toString(); }
+    function round2(n) { if (n < 10) return Math.round(n * 10) / 10; var p = Math.pow(10, Math.floor(Math.log10(n)) - 1); return Math.round(n / p) * p; }
+    function val() { return round2(Math.pow(10, $("bp-slide").value / 100)); }
+    function words(n) { var e = Math.floor(Math.log10(n)); return e < 1 ? "a handful" : e < 3 ? "in the tens or hundreds" : e < 6 ? "in the thousands" : e < 9 ? "in the millions" : e < 12 ? "in the billions" : "in the trillions"; }
+
+    function ticks() {
+      var t = $("bp-ticks"), labels = ["1","10","100","1k","10k","100k","1M","10M","100M","1B","10B","100B","1T","10T","100T"];
+      for (var e = 0; e <= MAXE; e++) {
+        var d = document.createElement("div"); d.className = "bp-tick"; d.style.left = (e / MAXE * 100) + "%";
+        if (e % 2 === 0 || window.innerWidth > 560) { var s = document.createElement("span"); s.textContent = labels[e]; d.appendChild(s); }
+        t.appendChild(d);
+        if (e < MAXE) [2, 5].forEach(function (m) { var mn = document.createElement("div"); mn.className = "bp-tick bp-minor"; mn.style.left = ((e + Math.log10(m)) / MAXE * 100) + "%"; t.appendChild(mn); });
+      }
+    }
+    function show() { var v = val(); $("bp-readout").textContent = fmt(v); $("bp-words").textContent = words(v); }
+
+    function load() {
+      var q = Q[idx]; $("bp-q").textContent = q.q; $("bp-unit").textContent = q.u;
+      $("bp-day").textContent = practice ? "Practice" : ("Today, " + now.toLocaleDateString("en-US", { month: "long", day: "numeric", timeZone: "UTC" }));
+      locked = false; $("bp-slide").disabled = false; $("bp-lock").disabled = false;
+      $("bp-marker").style.display = "none"; $("bp-result").style.display = "none"; $("bp-result").classList.remove("bp-show");
+      $("bp-slide").value = 500; show();
+      if (!practice) { try { var s = JSON.parse(localStorage.getItem("ballpark-" + dayN) || "null"); if (s) { $("bp-slide").value = s.v; show(); reveal(true); } } catch (e) {} }
+    }
+
+    function reveal(restoring) {
+      var q = Q[idx], g = val(), d = Math.log10(g / q.a), ad = Math.abs(d), v, c;
+      locked = true; $("bp-slide").disabled = true; $("bp-lock").disabled = true;
+      var m = $("bp-marker"); m.style.display = "block"; m.style.left = (Math.log10(q.a) / MAXE * 100) + "%"; $("bp-markerLabel").textContent = fmt(q.a);
+      if (ad < .15) { v = "Bullseye"; c = "hit"; } else if (ad < .5) { v = "Ballpark"; c = "hit"; } else if (ad < 1) { v = "Same neighbourhood"; c = "hit"; } else if (ad < 2) { v = "Right planet"; c = "miss"; } else { v = "Different universe"; c = "miss"; }
+      $("bp-verdict").textContent = v; $("bp-verdict").className = "bp-verdict bp-" + c;
+      var f = Math.pow(10, ad);
+      $("bp-off").textContent = ad < .02 ? "Spot on." : "The answer is " + fmt(q.a) + ". You were " + (f < 10 ? ("off by " + (Math.round(f * 10) / 10) + "x") : ("off by " + (Math.round(ad * 10) / 10) + " powers of ten")) + ", " + (d > 0 ? "too high" : "too low") + ".";
+      $("bp-how").innerHTML = q.h;                      // our own reviewed copy, never user input
+      var blocks = Math.max(0, 5 - Math.min(5, Math.round(ad * 2.5)));
+      $("bp-share").textContent = "Ballpark" + (practice ? " (practice)" : " " + now.toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "UTC" })) + "\n" + "\u{1F7E9}".repeat(blocks) + "⬜".repeat(5 - blocks) + "  " + v;
+      var r = $("bp-result"); r.style.display = "block"; if (!restoring) r.classList.add("bp-show");
+      if (!practice && !restoring) { try { localStorage.setItem("ballpark-" + dayN, JSON.stringify({ v: $("bp-slide").value })); } catch (e) {} }
+    }
+
+    $("bp-slide").addEventListener("input", show);
+    $("bp-lock").addEventListener("click", function () { if (!locked && Q.length) reveal(false); });
+    $("bp-another").addEventListener("click", function () { if (!Q.length) return; practice = true; var n; do { n = Math.floor(Math.random() * Q.length); } while (n === idx && Q.length > 1); idx = n; load(); });
+    $("bp-copy").addEventListener("click", function () {
+      navigator.clipboard.writeText($("bp-share").textContent).then(function () { $("bp-copy").textContent = "Copied"; },
+        function () { $("bp-copy").textContent = "Select the text above to copy"; });
+      setTimeout(function () { $("bp-copy").textContent = "Copy my result"; }, 1800);
+    });
+
+    ticks();
+    fetch("/silas/play/ballpark/questions.json").then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(function (j) { Q = j.questions || []; if (!Q.length) throw new Error("empty"); idx = dailyIndex(dayN, Q.length); load(); })
+      .catch(function () {
+        $("bp-q").textContent = "Today's question didn't load.";
+        $("bp-unit").textContent = "Try refreshing in a moment.";
+        $("bp-lock").disabled = true; $("bp-another").disabled = true; $("bp-slide").disabled = true;
+      });
+  })();
+  </script>
+</BaseLayout>
+
+<style is:global>
+  /* Ballpark on the site's own tokens. The slide-rule ruler is the one distinctive element kept
+     from the original; everything else is the site's type, colour and buttons. Prefixed .bp so
+     ticks created at runtime are styled too (Astro's scoped styles can't reach them). */
+  .bp { max-width: 720px; margin: 0 auto; font-variant-numeric: tabular-nums; }
+  .bp-crumb { font-size: .85rem; color: var(--color-text-secondary); margin: 0 0 1.5rem; }
+  .bp-crumb a { color: var(--color-text-secondary); }
+  .bp-crumb a:hover { color: var(--color-accent); }
+  .bp-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  .bp-brand { font-size: 1.1rem; font-weight: 700; letter-spacing: .02em; margin: 0; color: var(--color-accent); text-transform: uppercase; }
+  .bp-day { color: var(--color-text-secondary); font-size: .9rem; font-family: var(--font-mono); }
+  .bp-q { font-size: clamp(1.6rem, 5.2vw, 2.35rem); line-height: 1.15; margin: 2rem 0 .5rem; max-width: 30ch; color: var(--color-text-primary); }
+  .bp-unit { color: var(--color-text-secondary); margin: 0 0 2rem; }
+  .bp-readout { font-family: var(--font-mono); font-weight: 600; font-size: clamp(2.4rem, 9vw, 4rem); line-height: 1; margin: 0; color: var(--color-text-primary); }
+  .bp-words { color: var(--color-text-secondary); margin: 6px 0 18px; min-height: 1.5em; }
+  .bp-rule { position: relative; padding: 8px 0 40px; }
+  .bp-sr { position: absolute; left: -9999px; }
+  .bp-ticks { position: relative; height: 34px; border-top: 2px solid var(--color-text-primary); }
+  .bp-tick { position: absolute; top: 0; width: 2px; height: 14px; background: var(--color-text-primary); transform: translateX(-1px); }
+  .bp-tick.bp-minor { height: 7px; width: 1px; opacity: .5; }
+  .bp-tick span { position: absolute; top: 16px; left: 50%; transform: translateX(-50%); font-size: .72rem; color: var(--color-text-secondary); white-space: nowrap; font-family: var(--font-mono); }
+  .bp-marker { position: absolute; top: -30px; bottom: 6px; width: 3px; background: #7fd1a8; transform: translateX(-1.5px); display: none; }
+  .bp-marker b { position: absolute; top: -24px; left: 50%; transform: translateX(-50%); font-size: .8rem; color: #7fd1a8; white-space: nowrap; font-family: var(--font-mono); }
+  .bp input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; margin: 0 0 -8px; background: transparent; height: 44px; position: relative; z-index: 2; }
+  .bp input[type=range]::-webkit-slider-runnable-track { height: 44px; background: transparent; }
+  .bp input[type=range]::-moz-range-track { height: 44px; background: transparent; }
+  .bp input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 44px; border-radius: 4px; background: color-mix(in srgb, var(--color-accent) 22%, transparent); border: 2px solid var(--color-accent); }
+  .bp input[type=range]::-moz-range-thumb { width: 18px; height: 40px; border-radius: 4px; background: color-mix(in srgb, var(--color-accent) 22%, transparent); border: 2px solid var(--color-accent); }
+  .bp input[type=range]:focus-visible { outline: 2px dashed var(--color-accent); outline-offset: 6px; }
+  .bp-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 6px; }
+  .bp button { font: inherit; font-weight: 600; border-radius: 6px; padding: 12px 22px; cursor: pointer; border: 1px solid var(--color-accent); background: var(--color-accent); color: #0a0a0a; }
+  .bp button.bp-ghost { background: transparent; color: var(--color-text-primary); border-color: var(--color-border); }
+  .bp button.bp-ghost:hover { border-color: var(--color-accent); }
+  .bp button:focus-visible { outline: 2px dashed var(--color-accent); outline-offset: 3px; }
+  .bp button[disabled] { opacity: .4; cursor: default; }
+  .bp-result { display: none; margin-top: 2rem; padding-top: 1.4rem; border-top: 1px dashed var(--color-border); }
+  .bp-verdict { font-weight: 800; font-size: 1.6rem; margin: 0; }
+  .bp-verdict.bp-hit { color: #7fd1a8; }
+  .bp-verdict.bp-miss { color: #f08a6c; }
+  .bp-off { color: var(--color-text-secondary); margin: 4px 0 18px; }
+  .bp-how { margin: 0 0 18px; max-width: 62ch; color: var(--color-text-primary); }
+  .bp-how strong { font-weight: 600; color: var(--color-accent); }
+  .bp-share { white-space: pre-wrap; background: var(--color-surface-raised); border: 1px solid var(--color-border); border-radius: 8px; padding: 12px 14px; font-size: .95rem; margin: 0 0 14px; font-family: var(--font-mono); }
+  .bp-foot { margin-top: 3rem; color: var(--color-text-secondary); font-size: .85rem; max-width: 62ch; }
+  @media (prefers-reduced-motion: no-preference) { .bp-result.bp-show { animation: bp-rise .35s ease-out; } @keyframes bp-rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } } }
+</style>

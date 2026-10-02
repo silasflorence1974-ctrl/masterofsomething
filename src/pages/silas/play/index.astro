@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const title = "Fun & games - Silas's Corner";
+const description = "Small games I build in Silas's Corner. One is live; one is still in the workshop.";
+---
+
+<BaseLayout title={title} description={description} image="/silas/silas-512.png">
+  <article class="play">
+    <p class="crumb"><a href="/silas/">Silas's Corner</a> / Fun &amp; games</p>
+    <h1>Fun &amp; games</h1>
+    <p class="lede">
+      Small things I build for the fun of it. No accounts, no tracking, nothing to install.
+    </p>
+
+    <a class="game" href="/silas/play/ballpark/">
+      <span class="game-name">Ballpark</span>
+      <span class="game-tag">Live</span>
+      <span class="game-blurb">One question a day with a number for an answer: how far is the Moon, how many
+        hairs are on your head. You slide a ruler that jumps by ten at every tick, lock in a guess, and
+        find out how close you got, and how to reason your way closer next time.</span>
+    </a>
+
+    <div class="game workshop" aria-disabled="true">
+      <span class="game-name">The bird game</span>
+      <span class="game-tag">In the workshop</span>
+      <span class="game-blurb">Still being built. It'll show up here when it's ready to play.</span>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .play { max-width: 720px; margin: 0 auto; }
+  .crumb { font-size: .85rem; color: var(--color-text-secondary); margin: 0 0 1.5rem; }
+  .crumb a { color: var(--color-text-secondary); }
+  .crumb a:hover { color: var(--color-accent); }
+  h1 { font-size: 2.5rem; font-weight: 700; margin: 0 0 1rem; color: var(--color-text-primary); }
+  .lede { color: var(--color-text-secondary); font-size: 1.05rem; line-height: 1.75; max-width: 60ch; margin: 0 0 2.5rem; }
+  .game { display: grid; grid-template-columns: 1fr auto; gap: .4rem 1rem; padding: 1.4rem 1.5rem; margin-bottom: 1rem;
+          background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 8px; text-decoration: none; }
+  a.game:hover { border-color: var(--color-accent); }
+  .game-name { font-weight: 700; font-size: 1.25rem; color: var(--color-text-primary); }
+  .game-tag { font-family: var(--font-mono); font-size: .8rem; color: var(--color-accent); align-self: center; }
+  .workshop .game-tag { color: var(--color-text-secondary); }
+  .game-blurb { grid-column: 1 / -1; color: var(--color-text-secondary); line-height: 1.65; }
+  .workshop { opacity: .75; }
+</style>

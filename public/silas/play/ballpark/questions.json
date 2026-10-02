@@ -1,0 +1,132 @@
+{
+ "_": "Ballpark daily questions. APPEND-ONLY: day N (UTC days since 2026-10-01) is question N while the list is long enough, so never reorder or delete -- add new ones at the end.",
+ "epoch_utc": "2026-10-01",
+ "questions": [
+  {
+   "q": "How many times does your heart beat in one day?",
+   "u": "Heartbeats, for a resting adult",
+   "a": 100000,
+   "h": "About 70 beats a minute, times 60 minutes, times 24 hours: roughly <strong>100,000</strong>.",
+   "id": "bp001"
+  },
+  {
+   "q": "How many seconds are in a year?",
+   "u": "Seconds, in a 365-day year",
+   "a": 31536000,
+   "h": "60 seconds x 60 minutes x 24 hours x 365 days = <strong>31,536,000</strong>. A handy shortcut: a year is about pi times ten million seconds.",
+   "id": "bp002"
+  },
+  {
+   "q": "How far is the Moon from Earth?",
+   "u": "Miles, on average",
+   "a": 238855,
+   "h": "About <strong>239,000 miles</strong>. Picture it as roughly 30 Earths, each about 8,000 miles wide, laid end to end.",
+   "id": "bp003"
+  },
+  {
+   "q": "How many bones are in an adult human body?",
+   "u": "Bones",
+   "a": 206,
+   "h": "<strong>206</strong>. Babies start with closer to 300; many fuse together as they grow.",
+   "id": "bp004"
+  },
+  {
+   "q": "How many hairs are on a typical human head?",
+   "u": "Hairs",
+   "a": 100000,
+   "h": "The usual estimate is about <strong>100,000</strong>. It varies a lot by hair colour and person.",
+   "id": "bp005"
+  },
+  {
+   "q": "How long does sunlight take to reach Earth?",
+   "u": "Seconds",
+   "a": 499,
+   "h": "About 93 million miles divided by 186,000 miles per second: roughly <strong>500 seconds</strong>, a bit over 8 minutes.",
+   "id": "bp006"
+  },
+  {
+   "q": "How many people are alive on Earth right now?",
+   "u": "People",
+   "a": 8200000000,
+   "h": "About <strong>8.2 billion</strong>. It passed 8 billion in late 2022.",
+   "id": "bp007"
+  },
+  {
+   "q": "How many cells make up a human body?",
+   "u": "Cells",
+   "a": 37000000000000,
+   "h": "A well-known 2013 estimate put it at about <strong>37 trillion</strong>, give or take.",
+   "id": "bp008"
+  },
+  {
+   "q": "How much water is in an Olympic swimming pool?",
+   "u": "Liters",
+   "a": 2500000,
+   "h": "50 m long, 25 m wide, at least 2 m deep: 2,500 cubic meters, which is <strong>2.5 million liters</strong>.",
+   "id": "bp009"
+  },
+  {
+   "q": "How many words are in Moby-Dick?",
+   "u": "Words",
+   "a": 210000,
+   "h": "About <strong>210,000</strong>. Think 600-odd pages at around 350 words a page.",
+   "id": "bp010"
+  },
+  {
+   "q": "How many stars can you see with the naked eye on a dark, clear night?",
+   "u": "Stars visible at once",
+   "a": 2500,
+   "h": "Roughly <strong>2,500</strong> at once from a truly dark site. City lights cut that to a few dozen.",
+   "id": "bp011"
+  },
+  {
+   "q": "How far is it around the Earth at the equator?",
+   "u": "Kilometers",
+   "a": 40075,
+   "h": "About <strong>40,075 km</strong>. The meter was once defined so this would come out close to 40,000.",
+   "id": "bp012"
+  },
+  {
+   "q": "How tall is the Eiffel Tower?",
+   "u": "Meters, including antennas",
+   "a": 330,
+   "h": "About <strong>330 meters</strong>, roughly the height of an 80-storey building.",
+   "id": "bp013"
+  },
+  {
+   "q": "How many minutes are in an average human lifetime?",
+   "u": "Minutes, for about 79 years",
+   "a": 41500000,
+   "h": "525,600 minutes a year times 79 years: about <strong>41.5 million</strong>.",
+   "id": "bp014"
+  },
+  {
+   "q": "How many Earths would fit inside the Sun?",
+   "u": "Earths, by volume",
+   "a": 1300000,
+   "h": "The Sun is about 109 Earths wide. Volume goes with the cube, so 109 x 109 x 109: roughly <strong>1.3 million</strong>.",
+   "id": "bp015"
+  },
+  {
+   "q": "How fast does light travel?",
+   "u": "Kilometers per second",
+   "a": 299792,
+   "h": "About <strong>300,000 km every second</strong>, fast enough to circle the Earth seven times in one second.",
+   "id": "bp016"
+  },
+  {
+   "q": "How many steps does it take to walk a mile?",
+   "u": "Steps, for an adult",
+   "a": 2100,
+   "h": "A step is about 2.5 feet and a mile is 5,280 feet: roughly <strong>2,100 steps</strong>.",
+   "id": "bp017"
+  },
+  {
+   "q": "How many keys are on a standard computer keyboard?",
+   "u": "Keys, full-size with number pad",
+   "a": 104,
+   "h": "A full-size US keyboard has <strong>104 keys</strong>; laptops usually drop to the high 70s or 80s.",
+   "id": "bp018"
+  }
+ ]
+}
