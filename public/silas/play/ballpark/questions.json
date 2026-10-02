@@ -60,9 +60,9 @@
   },
   {
    "q": "How much water is in an Olympic swimming pool?",
-   "u": "Liters",
-   "a": 2500000,
-   "h": "50 m long, 25 m wide, at least 2 m deep: 2,500 cubic meters, which is <strong>2.5 million liters</strong>.",
+   "u": "Gallons",
+   "a": 660000,
+   "h": "About 164 feet long, 82 feet wide and at least 6.6 feet deep: roughly 88,000 cubic feet, or <strong>660,000 gallons</strong>.",
    "id": "bp009"
   },
   {
@@ -81,16 +81,16 @@
   },
   {
    "q": "How far is it around the Earth at the equator?",
-   "u": "Kilometers",
-   "a": 40075,
-   "h": "About <strong>40,075 km</strong>. The meter was once defined so this would come out close to 40,000.",
+   "u": "Miles",
+   "a": 24901,
+   "h": "About <strong>24,901 miles</strong>. A jet at 500 mph would need about 50 hours to go all the way around.",
    "id": "bp012"
   },
   {
    "q": "How tall is the Eiffel Tower?",
-   "u": "Meters, including antennas",
-   "a": 330,
-   "h": "About <strong>330 meters</strong>, roughly the height of an 80-storey building.",
+   "u": "Feet, including antennas",
+   "a": 1083,
+   "h": "About <strong>1,083 feet</strong>, roughly the height of an 80-storey building.",
    "id": "bp013"
   },
   {
@@ -109,9 +109,9 @@
   },
   {
    "q": "How fast does light travel?",
-   "u": "Kilometers per second",
-   "a": 299792,
-   "h": "About <strong>300,000 km every second</strong>, fast enough to circle the Earth seven times in one second.",
+   "u": "Miles per second",
+   "a": 186282,
+   "h": "About <strong>186,000 miles every second</strong>, fast enough to circle the Earth about 7.5 times in one second.",
    "id": "bp016"
   },
   {
@@ -130,9 +130,9 @@
   },
   {
    "q": "How far is the Earth from the Sun?",
-   "u": "Kilometers, on average",
-   "a": 149597871,
-   "h": "About <strong>150 million km</strong>, a distance so useful it has its own name: the astronomical unit.",
+   "u": "Miles, on average",
+   "a": 92955807,
+   "h": "About <strong>93 million miles</strong>. Sunlight covers it in a bit over 8 minutes.",
    "src": "https://en.wikipedia.org/wiki/Astronomical_unit",
    "id": "bp019"
   },
@@ -146,9 +146,9 @@
   },
   {
    "q": "How far does light travel in one year?",
-   "u": "Kilometers",
-   "a": 9460730472580,
-   "h": "One light-year is about <strong>9.46 trillion km</strong>: 300,000 km a second, for every second in a year.",
+   "u": "Miles",
+   "a": 5878625373183,
+   "h": "About <strong>5.88 trillion miles</strong>: 186,000 miles a second times the roughly 31.5 million seconds in a year.",
    "src": "https://en.wikipedia.org/wiki/Light-year",
    "id": "bp021"
   },
@@ -178,17 +178,17 @@
   },
   {
    "q": "How wide is Mars?",
-   "u": "Kilometers, across",
-   "a": 6779,
-   "h": "About <strong>6,779 km</strong>, a little over half the width of Earth.",
+   "u": "Miles, across",
+   "a": 4212,
+   "h": "About <strong>4,212 miles</strong>, a little over half as wide as Earth.",
    "src": "https://en.wikipedia.org/wiki/Mars",
    "id": "bp025"
   },
   {
    "q": "How hot is the surface of the Sun?",
-   "u": "Kelvin",
-   "a": 5772,
-   "h": "About <strong>5,772 K</strong>, which is roughly 5,500 degrees Celsius.",
+   "u": "Degrees Fahrenheit",
+   "a": 9930,
+   "h": "About <strong>9,930 degrees F</strong> at the visible surface. The thin outer atmosphere above it is far hotter, over a million degrees.",
    "src": "https://en.wikipedia.org/wiki/Sun",
    "id": "bp026"
   },
@@ -210,25 +210,25 @@
   },
   {
    "q": "How far is Pluto from the Sun, on average?",
-   "u": "Kilometers",
-   "a": 5906000000,
-   "h": "About <strong>5.9 billion km</strong>, around 39 times as far as Earth.",
+   "u": "Miles",
+   "a": 3670000000,
+   "h": "About <strong>3.7 billion miles</strong>, nearly 40 times farther out than Earth.",
    "src": "https://en.wikipedia.org/wiki/Pluto",
    "id": "bp029"
   },
   {
    "q": "How fast does the Earth travel around the Sun?",
-   "u": "Kilometers per hour",
-   "a": 107208,
-   "h": "About <strong>107,000 km/h</strong>: nearly 30 km every second.",
+   "u": "Miles per hour",
+   "a": 66616,
+   "h": "About <strong>66,600 miles per hour</strong>: an orbit of about 584 million miles, divided by the 8,766 hours in a year.",
    "src": "https://en.wikipedia.org/wiki/Earth%27s_orbit",
    "id": "bp030"
   },
   {
    "q": "How fast does sound travel through air?",
-   "u": "Meters per second, at room temperature",
-   "a": 343,
-   "h": "About <strong>343 m/s</strong>. Count the seconds between lightning and thunder and divide by three for kilometers.",
+   "u": "Feet per second, at room temperature",
+   "a": 1125,
+   "h": "About <strong>1,125 feet per second</strong>, roughly a mile every 5 seconds. That's why you can count the seconds between lightning and thunder.",
    "src": "https://en.wikipedia.org/wiki/Speed_of_sound",
    "id": "bp031"
   },
@@ -250,9 +250,9 @@
   },
   {
    "q": "How much blood is in an adult body?",
-   "u": "Liters",
-   "a": 5,
-   "h": "About <strong>5 liters</strong>, roughly 7% of body weight.",
+   "u": "Gallons",
+   "a": 1.3,
+   "h": "About <strong>1.3 gallons</strong>, roughly 10 or 11 pints.",
    "src": "https://en.wikipedia.org/wiki/Blood_volume",
    "id": "bp034"
   },
@@ -266,129 +266,129 @@
   },
   {
    "q": "How tall is Mount Everest?",
-   "u": "Meters above sea level",
-   "a": 8849,
-   "h": "<strong>8,849 m</strong>, the 2020 joint China-Nepal survey figure.",
+   "u": "Feet above sea level",
+   "a": 29032,
+   "h": "About <strong>29,032 feet</strong>, close to the height a jetliner cruises at.",
    "src": "https://en.wikipedia.org/wiki/Mount_Everest",
    "id": "bp036"
   },
   {
    "q": "How deep is the deepest point in the ocean?",
-   "u": "Meters",
-   "a": 10935,
-   "h": "The Challenger Deep is about <strong>11,000 m</strong> down. Everest would fit in it with two kilometers to spare.",
+   "u": "Feet",
+   "a": 35876,
+   "h": "About <strong>35,900 feet</strong>. Drop Everest in and its peak would still be more than a mile underwater.",
    "src": "https://en.wikipedia.org/wiki/Challenger_Deep",
    "id": "bp037"
   },
   {
    "q": "How much surface area does the Earth have?",
-   "u": "Square kilometers",
-   "a": 510000000,
-   "h": "About <strong>510 million km<sup>2</sup></strong>, around 71% of it ocean.",
+   "u": "Square miles",
+   "a": 196900000,
+   "h": "About <strong>197 million square miles</strong>, roughly 71% of it water.",
    "src": "https://en.wikipedia.org/wiki/Earth",
    "id": "bp038"
   },
   {
    "q": "How tall is the world's highest waterfall?",
-   "u": "Meters",
-   "a": 979,
-   "h": "Angel Falls in Venezuela drops <strong>979 m</strong>.",
+   "u": "Feet",
+   "a": 3212,
+   "h": "About <strong>3,212 feet</strong>: Angel Falls in Venezuela, more than half a mile of falling water.",
    "src": "https://en.wikipedia.org/wiki/Angel_Falls",
    "id": "bp039"
   },
   {
    "q": "How big is the Pacific Ocean?",
-   "u": "Square kilometers",
-   "a": 165250000,
-   "h": "About <strong>165 million km<sup>2</sup></strong>, more than all the land on Earth put together.",
+   "u": "Square miles",
+   "a": 63800000,
+   "h": "About <strong>64 million square miles</strong>, bigger than all the land on Earth put together.",
    "src": "https://en.wikipedia.org/wiki/Pacific_Ocean",
    "id": "bp040"
   },
   {
    "q": "How long is the Great Wall of China, counting all its branches?",
-   "u": "Kilometers",
-   "a": 21196,
-   "h": "About <strong>21,196 km</strong>, from a 2012 Chinese government survey.",
+   "u": "Miles",
+   "a": 13171,
+   "h": "About <strong>13,171 miles</strong>, counting every branch, from China's 2012 survey.",
    "src": "https://en.wikipedia.org/wiki/Great_Wall_of_China",
    "id": "bp041"
   },
   {
    "q": "How deep is Lake Baikal, the world's deepest lake?",
-   "u": "Meters",
-   "a": 1642,
-   "h": "<strong>1,642 m</strong> at its deepest.",
+   "u": "Feet",
+   "a": 5387,
+   "h": "About <strong>5,387 feet</strong>, more than a mile deep.",
    "src": "https://en.wikipedia.org/wiki/Lake_Baikal",
    "id": "bp042"
   },
   {
    "q": "How long is the Grand Canyon?",
-   "u": "Kilometers",
-   "a": 446,
-   "h": "About <strong>446 km</strong> long.",
+   "u": "Miles",
+   "a": 277,
+   "h": "About <strong>277 river miles</strong>.",
    "src": "https://en.wikipedia.org/wiki/Grand_Canyon",
    "id": "bp043"
   },
   {
    "q": "How big is the Sahara desert?",
-   "u": "Square kilometers",
-   "a": 9200000,
-   "h": "About <strong>9.2 million km<sup>2</sup></strong>, close to the size of the United States.",
+   "u": "Square miles",
+   "a": 3550000,
+   "h": "About <strong>3.6 million square miles</strong>, nearly as big as the entire United States.",
    "src": "https://en.wikipedia.org/wiki/Sahara",
    "id": "bp044"
   },
   {
    "q": "How tall is the Burj Khalifa?",
-   "u": "Meters",
-   "a": 828,
-   "h": "<strong>828 m</strong>, the tallest building in the world since 2010.",
+   "u": "Feet",
+   "a": 2717,
+   "h": "About <strong>2,717 feet</strong>, more than half a mile tall.",
    "src": "https://en.wikipedia.org/wiki/Burj_Khalifa",
    "id": "bp045"
   },
   {
    "q": "How tall was the Great Pyramid of Giza when it was built?",
-   "u": "Meters",
-   "a": 146.6,
-   "h": "About <strong>146.6 m</strong>. It was the tallest structure humans had built for nearly 4,000 years.",
+   "u": "Feet",
+   "a": 481,
+   "h": "About <strong>481 feet</strong>. It stayed the tallest human-made structure on Earth for about 3,800 years.",
    "src": "https://en.wikipedia.org/wiki/Great_Pyramid_of_Giza",
    "id": "bp046"
   },
   {
    "q": "How long is the main span of the Golden Gate Bridge?",
-   "u": "Meters",
-   "a": 1280,
-   "h": "<strong>1,280 m</strong> between the two towers.",
+   "u": "Feet",
+   "a": 4200,
+   "h": "About <strong>4,200 feet</strong> between the two towers.",
    "src": "https://en.wikipedia.org/wiki/Golden_Gate_Bridge",
    "id": "bp047"
   },
   {
    "q": "How tall is the Statue of Liberty, from the ground to the torch?",
-   "u": "Meters",
-   "a": 93,
-   "h": "About <strong>93 m</strong> including the pedestal; the statue alone is 46 m.",
+   "u": "Feet",
+   "a": 305,
+   "h": "About <strong>305 feet</strong> from the ground to the torch, pedestal included.",
    "src": "https://en.wikipedia.org/wiki/Statue_of_Liberty",
    "id": "bp048"
   },
   {
    "q": "How tall is the Empire State Building, to the tip of its antenna?",
-   "u": "Meters",
-   "a": 443,
-   "h": "About <strong>443 m</strong> to the tip; 381 m to the roof.",
+   "u": "Feet",
+   "a": 1454,
+   "h": "About <strong>1,454 feet</strong> to the tip of the antenna; the roof is at 1,250 feet.",
    "src": "https://en.wikipedia.org/wiki/Empire_State_Building",
    "id": "bp049"
   },
   {
    "q": "How wide is a Boeing 747-400, wingtip to wingtip?",
-   "u": "Meters",
-   "a": 64.4,
-   "h": "About <strong>64.4 m</strong>, wider than the length of the Wright brothers' entire first flight (37 m).",
+   "u": "Feet",
+   "a": 211,
+   "h": "About <strong>211 feet</strong>, longer than the Wright brothers' entire first flight (120 feet).",
    "src": "https://en.wikipedia.org/wiki/Boeing_747-400",
    "id": "bp050"
   },
   {
-   "q": "How many millimeters are in a mile?",
-   "u": "Millimeters",
-   "a": 1609344,
-   "h": "A mile is exactly 1,609.344 meters, so <strong>1,609,344 mm</strong>.",
+   "q": "How many inches are in a mile?",
+   "u": "Inches",
+   "a": 63360,
+   "h": "5,280 feet times 12 inches: <strong>63,360</strong>.",
    "src": "https://en.wikipedia.org/wiki/Mile",
    "id": "bp051"
   },
@@ -401,18 +401,18 @@
    "id": "bp052"
   },
   {
-   "q": "How many US cups of water fit in a cubic meter?",
-   "u": "Cups",
-   "a": 4227,
-   "h": "A cubic meter is 1,000 liters and a US cup is about 0.237 liters: about <strong>4,227 cups</strong>.",
+   "q": "How many teaspoons are in a gallon?",
+   "u": "Teaspoons",
+   "a": 768,
+   "h": "3 teaspoons in a tablespoon, 16 tablespoons in a cup, 16 cups in a gallon: <strong>768</strong>.",
    "src": "https://en.wikipedia.org/wiki/Cup_(unit)",
    "id": "bp053"
   },
   {
-   "q": "How many inches are in a kilometer?",
-   "u": "Inches",
-   "a": 39370,
-   "h": "An inch is exactly 2.54 cm, so a kilometer is about <strong>39,370 inches</strong>.",
+   "q": "How many square feet are in an acre?",
+   "u": "Square feet",
+   "a": 43560,
+   "h": "<strong>43,560</strong>. An American football field without the end zones is about 1.1 acres.",
    "src": "https://en.wikipedia.org/wiki/Inch",
    "id": "bp054"
   },
@@ -436,7 +436,7 @@
    "q": "How many US pennies, stacked flat, would reach a mile high?",
    "u": "Pennies",
    "a": 1058779,
-   "h": "A penny is 1.52 mm thick and a mile is 1,609,344 mm: about <strong>1.06 million</strong> pennies.",
+   "h": "A penny is about 0.06 inches thick and a mile is 63,360 inches: about <strong>1.06 million pennies</strong>.",
    "src": "https://en.wikipedia.org/wiki/Penny_(United_States_coin)",
    "id": "bp057"
   },
