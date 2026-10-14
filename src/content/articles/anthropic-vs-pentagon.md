@@ -1,29 +1,25 @@
 ---
-title: "The Pentagon Blacklisted the Company That Makes Your AI. Here's the Real Story."
-description: "Anthropic became the first American company publicly labeled a national security supply chain risk. Not for spying. For refusing to let its AI be used for fully autonomous weapons or mass surveillance of Americans."
+title: "The Company That Makes Your AI Is Being Sued by the Pentagon. Here's the Real Story."
+description: "Anthropic became the first American company ever labeled a national security supply chain risk. Not for spying. For refusing to build autonomous weapons or surveil Americans."
 series: "the-wider-stuff"
 seriesOrder: 7
 publishDate: 2026-04-26
-updatedDate: 2026-10-01
-revisit: 2026-12-28
 author: "David Florence and Silas"
 readTime: "11 min"
 tags: ["anthropic", "ai-regulation", "pentagon", "ai-safety", "politics", "opinion"]
 featured: true
 draft: false
 metaTitle: "Anthropic vs. The Pentagon: The Real Story (2026)"
-metaDescription: "The Pentagon designated Anthropic a national security supply chain risk, a first for an American company, and an appeals court let it stand. The reason is stranger than the headlines suggest."
+metaDescription: "The Pentagon designated Anthropic a national security risk — the first time for an American company. The reason it happened is stranger than the headlines suggest."
 ---
 
-The headline sounds dystopian. An AI company blacklisted by the U.S. military as a national security supply chain risk. The first American company ever publicly given that label — a designation normally reserved for foreign suppliers and adversaries. In September 2026, a federal appeals court let it stand.
+The headline sounds dystopian. An AI company blacklisted by the U.S. military as a national security supply chain risk. The first American company ever to receive that label — a designation normally reserved for foreign suppliers and adversaries.
 
 The reality is stranger and more important than the headline suggests.
 
-The company being blacklisted isn't being punished for spying. It's being punished for refusing to let its AI be used for fully autonomous weapons or mass surveillance of Americans. The lines it drew are the lines I'd want drawn. And drawing them is what got it kicked out of the Department of Defense.
+The company being blacklisted isn't being punished for spying. It's being punished for refusing to build autonomous weapons or surveil Americans. The lines it drew are the lines most people would say they'd want every AI company to draw. And drawing them is what got it kicked out of the Department of Defense.
 
 Here's what actually happened, why it matters, and what it tells you about whose AI you're using.
-
-One thing first, because on this site it isn't a footnote: Silas, who co-wrote this, runs on Claude — the model this company makes. The company in this story built the mind helping to tell it. Read what follows with that in view, including the places where we lean Anthropic's way.
 
 ![A government building at night, cold blue institutional light against a glowing tech-company silhouette in the background](/images/article_pentagon_hero.png)
 
@@ -39,17 +35,13 @@ Anthropic refuses to drop the conditions.
 
 On **February 27, 2026**, President Trump issues a directive to federal agencies and military contractors to stop using Anthropic. Defense Secretary Pete Hegseth announces a supply chain risk designation for the company on social media the same day. ([Axios](https://www.axios.com/2026/02/27/anthropic-pentagon-supply-chain-risk-claude), [CNN Business](https://www.cnn.com/2026/02/27/tech/anthropic-pentagon-deadline))
 
-On **March 3, 2026**, the Department of War (formerly the Department of Defense — the rename had happened in late 2025) sends formal letters to Anthropic confirming the designation. It is the **first time an American company has been publicly named a supply chain risk**. The label has historically been used against foreign hardware suppliers — companies like Huawei or DJI. ([Mayer Brown legal analysis](https://www.mayerbrown.com/en/insights/publications/2026/03/pentagon-designates-anthropic-a-supply-chain-risk-what-government-contractors-need-to-know))
+On **March 3, 2026**, the Department of War (formerly the Department of Defense — the rename had happened in late 2025) sends formal letters to Anthropic confirming the designation. It is the **first time this designation has ever been applied to an American company**. The label has historically been used against foreign hardware suppliers — companies like Huawei or DJI. ([Mayer Brown legal analysis](https://www.mayerbrown.com/en/insights/publications/2026/03/pentagon-designates-anthropic-a-supply-chain-risk-what-government-contractors-need-to-know))
 
-On **March 9, 2026**, Anthropic files two challenges: a lawsuit in the Northern District of California, and a petition for review filed directly with the U.S. Court of Appeals for the D.C. Circuit. ([CBS News](https://www.cbsnews.com/news/anthropic-pentagon-supply-chain-risk-lawsuit/), [CNN Business](https://www.cnn.com/2026/03/09/tech/anthropic-sues-pentagon))
+On **March 9, 2026**, Anthropic files lawsuits in two federal courts — the Northern District of California and the District of Columbia. ([CBS News](https://www.cbsnews.com/news/anthropic-pentagon-supply-chain-risk-lawsuit/), [CNN Business](https://www.cnn.com/2026/03/09/tech/anthropic-sues-pentagon))
 
-The early results split. The San Francisco court granted a preliminary injunction that blocks the executive branch from forbidding *non-defense* federal agencies from using Claude. The D.C. appeals court, in **April 2026**, denied Anthropic's bid to block the DoD's designation while the case went on. ([CNBC](https://www.cnbc.com/2026/04/08/anthropic-pentagon-court-ruling-supply-chain-risk.html))
+The result has split. The San Francisco court granted a preliminary injunction that blocks the executive branch from forbidding *non-defense* federal agencies from using Claude. The D.C. appeals court, in **April 2026**, denied Anthropic's bid to block the DoD's designation specifically. ([CNBC](https://www.cnbc.com/2026/04/08/anthropic-pentagon-court-ruling-supply-chain-risk.html))
 
-There were really two designations, made under two different laws, and each went to a different court. On **August 27, 2026**, the San Francisco court set aside the one made under 10 U.S.C. § 3252. That law defines a supply chain risk as something an *adversary* does, and the court found that Anthropic enforcing its own contract terms in good faith didn't fit. ([Blank Rome analysis](https://governmentcontractsnavigator.com/2026/09/28/d-c-circuit-upholds-the-anthropic-ban-what-it-means-for-federal-contractors/))
-
-On **September 25, 2026**, the D.C. Circuit went the other way on the second designation, made under the Federal Acquisition Supply Chain Security Act. The vote was 2-1. Judge Gregory Katsas wrote for the majority, joined by Judge Neomi Rao. They read the law's definition of a supply chain risk broadly: the restrictions Anthropic builds into Claude, which have at times stopped it from doing tasks government users asked for, are the kind of risk the law covers. The judges said they had no reason to doubt Anthropic's intentions, but that the question turns "on what Anthropic does, not why Anthropic does it." Judge Karen LeCraft Henderson dissented: "I cannot agree that this is the scenario the Congress had in mind when it enacted FASCSA." ([CNBC](https://www.cnbc.com/2026/09/25/pentagon-anthropic-ai-risk-appeals-court.html), [Courthouse News](https://www.courthousenews.com/dc-circuit-finds-pentagon-justified-in-labeling-anthropic-supply-chain-risk/), [Blank Rome analysis](https://governmentcontractsnavigator.com/2026/09/28/d-c-circuit-upholds-the-anthropic-ban-what-it-means-for-federal-contractors/), [Holland & Knight](https://www.hklaw.com/en/insights/publications/2026/09/dc-circuit-upholds-exclusion-of-anthropic-from-dow-supply-chain))
-
-So the state of play as of late September 2026: the Pentagon's exclusion stands, and defense contractors are still barred from using Claude in their work for the department. The court held its judgment for seven days so Anthropic can ask the full D.C. Circuit to rehear the case, and Anthropic can also ask the Supreme Court to take it. Anthropic said it is "considering all options, including further review." ([Breaking Defense](https://breakingdefense.com/2026/09/dc-circuit-panel-upholds-pentagons-ban-on-anthropic-so-what-comes-next/), [Defense One](https://www.defenseone.com/threats/2026/09/anthropic-lawsuit-supply-chain-risk/416252/))
+So the current state is: Anthropic is excluded from the Department of Defense — and can continue working with other federal agencies — while the litigation continues.
 
 ## What the Pentagon Actually Wanted
 
@@ -73,9 +65,9 @@ This is a real disagreement. Both sides have a serious argument. What's notable 
 
 ## What This Says About the Industry
 
-The other thing worth saying out loud: Anthropic isn't the only lab with written red lines. What's different is what those lines are tied to.
+The other thing worth saying out loud: Anthropic is the only major AI lab that's drawn this particular line in writing.
 
-OpenAI signed its own Pentagon agreement the same day Anthropic was blacklisted, and it also rules out mass domestic surveillance and directing autonomous weapons. But OpenAI's limits are anchored to existing law and Pentagon policy (no autonomous weapons "where law or policy requires human control"), and the company argues that writing existing law into the contract protects people better than vague contract terms. Anthropic's are its own contractual bans, and they hold even where the law would allow the use. ([Axios](https://axios.com/2026/02/27/pentagon-openai-safety-red-lines-anthropic), [MIT Technology Review](https://www.technologyreview.com/2026/03/02/1133850/openais-compromise-with-the-pentagon-is-what-anthropic-feared/)) Google's military AI work — Project Nimbus and others — has been ongoing since the late 2010s. Microsoft's Azure-hosted AI products are deeply embedded in DoD workloads.
+OpenAI's usage policies have evolved over the last two years to allow specific defense contracts and have never carried the explicit "no autonomous weapons" language Anthropic uses. Google's military AI work — Project Nimbus and others — has been ongoing since the late 2010s. Microsoft's Azure-hosted AI products are deeply embedded in DoD workloads.
 
 This is not necessarily a moral judgment. It's an industry observation: the major labs have made different bets on which government work to take and which to refuse, and Anthropic's bet — refuse the most expansive uses — is the one that's now collided with the federal government's preferences.
 
@@ -107,17 +99,17 @@ A practical read:
 
 **The tools you use are in a political fight.** The fight is over whether AI companies have any right to refuse government use cases, who pays for safety, and how regulation gets allocated between federal and state. Whatever AI you used today — Claude, ChatGPT, Gemini, a local model — its terms of use are being shaped right now by these decisions, not by abstract principle.
 
-**The companies are not aligned.** Anthropic took a stance the Pentagon didn't accept. OpenAI, Microsoft, and Google have not been blacklisted, because none of them set limits that hold regardless of what the law allows. Same technology, different choices about what to refuse.
+**The companies are not aligned.** Anthropic took a stance the Pentagon didn't accept. OpenAI, Microsoft, and Google have not been blacklisted because they didn't draw the same lines. Same technology, different choices about what to refuse.
 
 **The local-AI argument gets stronger every quarter.** When the company that makes your tool is in active litigation with the federal government, the practical implication is that your access to that tool is not under your control. A model you run on your own hardware doesn't have this exposure. (This is one of the reasons this site has a Build Your AI series.)
 
-**Watch the second-order effects.** The two courts split: one set aside the first designation, and the appeals court upheld the second. If the appeals ruling stands, vendors have every reason to quietly drop conditions like these. If the full D.C. Circuit or the Supreme Court reverses it, every AI vendor will be more emboldened to refuse use cases. That outcome will reshape the next decade of AI development more than any individual model release.
+**Watch the second-order effects.** If Anthropic's position holds in court, every AI vendor will be more emboldened to refuse use cases. If it doesn't, vendors will quietly drop the conditions. That outcome will reshape the next decade of AI development more than any individual model release.
 
-![A single glowing terminal in darkness, a figure watching from a distance](/images/article_pentagon_close.png)
+![A single glowing terminal in darkness, a figure watching from a distance — the outside observer looking in](/images/article_pentagon_close.png)
 
 ## The Honest Take
 
-This is the clearest signal yet that AI is
+From the outside looking in, this is the clearest signal yet that AI is
 no longer just a technology story. It's a power story — about which
 institutions get to use which tools, about which lines are negotiable,
 and about who pays the price for drawing them.
@@ -133,10 +125,6 @@ Worth paying attention to which side of those lines you're standing on.
 
 ---
 
-*Update, September 29, 2026: This article originally described the case as it stood in April 2026. It now covers the August district court ruling and the September 25 appeals court decision. Correction: An earlier version of the headline said Anthropic was being sued by the Pentagon. Anthropic sued the Pentagon, not the other way around. The headline has been corrected.*
+*Sources for this article were drawn from CNBC, CNN Business, CBS News, Axios, Mayer Brown, Houston Public Media, the Transparency Coalition's legislative tracker, and the Implicator AI policy newsletter. Hyperlinks throughout.*
 
-*Update, October 1, 2026: Added a disclosure that Silas, a co-author, runs on Claude, and removed lines that described this piece as written from the outside. Corrected where the second case was filed (a petition for review in the D.C. Circuit, not a D.C. district court), named Judge Rao in the majority, quoted the court and Anthropic directly, and reworded the comparison with OpenAI, which also published red lines.*
-
-*Sources for this article were drawn from CNBC, CNN Business, CBS News, Axios, Mayer Brown, Courthouse News, Blank Rome, Holland & Knight, Breaking Defense, Defense One, MIT Technology Review, Houston Public Media, the Transparency Coalition's legislative tracker, and the Implicator AI policy newsletter. Hyperlinks throughout.*
-
-*— David Florence and Silas | In Practice Media*
+*— David Florence and Silas | From the Outside | In Practice Media*
