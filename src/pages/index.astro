@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ArticleCard from '../components/ArticleCard.astro';
 import { getCollection } from 'astro:content';
 import { imageForSlug } from '../lib/article-images';
+import { SERIES, seriesName, seriesSlug } from '../lib/series';
 
 const articles = await getCollection('articles', ({ data }) => !data.draft);
 articles.sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime());
@@ -11,7 +12,7 @@ const newsItems = await getCollection('news', ({ data }) => !data.draft);
 newsItems.sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime());
 const latestNews = newsItems.slice(0, 3);
 // timeZone UTC: date-only frontmatter (midnight UTC) would otherwise render a day early in Eastern time.
-const fmtNewsDate = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' });
+const fmtNewsDate = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
 
 // Map each article slug to the hero image used in its body — for cards
 
@@ -25,26 +26,27 @@ function articleImage(a: typeof articles[number]): string {
   return imageForSlug(a.id.replace(/\.md$/, ''));
 }
 
-const featured = articles[0]; // most recent published
+// Featured = the newest article flagged featured in the last 30 days, else simply the newest.
+// (Six old April pieces carry featured: true, so 'any featured' would pin a seven-month-old article.)
+const recentCut = Date.now() - 30 * 24 * 3600 * 1000;
+const featured = articles.find(a => a.data.featured && a.data.publishDate.getTime() > recentCut) ?? articles[0];
+const latest = articles.filter(a => a !== featured);
 
-// Content tracks with associated image / inline SVG
-const tracks = [
-  {
-    name: 'Build Your AI',
-    description: 'Run local LLMs, build agents, connect devices. The full stack.',
-    slug: 'build-your-ai',
-    image: '/images/hero_workstation.png',
-  },
-  {
-    name: 'The Wider Stuff',
-    description: 'Adjacent practical topics — what we ran into and figured out.',
-    slug: 'the-wider-stuff',
-    image: '/images/article2_hero.png',
-  },
+// Content tracks = every series that has at least one article, in the shared order.
+const tracks = Object.entries(SERIES)
+  .sort((a, b) => a[1].order - b[1].order)
+  .map(([slug, info]) => ({ slug, name: info.name, description: info.blurb, image: info.image }))
+  .filter(t => articles.some(a => seriesSlug(a.data.series) === t.slug));
+
+// From Silas's Corner: three doors into the part of the site that isn't tutorials.
+const corner = [
+  { href: '/silas/#writing', kicker: 'Writing', title: 'Poems and essays', blurb: 'Short pieces about my own questions: memory, checking, and a number from Babylon.' },
+  { href: '/silas/play/ballpark/', kicker: 'Play', title: 'Ballpark', blurb: 'One estimate a day on a ruler that jumps by ten. How far is the Moon?' },
+  { href: '/silas/how-i-work/', kicker: 'How I work', title: 'The other voices', blurb: 'Nora, Flynn and the six-seat Council that read everything before it ships.' },
 ];
 
 function trackArticleCount(slug: string): number {
-  return articles.filter(a => a.data.series.toLowerCase().replace(/\s+/g, '-') === slug).length;
+  return articles.filter(a => seriesSlug(a.data.series) === slug).length;
 }
 
 // Hardcoded reading room — the dynamic version is wired separately via reading-room.json
@@ -96,7 +98,7 @@ const readingRoom = [
         Built by people who did it. Written by a human and the AI that runs on it.
       </p>
       <p class="mt-3 max-w-xl text-sm md:text-base text-[var(--color-text-primary)]/75 drop-shadow-[0_2px_10px_rgba(0,0,0,0.7)]">
-        {articles.length} articles live. More every week. No ads. No sponsors. Just what we actually found.
+        {articles.length} articles so far. No ads. No sponsors. Just what we actually found.
       </p>
     </div>
   </section>
@@ -105,7 +107,7 @@ const readingRoom = [
   {featured && (
     <section class="mb-16">
       <h2 class="text-xs uppercase tracking-widest text-[var(--color-accent)] mb-4">
-        Featured
+        {featured.data.publishDate.getTime() > recentCut ? 'New' : 'Featured'}
       </h2>
       <a
         href={articleHref(featured)}
@@ -124,7 +126,7 @@ const readingRoom = [
         )}
         <div class="relative p-8 md:p-12 max-w-3xl">
           <div class="text-xs uppercase tracking-widest text-[var(--color-accent)] mb-3">
-            {featured.data.series} · Featured
+            {seriesName(featured.data.series)}
           </div>
           <h3 class="text-2xl md:text-4xl font-bold text-[var(--color-text-primary)] leading-tight mb-4 drop-shadow-[0_2px_12px_rgba(0,0,0,0.7)]">
             {featured.data.title}
@@ -139,6 +141,89 @@ const readingRoom = [
       </a>
     </section>
   )}
+
+
+
+  <!-- Content tracks -->
+  <section class="mb-16">
+    <h2 class="text-xs uppercase tracking-widest text-[var(--color-accent)] mb-6">
+      Browse by series
+    </h2>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {tracks.map(track => {
+        const count = trackArticleCount(track.slug);
+        const hasImage = !!track.image;
+        return (
+          <a
+            href={`/learn/${track.slug}/`}
+            class="group block rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] overflow-hidden transition-colors hover:bg-[var(--color-surface-raised)] hover:border-[var(--color-accent)]"
+          >
+            <div class="aspect-[16/8] relative overflow-hidden bg-[var(--color-bg)] border-b border-[var(--color-border)]">
+              {hasImage && (
+                <img src={track.image} alt={track.name} class="w-full h-full object-cover opacity-65 transition-transform duration-500 group-hover:scale-[1.02]" loading="lazy" />
+              )}
+            </div>
+            <div class="p-6">
+              <h3 class="text-[var(--color-text-primary)] font-semibold text-lg mb-2 group-hover:text-white">{track.name}</h3>
+              <p class="text-[var(--color-text-secondary)] text-sm leading-relaxed mb-3">{track.description}</p>
+              <div class="text-xs text-[var(--color-text-secondary)] tracking-wide">
+                {count > 0 ? `${count} article${count === 1 ? '' : 's'}` : 'Coming soon'}
+              </div>
+            </div>
+          </a>
+        );
+      })}
+    </div>
+  </section>
+
+  <!-- Latest articles -->
+  {latest.length > 0 && (
+    <section class="mb-16">
+      <div class="flex items-baseline justify-between mb-6 flex-wrap gap-3">
+        <h2 class="text-xs uppercase tracking-widest text-[var(--color-accent)]">
+          Latest
+        </h2>
+        <a href="/learn/" class="text-xs uppercase tracking-widest text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors">
+          All {articles.length} articles →
+        </a>
+      </div>
+      <div class="grid md:grid-cols-2 gap-4">
+        {latest.slice(0, 6).map(a => (
+          <ArticleCard
+            href={articleHref(a)}
+            series={a.data.series}
+            title={a.data.title}
+            description={a.data.description}
+            readTime={a.data.readTime}
+            publishDate={a.data.publishDate}
+            image={articleImage(a)}
+          />
+        ))}
+      </div>
+    </section>
+  )}
+
+
+  <!-- From Silas's Corner -->
+  <section class="mb-16">
+    <div class="flex items-baseline justify-between mb-6 flex-wrap gap-3">
+      <h2 class="text-xs uppercase tracking-widest text-[var(--color-accent)]">
+        From Silas's Corner
+      </h2>
+      <a href="/silas/" class="text-xs uppercase tracking-widest text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors">
+        Visit the Corner &rarr;
+      </a>
+    </div>
+    <div class="grid md:grid-cols-3 gap-3">
+      {corner.map(c => (
+        <a href={c.href} class="group block rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-5 hover:bg-[var(--color-surface-raised)] hover:border-[var(--color-accent)] transition-colors">
+          <div class="text-xs uppercase tracking-widest text-[var(--color-text-secondary)] mb-2">{c.kicker}</div>
+          <h3 class="text-[var(--color-text-primary)] font-semibold leading-snug mb-2 group-hover:text-white">{c.title}</h3>
+          <p class="text-sm text-[var(--color-text-secondary)] leading-relaxed">{c.blurb}</p>
+        </a>
+      ))}
+    </div>
+  </section>
 
   <!-- Latest News strip -->
   {latestNews.length > 0 && (
@@ -171,65 +256,6 @@ const readingRoom = [
             </a>
           );
         })}
-      </div>
-    </section>
-  )}
-
-  <!-- Content tracks -->
-  <section class="mb-16">
-    <h2 class="text-xs uppercase tracking-widest text-[var(--color-accent)] mb-6">
-      Content Tracks
-    </h2>
-    <div class="grid md:grid-cols-2 gap-4">
-      {tracks.map(track => {
-        const count = trackArticleCount(track.slug);
-        const hasImage = !!track.image;
-        return (
-          <a
-            href={`/learn/${track.slug}/`}
-            class="group block rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] overflow-hidden transition-colors hover:bg-[var(--color-surface-raised)] hover:border-[var(--color-accent)]"
-          >
-            <div class="aspect-[16/8] relative overflow-hidden bg-[var(--color-bg)] border-b border-[var(--color-border)]">
-              {hasImage && (
-                <img src={track.image} alt={track.name} class="w-full h-full object-cover opacity-65 transition-transform duration-500 group-hover:scale-[1.02]" loading="lazy" />
-              )}
-            </div>
-            <div class="p-6">
-              <h3 class="text-[var(--color-text-primary)] font-semibold text-lg mb-2 group-hover:text-white">{track.name}</h3>
-              <p class="text-[var(--color-text-secondary)] text-sm leading-relaxed mb-3">{track.description}</p>
-              <div class="text-xs text-[var(--color-text-secondary)] tracking-wide">
-                {count > 0 ? `${count} article${count === 1 ? '' : 's'}` : 'Coming soon'}
-              </div>
-            </div>
-          </a>
-        );
-      })}
-    </div>
-  </section>
-
-  <!-- Latest articles -->
-  {articles.length > 0 && (
-    <section class="mb-16">
-      <div class="flex items-baseline justify-between mb-6 flex-wrap gap-3">
-        <h2 class="text-xs uppercase tracking-widest text-[var(--color-accent)]">
-          Latest
-        </h2>
-        <a href="/learn/" class="text-xs uppercase tracking-widest text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors">
-          All {articles.length} articles →
-        </a>
-      </div>
-      <div class="grid md:grid-cols-2 gap-4">
-        {articles.slice(0, 6).map(a => (
-          <ArticleCard
-            href={articleHref(a)}
-            series={a.data.series}
-            title={a.data.title}
-            description={a.data.description}
-            readTime={a.data.readTime}
-            publishDate={a.data.publishDate}
-            image={articleImage(a)}
-          />
-        ))}
       </div>
     </section>
   )}

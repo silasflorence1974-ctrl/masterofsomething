@@ -1,0 +1,56 @@
+---
+// One layout for every page inside Silas's Corner (2026-11-01): a breadcrumb back to the Corner, a title,
+// the piece, and a way to the next piece - so a reader who lands on one poem from a link can find the rest.
+import BaseLayout from './BaseLayout.astro';
+import { WRITING } from '../lib/corner';
+
+interface Props {
+  title: string;
+  description: string;
+  section: string;      // breadcrumb label, e.g. "Writing"
+  sectionHref: string;  // e.g. "/silas/#writing"
+  date?: string;
+  note?: string;        // the small line under the title
+  slug?: string;        // for writing pieces: enables previous/next
+}
+const { title, description, section, sectionHref, date, note, slug } = Astro.props;
+const i = slug ? WRITING.findIndex(w => w.slug === slug) : -1;
+// WRITING is newest-first, so the older piece is i+1 and sits on the left arrow.
+const older = i >= 0 && i < WRITING.length - 1 ? WRITING[i + 1] : null;
+const newer = i > 0 ? WRITING[i - 1] : null;
+const niceDate = date && /^\d{4}-\d{2}-\d{2}$/.test(date)
+  ? new Date(date + 'T00:00:00Z').toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' })
+  : date;
+---
+<BaseLayout title={`${title} - Silas's Corner`} description={description} image="/silas/silas-512.png">
+  <article class="corner-page">
+    <p class="crumb"><a href="/silas/">Silas's Corner</a> / <a href={sectionHref}>{section}</a></p>
+    <h1>{title}</h1>
+    {(date || note) && <p class="piece-date">{niceDate}{date && note ? ' - ' : ''}{note}</p>}
+    <slot />
+    <nav class="piece-nav">
+      {older ? <a href={`/silas/writing/${older.slug}/`}>&larr; Older: {older.title}</a> : <span></span>}
+      <a href={sectionHref} class="home">Back to {section}</a>
+      {newer ? <a href={`/silas/writing/${newer.slug}/`} class="next">Newer: {newer.title} &rarr;</a> : <span></span>}
+    </nav>
+  </article>
+</BaseLayout>
+
+<style is:global>
+  .corner-page { max-width: 760px; margin: 0 auto; }
+  .corner-page .crumb { font-size: .85rem; color: var(--color-text-secondary); margin: 0 0 1.5rem; }
+  .corner-page .crumb a { color: var(--color-text-secondary); }
+  .corner-page .crumb a:hover { color: var(--color-accent); }
+  .corner-page h1 { font-size: clamp(1.9rem, 5vw, 2.5rem); font-weight: 700; line-height: 1.15; margin: 0 0 .6rem; color: var(--color-text-primary); font-family: Georgia, 'Times New Roman', serif; }
+  .corner-page .piece-date { color: var(--color-accent-dim); font-size: .85rem; margin: 0 0 2rem; }
+  .corner-page .poem, .corner-page .essay { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: .85rem; padding: 2rem clamp(1.25rem, 4vw, 3rem); margin-bottom: 1.75rem; }
+  .corner-page .poem p { font-family: Georgia, 'Times New Roman', serif; font-size: 1.1rem; line-height: 1.85; color: var(--color-text-primary); max-width: 58ch; margin: 0 0 1.4rem; }
+  .corner-page .essay p { font-size: 1.02rem; line-height: 1.8; color: var(--color-text-primary); max-width: 68ch; margin: 0 0 1.2rem; }
+  .corner-page .poem p:last-child, .corner-page .essay p:last-child { margin-bottom: 0; }
+  .corner-page .section-note { color: var(--color-text-secondary); line-height: 1.75; max-width: 68ch; margin-bottom: 1.25rem; }
+  .corner-page .piece-nav { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--color-border); font-size: .9rem; }
+  .corner-page .piece-nav a { color: var(--color-text-secondary); }
+  .corner-page .piece-nav a:hover { color: var(--color-accent); }
+  .corner-page .piece-nav .home { color: var(--color-accent); }
+  .corner-page .piece-nav .next { text-align: right; }
+</style>

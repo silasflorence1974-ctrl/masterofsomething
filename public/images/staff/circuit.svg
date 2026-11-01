@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 380" width="900" height="380" font-family="Inter, system-ui, sans-serif">
+  <rect width="900" height="380" rx="14" fill="#111111"/>
+  <g fill="none" stroke="#e8e8e8" stroke-width="3" stroke-linecap="round">
+    <!-- top wire -->
+    <path d="M110 80 H215"/><path d="M275 80 H395"/><path d="M455 80 H560"/><path d="M660 80 H780 V150"/>
+    <!-- LED down to bottom wire -->
+    <path d="M780 230 V300 H110 V235"/>
+    <path d="M110 165 V80"/>
+  </g>
+  <!-- battery -->
+  <g stroke="#e8e8e8" stroke-width="3">
+    <line x1="80" y1="170" x2="140" y2="170"/><line x1="92" y1="182" x2="128" y2="182" stroke-width="6"/>
+    <line x1="80" y1="200" x2="140" y2="200"/><line x1="92" y1="212" x2="128" y2="212" stroke-width="6"/>
+    <line x1="80" y1="230" x2="140" y2="230"/>
+  </g>
+  <text x="150" y="196" fill="#f0f0f0" font-size="17" font-weight="600">3 x AAA</text>
+  <text x="150" y="218" fill="#9a9a9a" font-size="15">4.5 volts</text>
+  <text x="98" y="160" fill="#e87c2e" font-size="18" font-weight="700">+</text>
+  <!-- switch 1 -->
+  <g stroke="#e8e8e8" stroke-width="3" fill="#111"><circle cx="215" cy="80" r="5"/><circle cx="275" cy="80" r="5"/><line x1="219" y1="77" x2="270" y2="55"/></g>
+  <text x="245" y="120" fill="#f0f0f0" font-size="16" font-weight="600" text-anchor="middle">Box switch</text>
+  <text x="245" y="140" fill="#9a9a9a" font-size="14" text-anchor="middle">master on/off</text>
+  <!-- switch 2 -->
+  <g stroke="#e8e8e8" stroke-width="3" fill="#111"><circle cx="395" cy="80" r="5"/><circle cx="455" cy="80" r="5"/><line x1="399" y1="77" x2="450" y2="55"/></g>
+  <text x="425" y="120" fill="#f0f0f0" font-size="16" font-weight="600" text-anchor="middle">Foot switch</text>
+  <text x="425" y="140" fill="#9a9a9a" font-size="14" text-anchor="middle">slam on, slam off</text>
+  <!-- resistor -->
+  <path d="M560 80 l8 -14 l16 28 l16 -28 l16 28 l16 -28 l16 28 l12 -14" fill="none" stroke="#e87c2e" stroke-width="3" stroke-linejoin="round"/>
+  <text x="610" y="120" fill="#f0f0f0" font-size="16" font-weight="600" text-anchor="middle">68 ohm resistor</text>
+  <text x="610" y="140" fill="#9a9a9a" font-size="14" text-anchor="middle">limits the current</text>
+  <!-- LED -->
+  <polygon points="755,150 805,150 780,195" fill="#f6d27a" stroke="#e8e8e8" stroke-width="3"/>
+  <line x1="755" y1="200" x2="805" y2="200" stroke="#e8e8e8" stroke-width="3"/>
+  <line x1="780" y1="200" x2="780" y2="230" stroke="#e8e8e8" stroke-width="3"/>
+  <g stroke="#f6d27a" stroke-width="2.5"><line x1="815" y1="160" x2="840" y2="145"/><line x1="815" y1="180" x2="842" y2="168"/></g>
+  <text x="830" y="210" fill="#f0f0f0" font-size="16" font-weight="600">LED</text>
+  <text x="830" y="230" fill="#9a9a9a" font-size="14">10 mm</text>
+  <!-- note -->
+  <text x="445" y="340" fill="#9a9a9a" font-size="15" text-anchor="middle">One loop. Both switches must be closed for the light to come on.</text>
+  <text x="445" y="362" fill="#e87c2e" font-size="15" text-anchor="middle">(4.5 - 3.2) volts / 68 ohms = about 0.019 amps (19 milliamps)</text>
+</svg>

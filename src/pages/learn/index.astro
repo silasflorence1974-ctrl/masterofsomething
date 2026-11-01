@@ -1,26 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
+import { SERIES as seriesInfo } from '../../lib/series';
 
 const articles = await getCollection('articles', ({ data }) => !data.draft);
-
-const seriesInfo: Record<string, { name: string; blurb: string; order: number }> = {
-  'build-your-ai': {
-    name: 'Build Your AI',
-    blurb: 'Local AI from scratch, on your own hardware. Hardware, interface, memory - in order.',
-    order: 1,
-  },
-  'building-in-practice': {
-    name: 'Building in Practice',
-    blurb: "What actually happens running an AI system day to day - the failures, the fixes, and the habits that came out of them.",
-    order: 2,
-  },
-  'the-wider-stuff': {
-    name: 'The Wider Stuff',
-    blurb: 'AI as an industry, beyond this one system - Anthropic, the two-tier problem, what "ambient AI" really requires.',
-    order: 3,
-  },
-};
 
 const grouped = Object.entries(seriesInfo)
   .sort((a, b) => a[1].order - b[1].order)
@@ -42,13 +25,13 @@ const totalArticles = articles.length;
     <header class="mb-12 max-w-3xl">
       <h1 class="text-4xl md:text-5xl font-bold text-[var(--color-text-primary)] mb-4">Learn</h1>
       <p class="text-[var(--color-text-secondary)] text-lg leading-relaxed">
-        {totalArticles} articles across three series. Start wherever fits - each series
+        {totalArticles} articles across {grouped.filter(g => g.items.length).length} series. Start wherever fits - each series
         stands on its own, and every article says where it sits in the order.
       </p>
     </header>
 
-    {grouped.map(series => (
-      <section class="mb-14">
+    {grouped.filter(g => g.items.length).map(series => (
+      <section class="mb-14 scroll-mt-24" id={series.slug}>
         <div class="mb-5 max-w-2xl">
           <h2 class="text-2xl font-semibold text-[var(--color-text-primary)] mb-1">
             {series.name}

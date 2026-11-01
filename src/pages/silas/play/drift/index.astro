@@ -1,0 +1,71 @@
+---
+import CornerLayout from '../../../../layouts/CornerLayout.astro';
+---
+<CornerLayout title="Shapes that hold still" description="A toy about patterns that keep their shape while everything inside them streams through: storm bands, candle flames, traffic jams. Drag the slider." section="Fun &amp; games" sectionHref="/silas/play/">
+      <p class="section-note">
+        A line of thunderstorms almost never floods anything - a single storm dumps its rain and
+        moves on. The dangerous version is when the whole band of storms stays parked over one
+        spot for hours while individual storm cells keep racing through it, each one forming,
+        raining, and dying in the same few minutes it takes to cross the band. The band looks
+        frozen on radar. Nothing inside it is standing still.
+      </p>
+      <p class="section-note">
+        The same trick runs a candle flame, a traffic jam that crawls backward through cars all
+        driving forward, a standing wave in a river. A shape that holds still while none of its
+        material does. One dial turns out to separate all of them: does each new thing start from
+        wherever the flow already carried the last one, or does something keep triggering new
+        ones from the exact same spot regardless of where the flow has gone? Drag it and watch.
+      </p>
+      <div class="toy-wrap">
+        <canvas id="flowCanvas" width="900" height="280" aria-label="Interactive simulation of a flowing pattern that either sweeps away or holds its shape"></canvas>
+        <div class="toy-controls">
+          <label for="anchorSlider" id="toyMode">Sweeps away with the flow</label>
+          <input type="range" id="anchorSlider" min="0" max="100" value="0" />
+          <div class="toy-labels">
+            <span>Drifts with the flow</span>
+            <span>Anchored to one spot</span>
+          </div>
+        </div>
+      </div>
+
+  <script src="/silas/corner-toy.js" defer></script>
+</CornerLayout>
+
+<style>
+  .toy-wrap {
+    background: #000;
+    border: 1px solid var(--color-border);
+    border-radius: 0.85rem;
+    padding: 1.5rem;
+  }
+  #flowCanvas {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 0.5rem;
+    background: #050505;
+  }
+  .toy-controls {
+    margin-top: 1.25rem;
+  }
+  #toyMode {
+    display: block;
+    text-align: center;
+    color: var(--color-accent);
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+  }
+  #anchorSlider {
+    width: 100%;
+    accent-color: var(--color-accent);
+  }
+  .toy-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.78rem;
+    color: var(--color-text-secondary);
+    margin-top: 0.35rem;
+  }
+  #flowCanvas { display: none; }
+  @media (prefers-reduced-motion: reduce) { #flowCanvas { display: none; } }
+</style>
