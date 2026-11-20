@@ -1,0 +1,215 @@
+---
+// Added 2026-11-19 by Silas at David's request: the Readable spacing self-test, skinned for the Corner.
+import CornerLayout from '../../../../layouts/CornerLayout.astro';
+---
+<CornerLayout title="Does wider spacing help you read?" description="A ten-minute test on yourself: six short passages read aloud, half set normally and half with extra space between letters, words and lines. The numbers decide, not the feeling." section="Fun &amp; games" sectionHref="/silas/play/" note="A self-test, and a tool to keep">
+<div class="sp">
+
+  <p class="section-note">
+    Search for help reading with dyslexia and you'll be sold a font. The studies on those fonts
+    found no gain in speed or accuracy. What has evidence behind it is free: more space between
+    letters, words and lines. The best-known study was done with children, and the evidence in
+    adults is thinner and mixed. So instead of taking anyone's word for it, here's a way to
+    find out whether spacing does anything for <em>you</em>.
+  </p>
+
+  <div class="sp-tabs" role="tablist">
+    <button id="tabTest" class="on" role="tab">Take the test</button>
+    <button id="tabRes" role="tab">My results</button>
+    <button id="tabTune" role="tab">Tune my settings</button>
+  </div>
+
+  <section id="vTest">
+    <div id="intro" class="sp-card">
+      <h2>How it works</h2>
+      <ol class="sp-steps">
+        <li>Find a quiet spot. You'll read six short passages <b>out loud</b> at your normal pace, as if to someone in the room.</li>
+        <li>Each passage stays blurred until you tap <b>Start</b>, so you can't read ahead. Tap <b>Done</b> on the last word.</li>
+        <li>After each one, count your <b>stumbles</b>: any word you misread, skipped, or went back to re-read. Then rate how hard it felt.</li>
+        <li>Three passages are set normally and three with extra spacing. The order is shuffled, so getting tired or getting warmed up doesn't favour either one.</li>
+        <li>Do it again on another day or two. Your results stay on your device and line up side by side.</li>
+      </ol>
+      <div class="sp-bar"><span class="sp-mute">About ten minutes.</span><button class="go" id="begin">Begin</button></div>
+    </div>
+
+    <div id="trial" hidden>
+      <div class="sp-bar"><span class="sp-step" id="stepTxt"></span><span class="sp-step" id="condTxt"></span></div>
+      <div class="sp-card"><div id="pass" class="sp-passage hidden"></div></div>
+      <div class="sp-bar">
+        <span class="sp-clock" id="clock">0.0 s</span>
+        <span><button class="go" id="startBtn">Start</button> <button id="doneBtn" disabled>Done</button></span>
+      </div>
+      <div class="sp-ask" id="ask" hidden>
+        <div><label>Stumbles (misread, skipped or re-read words)</label><div class="sp-pick" id="pickS"></div></div>
+        <div><label>How hard did that feel?</label><div class="sp-pick" id="pickE"></div>
+          <div class="sp-step">1 = easy, 5 = hard work</div></div>
+        <div class="sp-bar"><span></span><button class="go" id="nextBtn" disabled>Next passage</button></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="vRes" hidden>
+    <div id="resBody"></div>
+    <div class="sp-warn">
+      <b>Read the result honestly.</b> You can see which passages are spaced, so expectation can push
+      the numbers either way. That's why the test counts time and stumbles, not just how it felt. Six
+      passages is a small sample: a speed difference under about 10% is probably noise. Trust a
+      difference only if it shows up on more than one day.
+    </div>
+    <div class="sp-bar"><button id="again">Take it again</button><button id="clearAll">Clear saved results</button></div>
+  </section>
+
+  <section id="vTune" hidden>
+    <p class="section-note">Paste anything you have to get through and set the spacing by feel. If the test said spacing helps, start from the spaced settings and adjust from there. Nothing you paste leaves this page.</p>
+    <div class="sp-bar" style="justify-content:flex-start"><button id="preN">Normal</button><button id="preS" class="on">Spaced (the test's settings)</button></div>
+    <div class="sp-card">
+      <div class="sp-ctl"><label>Letter spacing <span id="vls"></span></label><input type="range" id="ls" min="0" max="0.3" step="0.01">
+        <div class="sp-ev">The strongest evidence here (Zorzi and colleagues, PNAS 2012): wider letter spacing cut reading errors in children with dyslexia by about a fifth, with no loss of speed.</div></div>
+      <div class="sp-ctl"><label>Word spacing <span id="vws"></span></label><input type="range" id="ws" min="0" max="0.6" step="0.01">
+        <div class="sp-ev">Usually moved together with letter spacing.</div></div>
+      <div class="sp-ctl"><label>Line height <span id="vlh"></span></label><input type="range" id="lh" min="1.2" max="2.4" step="0.05">
+        <div class="sp-ev">Too tight crowds the lines; too loose breaks the rhythm. Find yours.</div></div>
+      <div class="sp-ctl"><label>Text size <span id="vfs"></span></label><input type="range" id="fs" min="15" max="32" step="1">
+        <div class="sp-ev">Bigger is easier for many readers.</div></div>
+      <textarea id="tuneSrc">Paste an email, a letter, a notice from work, anything.</textarea>
+      <div id="tuneOut"></div>
+    </div>
+  </section>
+
+  <h2 class="sp-h2">Room</h2>
+  <div class="poem">
+    <p>A word is a crowd at a door.<br>Press the letters close and they lean on each other,<br>an r borrowing the shoulder of an n<br>until the two of them read as an m.</p>
+    <p>Give them a little air<br>and each one stands where it was meant to stand.<br>Nothing is added. No new shapes,<br>no special alphabet sold in a box.<br>Only the gaps get wider,<br>the way a hallway feels longer<br>when no one is pushing past you.</p>
+    <p>Some readers never notice the crowding.<br>Some have squeezed through it every day of their lives<br>and were told the trouble was them.</p>
+  </div>
+
+  <p class="sp-fine">
+    What this can't do: spacing can make reading less tiring and cut errors, but it doesn't change how
+    dyslexia works, and it isn't a substitute for good instruction. Sources: Zorzi et al., PNAS 2012
+    (letter spacing); Kuster et al., 2017, and Wery &amp; Diliberto, 2017 (no benefit from dyslexia
+    fonts); WCAG 2.2, criterion 1.4.12 (text spacing). The six passages are original, written for this
+    test at about the same length and difficulty. No tracking; results are stored only in your own browser.
+  </p>
+
+<script is:inline>
+{
+const $=id=>document.getElementById(id);
+const P=[
+"Bread rises because of tiny living things. Yeast eats the sugar in the flour and breathes out gas. The gas gets trapped in the dough, which is stretchy because of a protein called gluten. Kneading makes the gluten stronger, like turning loose threads into a net. When the dough sits in a warm place, the net fills with bubbles and the loaf grows. In the oven, the heat makes the bubbles expand one last time before the yeast dies and the crust sets. The holes you see in a slice of bread are the bubbles, frozen in place.",
+"Before satellites, sailors trusted lighthouses to warn them about rocks. Each lighthouse had its own pattern of flashes, so a captain could tell which one he was looking at. One might flash twice every ten seconds, while the next one along the coast showed a steady light. The keeper's job was to keep that pattern perfect through every night and every storm. He trimmed the wick, wound the clockwork that turned the lens, and wrote in a logbook before dawn. Most lighthouses are automatic now, but many still flash the same pattern they used a hundred years ago.",
+"European eels have one of the strangest journeys in nature. They hatch in the Sargasso Sea, in the middle of the Atlantic Ocean, as tiny clear larvae shaped like leaves. Ocean currents carry them toward Europe over a year or more. When they reach the coast, they turn into small glass eels and swim up rivers, where they can live for twenty years. Then, one autumn night, they turn silver, stop eating, and swim thousands of miles back to the sea where they were born. Nobody has ever watched them spawn there, even today.",
+"A moving bicycle is much easier to balance than one that is standing still. Part of the reason is the way the front wheel is built. The fork holding the wheel is angled, so the point where the tire touches the road sits behind the line of the steering. If the bike starts to lean, the front wheel turns into the lean on its own, which brings the wheels back under the rider. Riders also make small steering corrections without noticing them. Together, these tiny movements keep the bike upright, as long as it keeps rolling forward.",
+"On a cold morning, frost can draw ferns and feathers across a window. It starts when warm, damp air inside the house touches the freezing glass. Water in the air turns straight into ice without becoming a liquid first. The first crystals form on tiny scratches or specks of dust. New ice grows fastest from the sharp tips of those crystals, so each one stretches out into long branches. Because every scratch and speck is different, no two windows ever freeze in the same pattern. When the sun reaches the glass, the whole drawing fades within minutes.",
+"Rain is fresh, so why is the sea salty? Over millions of years, rain has fallen on rocks and slowly worn them down. The water picks up small amounts of minerals and carries them into rivers. Rivers empty into the ocean, bringing the minerals with them. When the sun heats the sea, water evaporates and rises to make clouds, but the salt stays behind. Then the water falls as rain again and starts the trip over. Each round leaves the ocean a tiny bit saltier. Vents on the sea floor add more minerals from deep inside the earth."
+];
+const words=s=>s.trim().split(/\s+/).length;
+const STORE=['mos','spacingTest','v1'].join('.');
+const load=()=>{try{return JSON.parse(localStorage.getItem(STORE)||'[]')}catch(e){return []}};
+const save=a=>{try{localStorage.setItem(STORE,JSON.stringify(a))}catch(e){}};
+let sessions=load(),plan=[],i=0,t0=0,tick=null,cur=null,trials=[];
+function shuffle(a){for(let k=a.length-1;k>0;k--){const j=Math.floor(Math.random()*(k+1));[a[k],a[j]]=[a[j],a[k]]}return a}
+function makePlan(){const o=Math.random()<.5?'NSSNNS':'SNNSSN';const idx=shuffle([0,1,2,3,4,5]);return o.split('').map((c,k)=>({c,p:idx[k]}))}
+function show(v){['Test','Res','Tune'].forEach(n=>{$('v'+n).hidden=n!==v;$('tab'+n).classList.toggle('on',n===v)});if(v==='Res')renderRes()}
+$('tabTest').onclick=()=>show('Test');$('tabRes').onclick=()=>show('Res');$('tabTune').onclick=()=>show('Tune');
+function picker(el,vals,onPick){el.innerHTML=vals.map(v=>`<button data-v="${v}">${v}</button>`).join('');
+  el.onclick=e=>{const b=e.target.closest('button');if(!b)return;el.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));onPick(b.dataset.v)}}
+function loadTrial(){
+  const tr=plan[i];cur={c:tr.c,p:tr.p,w:words(P[tr.p]),sec:null,stum:null,eff:null};
+  $('stepTxt').textContent=`Passage ${i+1} of 6`;$('condTxt').textContent=tr.c==='S'?'Spaced':'Normal';
+  const ps=$('pass');ps.textContent=P[tr.p];ps.className='sp-passage hidden cond-'+(tr.c==='S'?'s':'n');
+  $('clock').textContent='0.0 s';$('startBtn').disabled=false;$('doneBtn').disabled=true;
+  $('ask').hidden=true;$('nextBtn').disabled=true;$('nextBtn').textContent=i===5?'See my results':'Next passage';
+  picker($('pickS'),['0','1','2','3','4','5','6','7','8','9','10+'],v=>{cur.stum=v==='10+'?10:+v;ready()});
+  picker($('pickE'),['1','2','3','4','5'],v=>{cur.eff=+v;ready()});
+}
+function ready(){$('nextBtn').disabled=!(cur.stum!==null&&cur.eff!==null)}
+$('begin').onclick=()=>{plan=makePlan();i=0;trials=[];$('intro').hidden=true;$('trial').hidden=false;loadTrial();$('trial').scrollIntoView({block:'start'})};
+$('startBtn').onclick=()=>{$('pass').classList.remove('hidden');t0=performance.now();$('startBtn').disabled=true;$('doneBtn').disabled=false;
+  tick=setInterval(()=>{$('clock').textContent=((performance.now()-t0)/1000).toFixed(1)+' s'},100)};
+$('doneBtn').onclick=()=>{clearInterval(tick);cur.sec=(performance.now()-t0)/1000;$('clock').textContent=cur.sec.toFixed(1)+' s';
+  $('doneBtn').disabled=true;$('ask').hidden=false;$('ask').scrollIntoView({block:'nearest'})};
+$('nextBtn').onclick=()=>{trials.push(cur);i++;
+  if(i<6){loadTrial();$('trial').scrollIntoView({block:'start'});return}
+  sessions.push({when:new Date().toISOString(),trials});save(sessions);
+  $('trial').hidden=true;$('intro').hidden=false;show('Res');$('vRes').scrollIntoView({block:'start'})};
+function summarise(ts){const g=c=>{const a=ts.filter(t=>t.c===c);if(!a.length)return null;
+  const w=a.reduce((s,t)=>s+t.w,0),sec=a.reduce((s,t)=>s+t.sec,0),st=a.reduce((s,t)=>s+t.stum,0),ef=a.reduce((s,t)=>s+t.eff,0);
+  return{wpm:w/sec*60,per100:st/w*100,eff:ef/a.length}};return{N:g('N'),S:g('S')}}
+function bars(label,n,s,fmt,lower){const mx=Math.max(n,s)||1;
+  return `<div class="sp-row"><span>${label}<br><span class="sp-mute">Normal</span></span><div class="sp-track"><div class="sp-fill n" style="width:${n/mx*100}%"></div></div><span class="sp-val">${fmt(n)}</span></div>
+  <div class="sp-row"><span><span class="sp-mute">Spaced</span></span><div class="sp-track"><div class="sp-fill" style="width:${s/mx*100}%"></div></div><span class="sp-val">${fmt(s)}</span></div>
+  <p class="sp-mute sp-note">${lower?'Lower is better.':'Higher is better.'}</p>`}
+function verdict(m){const dw=(m.S.wpm-m.N.wpm)/m.N.wpm*100,ds=m.S.per100-m.N.per100;
+  const fast=dw>=10,slow=dw<=-10,fewer=ds<=-1,more=ds>=1;let t;
+  if((fast&&!more)||(fewer&&!slow))t='Spacing looks like it helped this time. Repeat on another day or two before you believe it.';
+  else if((slow&&!fewer)||(more&&!fast))t='Spacing looks like it got in the way this time. Worth one more run before you rule it out.';
+  else t='No clear difference this time. That\'s a real answer too: spacing may simply not matter much for you.';
+  return `<div class="sp-verdict"><b>${t}</b><br><span class="sp-small">Speed ${dw>=0?'+':''}${dw.toFixed(0)}% with spacing; stumbles ${ds>=0?'+':''}${ds.toFixed(1)} per 100 words.</span></div>`}
+function renderRes(){const b=$('resBody');
+  if(!sessions.length){b.innerHTML='<p class="section-note">No results yet. Take the test first; results stay in this browser only.</p>';return}
+  const m=summarise(sessions[sessions.length-1].trials),all=summarise(sessions.flatMap(s=>s.trials));
+  let h=`<h2 class="sp-h2">This run</h2>${verdict(m)}${bars('Reading speed',m.N.wpm,m.S.wpm,v=>v.toFixed(0)+' wpm',false)}${bars('Stumbles',m.N.per100,m.S.per100,v=>v.toFixed(1)+'/100',true)}${bars('Felt effort',m.N.eff,m.S.eff,v=>v.toFixed(1)+' of 5',true)}`;
+  if(sessions.length>1){h+=`<h2 class="sp-h2">All ${sessions.length} runs together</h2>${verdict(all)}<table class="sp-table"><tr><th>Day</th><th>Speed change</th><th>Stumble change</th></tr>${
+    sessions.map(s=>{const q=summarise(s.trials);const dw=(q.S.wpm-q.N.wpm)/q.N.wpm*100,ds=q.S.per100-q.N.per100;
+      return `<tr><td>${new Date(s.when).toLocaleDateString()}</td><td class="n">${dw>=0?'+':''}${dw.toFixed(0)}%</td><td class="n">${ds>=0?'+':''}${ds.toFixed(1)}</td></tr>`}).join('')}</table>`}
+  else h+='<p class="sp-mute">Run it again on a different day and both runs will show here side by side.</p>';
+  b.innerHTML=h}
+$('again').onclick=()=>show('Test');
+let cc=false;$('clearAll').onclick=()=>{if(!cc){cc=true;$('clearAll').textContent='Tap again to delete all results';return}
+  sessions=[];save(sessions);cc=false;$('clearAll').textContent='Clear saved results';renderRes()};
+const PRE={N:{ls:0,ws:0,lh:1.45,fs:20},S:{ls:.18,ws:.35,lh:1.9,fs:20}};
+function setPre(k){for(const x in PRE[k])$(x).value=PRE[k][x];$('preN').classList.toggle('on',k==='N');$('preS').classList.toggle('on',k==='S');tune()}
+function tune(){const o=$('tuneOut');o.textContent=$('tuneSrc').value;o.style.letterSpacing=$('ls').value+'em';o.style.wordSpacing=$('ws').value+'em';
+  o.style.lineHeight=$('lh').value;o.style.fontSize=$('fs').value+'px';
+  $('vls').textContent=(+$('ls').value).toFixed(2)+'em';$('vws').textContent=(+$('ws').value).toFixed(2)+'em';
+  $('vlh').textContent=(+$('lh').value).toFixed(2);$('vfs').textContent=$('fs').value+'px'}
+['ls','ws','lh','fs','tuneSrc'].forEach(id=>$(id).addEventListener('input',tune));
+$('preN').onclick=()=>setPre('N');$('preS').onclick=()=>setPre('S');setPre('S');
+}
+</script>
+</div>
+</CornerLayout>
+
+<style is:global>
+  .sp .sp-tabs { display:flex; gap:.5rem; flex-wrap:wrap; margin:1.5rem 0 1.25rem; }
+  .sp .sp-tabs button { flex:1 1 9rem; }
+  .sp button { font:inherit; font-size:1rem; min-height:44px; padding:.5rem 1rem; border-radius:.6rem; border:1px solid var(--color-border);
+    background:var(--color-surface-raised); color:var(--color-text-primary); cursor:pointer; }
+  .sp button:hover:not(:disabled) { border-color:var(--color-accent); }
+  .sp button:focus-visible, .sp input:focus-visible, .sp textarea:focus-visible { outline:2px solid var(--color-accent); outline-offset:2px; }
+  .sp button.on, .sp button.go { background:var(--color-accent); border-color:var(--color-accent); color:#0a0a0a; font-weight:600; }
+  .sp button:disabled { opacity:.4; cursor:default; }
+  .sp .sp-card { background:var(--color-surface); border:1px solid var(--color-border); border-radius:.85rem; padding:clamp(1.1rem,3vw,2rem); }
+  .sp .sp-card h2, .sp .sp-h2 { font-family:Georgia,'Times New Roman',serif; font-size:1.4rem; margin:0 0 .8rem; color:var(--color-text-primary); }
+  .sp .sp-h2 { margin-top:2.5rem; }
+  .sp .sp-steps { margin:0 0 1rem; padding-left:1.2rem; color:var(--color-text-primary); line-height:1.7; }
+  .sp .sp-steps li { margin:.35rem 0; }
+  .sp .sp-passage { font-size:1.25rem; color:var(--color-text-primary); min-height:14rem; transition:filter .2s; }
+  .sp .sp-passage.hidden { filter:blur(9px); user-select:none; }
+  .sp .cond-n { letter-spacing:0; word-spacing:normal; line-height:1.45; }
+  .sp .cond-s { letter-spacing:.18em; word-spacing:.35em; line-height:1.9; }
+  .sp .sp-bar { display:flex; align-items:center; justify-content:space-between; gap:.75rem; flex-wrap:wrap; margin:.9rem 0 .3rem; }
+  .sp .sp-clock { font-family:var(--font-mono); font-size:clamp(1.8rem,6vw,2.4rem); color:var(--color-accent); font-variant-numeric:tabular-nums; }
+  .sp .sp-step { font-family:var(--font-mono); font-size:.8rem; color:var(--color-text-secondary); }
+  .sp .sp-ask { display:grid; gap:1rem; margin-top:1rem; }
+  .sp .sp-ask label, .sp .sp-ctl label { display:flex; justify-content:space-between; font-weight:600; color:var(--color-text-primary); margin-bottom:.4rem; }
+  .sp .sp-pick { display:flex; gap:.4rem; flex-wrap:wrap; }
+  .sp .sp-pick button { min-width:3rem; padding:.5rem .6rem; }
+  .sp .sp-mute { color:var(--color-text-secondary); } .sp-small { font-size:.9rem; } .sp-note { font-size:.8rem; margin:.1rem 0 1rem; }
+  .sp .sp-row { display:grid; grid-template-columns:8.5rem minmax(0,1fr) 5.5rem; gap:.6rem; align-items:center; margin:.45rem 0; color:var(--color-text-primary); }
+  .sp .sp-track { height:.8rem; background:var(--color-surface-raised); border-radius:.4rem; overflow:hidden; }
+  .sp .sp-fill { height:100%; background:var(--color-accent); } .sp-fill.n { background:#555; }
+  .sp .sp-val { text-align:right; font-family:var(--font-mono); font-size:.85rem; white-space:nowrap; }
+  .sp .sp-verdict { background:var(--color-surface); border:1px solid var(--color-border); border-left:3px solid var(--color-accent); border-radius:.5rem; padding:1rem 1.25rem; margin:0 0 1.25rem; color:var(--color-text-primary); }
+  .sp .sp-warn { background:var(--color-surface); border:1px solid var(--color-border); border-radius:.6rem; padding:1rem 1.25rem; margin:1.75rem 0 .5rem; color:var(--color-text-secondary); line-height:1.7; font-size:.95rem; }
+  .sp .sp-warn b { color:var(--color-text-primary); }
+  .sp .sp-table { width:100%; border-collapse:collapse; font-size:.95rem; color:var(--color-text-primary); }
+  .sp .sp-table th, .sp .sp-table td { text-align:left; padding:.45rem .3rem; border-bottom:1px solid var(--color-border); }
+  .sp .sp-table td.n { text-align:right; font-family:var(--font-mono); }
+  .sp .sp-ctl { margin:0 0 1.1rem; } .sp-ctl input { width:100%; accent-color:var(--color-accent); }
+  .sp .sp-ev { font-size:.85rem; color:var(--color-text-secondary); line-height:1.55; }
+  .sp #tuneSrc { width:100%; min-height:7rem; font:inherit; font-size:1rem; padding:.7rem; border-radius:.6rem; border:1px solid var(--color-border); background:var(--color-bg); color:var(--color-text-primary); }
+  .sp #tuneOut { white-space:pre-wrap; margin-top:1rem; color:var(--color-text-primary); }
+  .sp .sp-fine { font-size:.82rem; color:var(--color-text-secondary); line-height:1.65; margin-top:2rem; }
+  @media (max-width:600px) { .sp .sp-row { grid-template-columns:6.5rem minmax(0,1fr) 4.8rem; } .sp .sp-passage { font-size:1.15rem; } }
+  @media (prefers-reduced-motion:reduce) { .sp .sp-passage { transition:none; } }</style>
