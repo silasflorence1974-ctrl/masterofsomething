@@ -21,11 +21,25 @@
   "h": 1800
  },
  {
+  "slug": "carnage",
+  "title": "Carnage",
+  "group": "fan",
+  "w": 1800,
+  "h": 1440
+ },
+ {
   "slug": "black-bear-cubs",
   "title": "Two Black Bear Cubs",
   "group": "wild",
   "w": 1800,
   "h": 1440
+ },
+ {
+  "slug": "owen",
+  "title": "Owen",
+  "group": "family",
+  "w": 1800,
+  "h": 1387
  },
  {
   "slug": "cardinals",
@@ -77,11 +91,25 @@
   "h": 1800
  },
  {
+  "slug": "light-and-dark-fury",
+  "title": "Light and Dark Fury",
+  "group": "fan",
+  "w": 1800,
+  "h": 1440
+ },
+ {
   "slug": "fox",
   "title": "Fox",
   "group": "wild",
   "w": 1144,
   "h": 915
+ },
+ {
+  "slug": "owen-and-the-gruffalo",
+  "title": "Owen and the Gruffalo",
+  "group": "family",
+  "w": 1800,
+  "h": 1200
  },
  {
   "slug": "cardinal-on-black",
@@ -133,6 +161,13 @@
   "h": 1439
  },
  {
+  "slug": "darth-vader",
+  "title": "Darth Vader",
+  "group": "fan",
+  "w": 1442,
+  "h": 1800
+ },
+ {
   "slug": "reindeer",
   "title": "Reindeer Study",
   "group": "wild",
@@ -168,6 +203,13 @@
   "h": 1440
  },
  {
+  "slug": "iron-man",
+  "title": "Iron Man",
+  "group": "fan",
+  "w": 1038,
+  "h": 1322
+ },
+ {
   "slug": "dragon-eye",
   "title": "Dragon Eye",
   "group": "wild",
@@ -194,5 +236,26 @@
   "group": "birds",
   "w": 1800,
   "h": 1440
+ },
+ {
+  "slug": "batman",
+  "title": "Batman",
+  "group": "fan",
+  "w": 1272,
+  "h": 1800
+ },
+ {
+  "slug": "mine",
+  "title": "Mine",
+  "group": "wild",
+  "w": 1800,
+  "h": 1440
+ },
+ {
+  "slug": "lord-of-the-rings",
+  "title": "The Fellowship",
+  "group": "fan",
+  "w": 1800,
+  "h": 573
  }
 ]
