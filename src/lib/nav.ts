@@ -11,6 +11,7 @@ export const navLinks: NavLink[] = [
   { href: '/news/', label: 'News' },
   { href: '/skywatch', label: 'Skywatch' },
   { href: '/silas/', label: "Silas's Corner" },
+  { href: '/david/', label: "David's Corner" },
   { href: '/tools', label: 'Tools' },
   { href: '/about', label: 'About' },
 ];

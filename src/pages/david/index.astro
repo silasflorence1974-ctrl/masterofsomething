@@ -1,0 +1,124 @@
+---
+// David's Corner (2026-11-25): David Florence's digital paintings. Built by Silas at David's request.
+// Images: public/david/art/<slug>.jpg (<=1800 px) + <slug>-t.jpg (<=640 px), list in src/lib/david_art.json,
+// both written by C:\Silas\projects\david_art\export_art.py from his OneDrive Art folders. Originals untouched.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import art from '../../lib/david_art.json';
+
+const title = "David's Corner";
+const description = "Digital paintings by David Florence: birds, wildlife, portraits and places, painted on a tablet in SketchBook and finished in Photoshop.";
+const groups = [
+  { key: 'all', label: 'Everything' },
+  { key: 'birds', label: 'Birds' },
+  { key: 'wild', label: 'Wildlife' },
+  { key: 'people', label: 'Portraits' },
+  { key: 'places', label: 'Places' },
+  { key: 'dark', label: 'After dark' },
+];
+---
+<BaseLayout title={title} description={description} image="/david/art/blue-jay-winter-t.jpg">
+  <section class="dc">
+    <header class="dc-head">
+      <p class="eyebrow">In Practice Media</p>
+      <h1>David's Corner</h1>
+      <p class="lede">
+        Digital paintings by David Florence. Each one starts as a sketch on a tablet in SketchBook and is finished
+        in Photoshop. Mostly birds and wildlife, plus a few faces, a few coastlines, and a couple of things that
+        only come out at night.
+      </p>
+      <p class="count">{art.length} paintings &middot; tap any one to see it large</p>
+    </header>
+
+    <nav class="filters" aria-label="Filter paintings">
+      {groups.map((g, i) => (
+        <button type="button" class:list={['chip', { on: i === 0 }]} data-group={g.key}>{g.label}</button>
+      ))}
+    </nav>
+
+    <div class="wall" id="wall">
+      {art.map((a, i) => (
+        <figure class="piece" data-group={a.group} data-i={i}>
+          <button type="button" class="open" aria-label={`View ${a.title} large`}>
+            <img src={`/david/art/${a.slug}-t.jpg`} alt={a.title} width={a.w} height={a.h} loading={i < 6 ? 'eager' : 'lazy'} decoding="async" />
+          </button>
+          <figcaption>{a.title}</figcaption>
+        </figure>
+      ))}
+    </div>
+
+    <p class="foot">All paintings &copy; David Florence. Please ask before using them anywhere else.</p>
+  </section>
+
+  <dialog id="lb" class="lb" aria-label="Painting viewer">
+    <button type="button" class="lb-close" aria-label="Close">&times;</button>
+    <button type="button" class="lb-nav prev" aria-label="Previous painting">&lsaquo;</button>
+    <figure>
+      <img id="lb-img" alt="" />
+      <figcaption id="lb-cap"></figcaption>
+    </figure>
+    <button type="button" class="lb-nav next" aria-label="Next painting">&rsaquo;</button>
+  </dialog>
+
+  <script is:inline define:vars={{ art }}>
+    const wall = document.getElementById('wall');
+    const lb = document.getElementById('lb'), img = document.getElementById('lb-img'), cap = document.getElementById('lb-cap');
+    let cur = 0;
+    const visible = () => [...wall.querySelectorAll('.piece')].filter(f => !f.hidden).map(f => +f.dataset.i);
+    function show(i) {
+      cur = i; const a = art[i];
+      img.src = `/david/art/${a.slug}.jpg`; img.alt = a.title; cap.textContent = a.title;
+      if (!lb.open) lb.showModal();
+    }
+    function step(d) { const v = visible(); const k = v.indexOf(cur); show(v[(k + d + v.length) % v.length]); }
+    wall.addEventListener('click', e => { const f = e.target.closest('.piece'); if (f) show(+f.dataset.i); });
+    lb.querySelector('.prev').onclick = () => step(-1);
+    lb.querySelector('.next').onclick = () => step(1);
+    lb.querySelector('.lb-close').onclick = () => lb.close();
+    lb.addEventListener('click', e => { if (e.target === lb) lb.close(); });
+    document.addEventListener('keydown', e => { if (!lb.open) return; if (e.key === 'ArrowLeft') step(-1); if (e.key === 'ArrowRight') step(1); });
+    let x0 = null;
+    lb.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; }, { passive: true });
+    lb.addEventListener('touchend', e => { if (x0 === null) return; const dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 50) step(dx < 0 ? 1 : -1); x0 = null; });
+    document.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () => {
+      document.querySelectorAll('.chip').forEach(o => o.classList.toggle('on', o === c));
+      const g = c.dataset.group;
+      wall.querySelectorAll('.piece').forEach(f => { f.hidden = g !== 'all' && f.dataset.group !== g; });
+    }));
+  </script>
+</BaseLayout>
+
+<style>
+  .dc { max-width: 1200px; margin: 0 auto; }
+  .dc-head { max-width: 720px; margin-bottom: 2rem; }
+  .eyebrow { font-family: var(--font-mono); font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; color: var(--color-accent); margin: 0 0 .6rem; }
+  h1 { font-size: clamp(2.2rem, 6vw, 3.2rem); font-weight: 700; line-height: 1.05; margin: 0 0 1rem; color: var(--color-text-primary); font-family: Georgia, 'Times New Roman', serif; }
+  .lede { color: var(--color-text-secondary); font-size: 1.08rem; line-height: 1.75; margin: 0 0 .8rem; }
+  .count { font-family: var(--font-mono); font-size: .82rem; color: var(--color-accent-dim); margin: 0; }
+  .filters { display: flex; flex-wrap: wrap; gap: .5rem; margin: 0 0 1.75rem; }
+  .chip { font: inherit; font-size: .88rem; padding: .45rem .95rem; border-radius: 999px; cursor: pointer;
+          background: var(--color-surface); color: var(--color-text-secondary); border: 1px solid var(--color-border); }
+  .chip:hover { border-color: var(--color-accent); color: var(--color-text-primary); }
+  .chip.on { background: var(--color-accent); color: #0a0a0a; border-color: var(--color-accent); font-weight: 600; }
+  .wall { columns: 3 300px; column-gap: 1.1rem; }
+  .piece { break-inside: avoid; margin: 0 0 1.1rem; background: var(--color-surface); border: 1px solid var(--color-border);
+           border-radius: 10px; overflow: hidden; transition: border-color .2s, transform .2s; }
+  .piece:hover { border-color: var(--color-accent); transform: translateY(-2px); }
+  .piece[hidden] { display: none; }
+  .open { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; }
+  .open img { display: block; width: 100%; height: auto; }
+  .piece figcaption { padding: .65rem .9rem .75rem; font-size: .9rem; color: var(--color-text-primary); font-family: Georgia, 'Times New Roman', serif; }
+  .foot { margin: 2.5rem 0 0; font-size: .82rem; color: var(--color-text-secondary); }
+  .lb { width: 100vw; height: 100vh; max-width: none; max-height: none; margin: 0; padding: 0; border: 0;
+        background: rgba(10,10,10,.96); color: var(--color-text-primary); }
+  .lb::backdrop { background: rgba(0,0,0,.85); }
+  .lb[open] { display: flex; align-items: center; justify-content: center; }
+  .lb figure { margin: 0; display: flex; flex-direction: column; align-items: center; gap: .8rem; padding: 1rem; }
+  .lb img { max-width: min(92vw, 1600px); max-height: 82vh; object-fit: contain; border-radius: 6px; }
+  .lb figcaption { font-family: Georgia, 'Times New Roman', serif; font-size: 1.05rem; }
+  .lb-close, .lb-nav { position: absolute; background: none; border: 0; color: #f0f0f0; cursor: pointer; line-height: 1; opacity: .75; }
+  .lb-close:hover, .lb-nav:hover { opacity: 1; color: var(--color-accent); }
+  .lb-close { top: .8rem; right: 1.1rem; font-size: 2.4rem; }
+  .lb-nav { top: 50%; transform: translateY(-50%); font-size: 3.4rem; padding: 1rem; }
+  .lb-nav.prev { left: .3rem; } .lb-nav.next { right: .3rem; }
+  @media (max-width: 640px) { .wall { columns: 2 150px; column-gap: .7rem; } .piece { margin-bottom: .7rem; } .lb-nav { font-size: 2.6rem; } }
+</style>
