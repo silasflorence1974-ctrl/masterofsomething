@@ -105,13 +105,6 @@
   "h": 915
  },
  {
-  "slug": "owen-and-the-gruffalo",
-  "title": "Owen and the Gruffalo",
-  "group": "family",
-  "w": 1800,
-  "h": 1200
- },
- {
   "slug": "cardinal-on-black",
   "title": "Cardinal on Black",
   "group": "birds",
@@ -250,12 +243,5 @@
   "group": "wild",
   "w": 1800,
   "h": 1440
- },
- {
-  "slug": "lord-of-the-rings",
-  "title": "The Fellowship",
-  "group": "fan",
-  "w": 1800,
-  "h": 573
  }
 ]
